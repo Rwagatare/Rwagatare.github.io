@@ -1,0 +1,159 @@
+.btc-card {
+    padding: 2rem;
+}
+
+/* ── Book list ── */
+.btc-books {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.btc-book {
+    border-bottom: 1px solid var(--color-bg-lightest);
+    transition: var(--transition);
+}
+
+.btc-book:last-child {
+    border-bottom: none;
+}
+
+.btc-book[role="button"] {
+    cursor: pointer;
+}
+
+.btc-book:hover {
+    background: rgba(244, 211, 94, 0.03);
+}
+
+.btc-book-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 0.5rem;
+}
+
+/* Status dot */
+.btc-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.btc-dot.reading { background: var(--color-accent); }
+.btc-dot.completed { background: var(--color-green); }
+.btc-dot.queued { background: var(--color-bg-lightest); }
+
+/* Book info */
+.btc-book-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.btc-book-title {
+    color: var(--color-text-bright);
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btc-book-author {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-dim);
+}
+
+.btc-book-status {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--color-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.btc-expand-icon {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--color-accent);
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+/* ── Expandable reflection ── */
+.btc-reflection {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 0.5rem;
+}
+
+.btc-reflection.show {
+    max-height: 250px;
+    padding: 0 0.5rem 1rem 2rem;
+}
+
+.btc-reflection p {
+    font-size: 0.85rem;
+    color: var(--color-text-dim);
+    line-height: 1.65;
+    margin: 0;
+    border-left: 2px solid var(--color-accent);
+    padding-left: 0.75rem;
+}
+
+/* ── Legend ── */
+.btc-legend {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-bg-lightest);
+}
+
+.btc-legend span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-dim);
+    text-transform: lowercase;
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+    .btc-card {
+        padding: 1.25rem;
+    }
+
+    .btc-book-row {
+        flex-wrap: wrap;
+        padding: 0.75rem 0.25rem;
+    }
+
+    .btc-book-title {
+        white-space: normal;
+    }
+
+    .btc-book-status {
+        display: none;
+    }
+
+    .btc-reflection.show {
+        padding-left: 0.5rem;
+    }
+
+    .btc-legend {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+}

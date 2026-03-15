@@ -1,100 +1,36 @@
-.experience-inner {
-    display: flex;
-    gap: 4rem;
+.exp-card {
+    padding: 2rem;
 }
 
-.experience-tabs {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    min-width: 150px;
-}
-
-.tab-button {
-    text-align: left;
-    padding: 1rem;
-    border-left: 2px solid var(--color-bg-lightest);
-    color: var(--color-text-dim);
-    transition: var(--transition);
-    font-family: var(--font-mono, monospace);
-    font-size: 0.85rem;
-}
-
-.tab-button:hover,
-.tab-button.active {
-    color: var(--color-accent);
-    background-color: var(--color-bg-light);
-}
-
-.tab-button.active {
-    border-left-color: var(--color-accent);
-}
-
-.experience-content {
-    flex: 1;
-}
-
-.job-header h3 {
-    font-size: 1.3rem;
+.exp-role {
+    font-size: 1.05rem;
     font-weight: 500;
-    margin-bottom: 0.5rem;
-    color: #e6f1ff;
+    margin-bottom: 0.25rem;
 }
 
-.job-header .company {
+.exp-at {
     color: var(--color-accent);
 }
 
-.job-period {
-    font-family: var(--font-mono, monospace);
-    font-size: 0.9rem;
+.exp-period {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
     color: var(--color-text-dim);
-    margin-bottom: 1.5rem;
-}
-
-.job-description {
-    list-style: none;
-    padding: 0;
-}
-
-.job-description li {
-    position: relative;
-    padding-left: 1.5rem;
     margin-bottom: 1rem;
-    color: var(--color-text);
-    font-size: 1rem;
 }
 
-.job-description li::before {
+.exp-bullets li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+.exp-bullets li::before {
     content: "▹";
     position: absolute;
     left: 0;
     color: var(--color-accent);
-}
-
-@media (max-width: 600px) {
-    .experience-inner {
-        flex-direction: column;
-        gap: 2rem;
-    }
-
-    .experience-tabs {
-        flex-direction: row;
-        overflow-x: auto;
-        border-bottom: 2px solid var(--color-bg-lightest);
-    }
-
-    .tab-button {
-        border-left: none;
-        border-bottom: 2px solid transparent;
-        /* Prepare for active state override if needed, though structure differs */
-        padding: 1rem;
-        min-width: 120px;
-        text-align: center;
-    }
-
-    .tab-button.active {
-        border-left: none;
-        border-bottom: 2px solid var(--color-accent);
-    }
 }

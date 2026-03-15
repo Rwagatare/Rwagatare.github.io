@@ -3,8 +3,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px;
-    /* Reduced specific height dependency if possible, but keeping for layout stability */
+    height: 64px;
     z-index: 1000;
     background: rgba(10, 25, 47, 0.85);
     backdrop-filter: blur(10px);
@@ -14,7 +13,7 @@
 }
 
 .header.scrolled {
-    height: 70px;
+    height: 56px;
     box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
 }
 
@@ -26,32 +25,134 @@
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-accent);
     border: 1px solid var(--color-accent);
-    padding: 0.25rem 0.5rem;
+    padding: 0.15rem 0.4rem;
     border-radius: 4px;
+    line-height: 1;
+}
+
+/* Desktop nav */
+.desktop-nav {
+    display: flex;
+    align-items: center;
 }
 
 .nav ul {
     display: flex;
-    gap: 2rem;
+    gap: 1.75rem;
+    align-items: center;
 }
 
 .nav a {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
     color: var(--color-text);
+    font-family: var(--font-mono);
 }
 
-.nav a:hover {
+.nav a:hover { color: var(--color-accent); }
+
+/* Resume button */
+.resume-btn {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 4px;
     color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    transition: var(--transition);
+    margin-left: 1.5rem;
+}
+
+.resume-btn:hover { background: var(--color-accent-dim); }
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    z-index: 1100;
+    padding: 4px;
+}
+
+.hamburger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-accent);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+
+.hamburger.open .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open .hamburger-line:nth-child(2) { opacity: 0; }
+.hamburger.open .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile overlay */
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 25, 47, 0.7);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-overlay.visible { display: block; opacity: 1; }
+
+/* Mobile nav */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(75vw, 300px);
+    height: 100vh;
+    background: rgba(17, 34, 64, 0.97);
+    backdrop-filter: blur(12px);
+    z-index: 1050;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-nav.open { transform: translateX(0); }
+
+.mobile-nav ul {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+}
+
+.mobile-nav li { width: 100%; text-align: center; }
+
+.mobile-nav a {
+    display: block;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.mobile-nav .resume-btn {
+    margin: 1.5rem 0 0;
+    margin-left: 0;
+    padding: 0.6rem 2rem;
 }
 
 @media (max-width: 768px) {
-    .desktop-nav {
-        display: none;
-        /* Mobile nav to be implemented later */
-    }
+    .desktop-nav { display: none; }
+    .hamburger { display: flex; }
+    .mobile-nav { display: flex; }
 }

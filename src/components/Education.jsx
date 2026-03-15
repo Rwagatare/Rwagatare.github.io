@@ -1,73 +1,56 @@
-import React from 'react';
+import useScrollReveal from '../hooks/useScrollReveal';
 import './Education.css';
 
+const awards = [
+    'Wheaton Innovation Lab',
+    'Augustinian Scholar',
+    'Bridge2Rwanda Scholar',
+    'LeFrak-Friedberg Scholar',
+    'Up-to-US Leadership'
+];
+
+const leadership = [
+    { role: 'Co-founder', org: 'Ganza Mwari (Advanced Women)', period: 'Dec 2021 – Present' },
+    { role: 'Fundraiser / Speaker', org: 'Agahozo Shalom Youth Village', period: 'Jan 2025 – Present' },
+    { role: 'Co-president', org: 'Global & International Students Assoc.', period: '2023 – 2024' },
+    { role: 'Co-founder & Co-president', org: 'African Students Union', period: '2023 – 2024' },
+    { role: 'Co-founder', org: 'ASYV Critical Thinking for Peace', period: '2017 – 2018' },
+];
+
 const Education = () => {
-    const activities = [
-        {
-            organization: 'Ganza Mwali (Advanced Women)',
-            role: 'Co-founder',
-            date: 'Dec 2021 – Present',
-            description: 'Co-founded Ganza Mwari to combat public health challenges of teen dropouts due to pregnancy post-covid. Worked with local government and AEGIS Trust to provide vocational skills training and support.'
-        },
-        {
-            organization: 'Agahozo Shalom Youth Village',
-            role: 'Fundraiser',
-            date: 'Jan 2025 – Present',
-            description: 'Served as a speaker at the annual ASYV New York City fundraising event. Contributed to raising nearly $650,000 at the 2025 January gala.'
-        },
-        {
-            organization: 'Global and International Students Association',
-            role: 'Co-president',
-            date: 'May 2023 – May 2024',
-            description: 'Led planning and execution of International Food Market attracting 300+ students. Organized International Trivia Night.'
-        },
-        {
-            organization: 'African Students Union',
-            role: 'Co-president | Co-founder',
-            date: 'May 2023 – May 2024',
-            description: 'Co-founded ASU to assist new African students. Organized a trip to Yale Africa Symposium II.'
-        },
-        {
-            organization: 'ASYV Critical Thinking for Peace',
-            role: 'Co-president | Co-founder',
-            date: 'July 2017 – Aug 2018',
-            description: 'Co-founded CTP Club to engage with community issues. Over 100 student-led community service projects have been delivered.'
-        }
-    ];
+    const revealRef = useScrollReveal();
 
     return (
-        <section id="education" className="section container">
-            <div className="education-grid">
-                <div className="edu-column">
-                    <h2 className="section-title">Education</h2>
-                    <div className="edu-card">
-                        <h3>Westmont College</h3>
-                        <p className="edu-degree">B.S Computer Science and B.S Data Analytics</p>
-                        <p className="edu-date">Aug 2022 - May 2026</p>
-                        <p className="edu-location">Santa Barbara, CA</p>
+        <section id="education" className="section-wrap container">
+            <div className="reveal" ref={revealRef}>
+                <h2 className="label"><span className="accent">//</span> Education & Leadership</h2>
+                <div className="edu-layout">
+                    {/* Education Card */}
+                    <div className="card edu-card">
+                        <h3 className="edu-school">Westmont College</h3>
+                        <p className="edu-degree">B.S Computer Science & B.S Data Analytics</p>
+                        <p className="edu-meta">Aug 2022 – May 2026 · Santa Barbara, CA</p>
+                        <div className="edu-awards">
+                            {awards.map((a, i) => (
+                                <span key={i} className="edu-chip">{a}</span>
+                            ))}
+                        </div>
                     </div>
 
-                    <h3 className="sub-title">Awards & Honors</h3>
-                    <ul className="awards-list">
-                        <li>Wheaton Innovation and Leadership Laboratory</li>
-                        <li>Westmont College Honors Program (Augustinian Scholar)</li>
-                        <li>Bridge2Rwanda Scholar</li>
-                        <li>LeFrak-Friedberg Scholar</li>
-                        <li>Up-to-US Leadership Network</li>
-                    </ul>
-                </div>
-
-                <div className="edu-column">
-                    <h2 className="section-title">Volunteering & Leadership</h2>
-                    <div className="volunteering-list">
-                        {activities.map((activity, index) => (
-                            <div key={index} className="vol-item">
-                                <h4 className="vol-role">{activity.role}</h4>
-                                <div className="vol-org">{activity.organization}</div>
-                                <div className="vol-date">{activity.date}</div>
-                                <p className="vol-desc">{activity.description}</p>
-                            </div>
-                        ))}
+                    {/* Leadership Card */}
+                    <div className="card edu-leadership-card">
+                        <h4 className="edu-lead-title">Leadership & Volunteering</h4>
+                        <div className="edu-lead-list">
+                            {leadership.map((l, i) => (
+                                <div key={i} className="edu-lead-item reveal-child">
+                                    <div className="edu-lead-row">
+                                        <span className="edu-lead-role">{l.role}</span>
+                                        <span className="edu-lead-period">{l.period}</span>
+                                    </div>
+                                    <span className="edu-lead-org">{l.org}</span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

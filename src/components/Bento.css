@@ -1,0 +1,504 @@
+/* ── Grid Layout ─────────────────────────────────── */
+.bento-section {
+    padding: 4rem 0 5rem;
+}
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+/* ── Card assignments ── */
+.bento-edu       { grid-column: span 1; }
+.bento-reading   { grid-column: span 2; }
+.bento-exp       { grid-column: span 2; }
+.bento-vol       { grid-column: span 1; }
+
+.bento-project {
+    cursor: pointer;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* ── Education Card ─────────────────────────────── */
+.edu-school {
+    font-size: 1.15rem;
+    margin-bottom: 0.25rem;
+}
+
+.edu-degree {
+    color: var(--color-text);
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+}
+
+.edu-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+    margin-bottom: 1rem;
+}
+
+.edu-awards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.award-chip {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-dim);
+    border: 1px solid var(--color-bg-lightest);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+}
+
+/* ── Reading & Reflections Card ─────────────────── */
+.reading-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--color-bg-lightest);
+}
+
+.rtab {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 0.5rem 1rem;
+    color: var(--color-text-dim);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: var(--transition);
+}
+
+.rtab:hover { color: var(--color-accent); }
+
+.rtab.active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+}
+
+/* Books */
+.books-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.book-item {
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-bg-lightest);
+}
+
+.book-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.book-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.15rem;
+}
+
+.book-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.book-dot.reading { background: var(--color-accent); }
+.book-dot.completed { background: var(--color-green); }
+
+.book-name {
+    color: var(--color-text-bright);
+    font-size: 0.9rem;
+}
+
+.book-author {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-text-dim);
+    display: block;
+    margin-bottom: 0.35rem;
+}
+
+.book-note {
+    font-size: 0.82rem;
+    color: var(--color-text-dim);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Reflections */
+.reflections-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.reflection-item {
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-bg-lightest);
+}
+
+.reflection-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.ref-date {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ref-title {
+    display: block;
+    color: var(--color-text-bright);
+    font-size: 0.9rem;
+    margin: 0.15rem 0 0.3rem;
+}
+
+.ref-body {
+    font-size: 0.82rem;
+    color: var(--color-text-dim);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ── Experience Card ────────────────────────────── */
+.exp-layout {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.exp-tabs {
+    display: flex;
+    flex-direction: column;
+    min-width: 100px;
+    border-right: 1px solid var(--color-bg-lightest);
+}
+
+.exp-tab {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-text-dim);
+    border-right: 2px solid transparent;
+    margin-right: -1px;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.exp-tab:hover { color: var(--color-accent); }
+
+.exp-tab.active {
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    border-right-color: var(--color-accent);
+}
+
+.exp-content { flex: 1; }
+
+.exp-role {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.exp-company { color: var(--color-accent); }
+
+.exp-period {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+    margin-bottom: 0.75rem;
+}
+
+.exp-bullets {
+    padding: 0;
+}
+
+.exp-bullets li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--color-text);
+    line-height: 1.5;
+}
+
+.exp-bullets li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+}
+
+/* ── Volunteering Card ──────────────────────────── */
+.vol-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.vol-row {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--color-bg-lightest);
+}
+
+.vol-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.vol-role {
+    font-size: 0.85rem;
+    color: var(--color-text-bright);
+    font-weight: 500;
+}
+
+.vol-org {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-accent);
+}
+
+.vol-date {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-dim);
+}
+
+/* ── Project Cards ──────────────────────────────── */
+.proj-color {
+    height: 100px;
+    width: 100%;
+}
+
+.proj-body {
+    padding: 1rem 1.25rem 1.25rem;
+}
+
+.proj-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.35rem;
+}
+
+.proj-title {
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.proj-date {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-dim);
+    white-space: nowrap;
+}
+
+.proj-desc {
+    font-size: 0.82rem;
+    color: var(--color-text-dim);
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+}
+
+.proj-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.proj-tags span {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+}
+
+.bento-project:hover {
+    transform: translateY(-4px);
+    border-color: rgba(244, 211, 94, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Modal ──────────────────────────────────────── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 25, 47, 0.88);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 2rem;
+    animation: modalFade 0.2s ease;
+}
+
+.modal-card {
+    background: var(--color-bg-light);
+    border: 1px solid var(--color-bg-lightest);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 560px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalSlide 0.25s ease;
+}
+
+.modal-x {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 1.75rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.3);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.2s;
+    line-height: 1;
+}
+
+.modal-x:hover { background: rgba(0, 0, 0, 0.6); }
+
+.modal-color {
+    height: 180px;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-body {
+    padding: 1.75rem;
+}
+
+.modal-body h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+}
+
+.modal-date {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+}
+
+.modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+}
+
+.modal-tags span {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--color-bg-lightest);
+    border-radius: 16px;
+    color: var(--color-text);
+}
+
+.modal-desc {
+    color: var(--color-text);
+    line-height: 1.7;
+    font-size: 0.92rem;
+    margin-bottom: 1.5rem;
+}
+
+.modal-links {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.modal-link {
+    padding: 0.6rem 1.25rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 6px;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.modal-link:hover {
+    background: var(--color-accent-dim);
+}
+
+@keyframes modalFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalSlide {
+    from { transform: translateY(24px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 1024px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bento-reading { grid-column: span 1; }
+    .bento-exp     { grid-column: span 2; }
+    .bento-vol     { grid-column: span 2; }
+}
+
+@media (max-width: 600px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bento-edu,
+    .bento-reading,
+    .bento-exp,
+    .bento-vol {
+        grid-column: span 1;
+    }
+
+    .exp-layout {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .exp-tabs {
+        flex-direction: row;
+        border-right: none;
+        border-bottom: 1px solid var(--color-bg-lightest);
+        overflow-x: auto;
+    }
+
+    .exp-tab {
+        border-right: none;
+        border-bottom: 2px solid transparent;
+        margin-right: 0;
+        margin-bottom: -1px;
+        text-align: center;
+        min-width: fit-content;
+    }
+
+    .exp-tab.active {
+        border-bottom-color: var(--color-accent);
+        border-right-color: transparent;
+    }
+
+    .proj-color {
+        height: 80px;
+    }
+}

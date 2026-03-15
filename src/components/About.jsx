@@ -1,57 +1,42 @@
-import React, { useEffect, useRef } from 'react';
+import useScrollReveal from '../hooks/useScrollReveal';
 import './About.css';
 
 const About = () => {
-    const revealRef = useRef(null);
+    const revealRef = useScrollReveal();
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
-
-        if (revealRef.current) {
-            observer.observe(revealRef.current);
-        }
-
-        return () => {
-            if (revealRef.current) observer.unobserve(revealRef.current);
-        };
-    }, []);
+    const skills = [
+        'Python', 'Java', 'C++', 'JavaScript', 'Ruby', 'SQL',
+        'TensorFlow', 'React', 'React Native', 'Ruby on Rails',
+        'Git', 'HTML/CSS', 'Big Data', 'Information Retrieval'
+    ];
 
     return (
-        <section id="about" className="section container about-section">
-            <h2 className="section-title">About Me</h2>
-            <div className="about-content" ref={revealRef}>
+        <section id="about" className="about-section container">
+            <div className="about-grid reveal" ref={revealRef}>
                 <div className="about-text">
-                    <p className="lead-text">
+                    <h2 className="label"><span className="accent">//</span> About</h2>
+                    <p className="about-lead">
                         I dream of a future where technology begins and ends with us.
                     </p>
                     <p>
-                        My journey into technology didn't start with code—it started in a small room in Rwamagana, Rwanda.
-                        Through the <strong>Ganza Mwari Initiative</strong>, I saw firsthand how human-led interventions, while powerful,
-                        often struggle to scale to meet the depth of need in our communities.
+                        My journey didn't start with code — it started in a small room in Rwamagana, Rwanda.
+                        Through the <strong>Ganza Mwari Initiative</strong>, I saw how human-led interventions
+                        struggle to scale. This sparked my driving question:
+                        <em> Could AI designed with cultural awareness extend the support we try to provide?</em>
                     </p>
                     <p>
-                        This realization sparked a question that drives my work today:
-                        <em>Could AI companions designed with cultural awareness and empathy extend the support we try to provide?</em>
+                        Today I bridge high-performance engineering and social impact — building
+                        <strong> offline-first AI</strong> at MIT Media Lab and scalable
+                        <strong> data infrastructure</strong> at CATLAB.
                     </p>
-                    <p>
-                        Today, I bridge the gap between high-performance engineering and social impact. From building
-                        <strong>offline-first AI tools</strong> at MIT Media Lab to developing scalable
-                        <strong>data infrastructure</strong> at CATLAB, I aim to leverage technical tools to tackle social problems
-                        in high-volume contexts. My goal is to design technologies that walk beside the communities they serve.
-                    </p>
+                    <div className="skill-cloud">
+                        {skills.map((s, i) => (
+                            <span key={i} className="skill-tag reveal-child">{s}</span>
+                        ))}
+                    </div>
                 </div>
-                <div className="about-image-wrapper">
-                    {/* Placeholder for a profile image, can add later if user provides one */}
-                    <div className="about-image-placeholder">
+                <div className="about-image">
+                    <div className="image-frame">
                         <span>LR</span>
                     </div>
                 </div>
