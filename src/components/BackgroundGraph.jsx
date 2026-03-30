@@ -119,21 +119,34 @@ const BackgroundGraph = () => {
                 if (this.y < 0 || this.y > height) this.vy *= -1;
             }
 
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(244, 211, 94, 0.35)';
-                ctx.fill();
-
-                ctx.font = '11px "JetBrains Mono", monospace';
-                ctx.fillStyle = 'rgba(204, 214, 246, 0.2)';
-                ctx.fillText(this.text, this.x + 8, this.y + 4);
-            }
         }
 
         nodesRef.current = terms.map(t => new Node(t));
 
-        const drawEdges = () => {
+        const getThemeColors = () => {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            return {
+                dot: isLight ? 'rgba(198, 147, 10, 0.4)' : 'rgba(244, 211, 94, 0.35)',
+                text: isLight ? 'rgba(74, 85, 104, 0.25)' : 'rgba(204, 214, 246, 0.2)',
+                edge: isLight ? [136, 146, 176, 0.08] : [136, 146, 176, 0.12],
+            };
+        };
+
+        const animate = () => {
+            const colors = getThemeColors();
+            ctx.clearRect(0, 0, width, height);
+            nodesRef.current.forEach(node => {
+                node.update();
+                // inline draw with theme colors
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fillStyle = colors.dot;
+                ctx.fill();
+                ctx.font = '11px "JetBrains Mono", monospace';
+                ctx.fillStyle = colors.text;
+                ctx.fillText(node.text, node.x + 8, node.y + 4);
+            });
+            // inline edges with theme colors
             const maxDist = 200;
             for (let i = 0; i < nodesRef.current.length; i++) {
                 for (let j = i + 1; j < nodesRef.current.length; j++) {
@@ -147,20 +160,11 @@ const BackgroundGraph = () => {
                         ctx.beginPath();
                         ctx.moveTo(a.x, a.y);
                         ctx.lineTo(b.x, b.y);
-                        ctx.strokeStyle = `rgba(136, 146, 176, ${opacity * 0.12})`;
+                        ctx.strokeStyle = `rgba(${colors.edge[0]}, ${colors.edge[1]}, ${colors.edge[2]}, ${opacity * colors.edge[3]})`;
                         ctx.stroke();
                     }
                 }
             }
-        };
-
-        const animate = () => {
-            ctx.clearRect(0, 0, width, height);
-            nodesRef.current.forEach(node => {
-                node.update();
-                node.draw();
-            });
-            drawEdges();
             animationFrameId = requestAnimationFrame(animate);
         };
 

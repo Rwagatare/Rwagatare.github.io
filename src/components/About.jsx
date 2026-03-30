@@ -1,4 +1,5 @@
 import useScrollReveal from '../hooks/useScrollReveal';
+import Typewriter from './Typewriter';
 import './About.css';
 
 const About = () => {
@@ -15,6 +16,7 @@ const About = () => {
             <div className="about-grid reveal" ref={revealRef}>
                 <div className="about-text">
                     <h2 className="label"><span className="accent">//</span> About</h2>
+                    <Typewriter text="From a small room in Rwanda to building AI that centers the people it serves." />
                     <p className="about-lead">
                         I dream of a future where technology begins and ends with us.
                     </p>
@@ -37,7 +39,7 @@ const About = () => {
                 </div>
                 <div className="about-image">
                     <div className="image-frame">
-                        <span>LR</span>
+                        <img src="/Photos/Profile.JPEG" alt="Livingstone Rwagatare" />
                     </div>
                 </div>
             </div>

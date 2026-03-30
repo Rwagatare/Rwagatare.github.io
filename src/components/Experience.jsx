@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import useScrollReveal from '../hooks/useScrollReveal';
 import useTilt from '../hooks/useTilt';
+import Typewriter from './Typewriter';
 import './Experience.css';
 
 const jobs = [
@@ -11,8 +12,9 @@ const jobs = [
         period: 'Jul – Aug 2025',
         location: 'Cambridge, MA',
         bullets: [
-            'Spearheaded the development and launch of an AI chatbot (AI not AI bot, Teachable Machine Bot, and Module Review Bot) tutoring system for a nationwide AI literacy program in Rwanda.',
-            'Facilitated deep learning for over 80 educators through interactive sessions (avg. 10-minute session per user).'
+            'Spearheaded the development and launch of three AI chatbots  tutoring systems for a nationwide Day of AI\'s AI literacy program in Rwanda.',
+            'Reengineered Google transfer learning tool (teachable machine v1) into fully functional offline-capable Progressive Web Application (PWA) using Workbox service workers with CacheFirst strategies allowing reliable use in regions with limited internet access. I improved mobileNet image classification prediction stability on low-powered Android devices using temporal smoothing with a 10-frame confidence buffer and a 65% confidence threshold.',
+            'Developed RESTful API middleware bridging Playlab.ai educational LLM platform with Meta WhatsApp Cloud API using Python/FastAPI, enabling curriculum-grounded AI tutoring for students in low-bandwidth regions. Implemented webhook-based architecture with Redis session caching and PostgreSQL persistence to handle asynchronous message routing between educators custom AI agents and student conversations.'
         ]
     },
     {
@@ -50,6 +52,7 @@ const Experience = () => {
         <section id="experience" className="section-wrap container">
             <div className="reveal" ref={revealRef}>
                 <h2 className="label"><span className="accent">//</span> Experience</h2>
+                <Typewriter text="Every role taught me that the best technology is built with people, not just for them." />
                 <div className="card exp-card" onMouseMove={tilt.onMouseMove} onMouseLeave={tilt.onMouseLeave}>
                     <div className="vtab-layout">
                         <div className="vtab-sidebar">

@@ -18,7 +18,7 @@ const Hero = () => {
                     <a href="mailto:lrwagatare@westmont.edu" className="btn-primary">
                         Get In Touch
                     </a>
-                    <a href="/resume.pdf" className="btn-outline" target="_blank" rel="noopener noreferrer">
+                    <a href="/Resume/Livingstone_Rwagatar.pdf" className="btn-outline" target="_blank" rel="noopener noreferrer">
                         Resume
                     </a>
                 </div>

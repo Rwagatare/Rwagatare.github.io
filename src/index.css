@@ -21,6 +21,25 @@
   --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
+/* ── Light theme ── */
+[data-theme="light"] {
+  --color-bg: #f8f9fc;
+  --color-bg-light: #ffffff;
+  --color-bg-lightest: #e2e6ef;
+
+  --color-text: #4a5568;
+  --color-text-dim: #718096;
+  --color-text-bright: #1a202c;
+  --color-accent: #c6930a;
+  --color-accent-dim: rgba(198, 147, 10, 0.1);
+  --color-green: #0fa573;
+  --color-dot-pattern: rgba(198, 147, 10, 0.04);
+  --header-bg: rgba(248, 249, 252, 0.9);
+  --header-shadow: rgba(0, 0, 0, 0.08);
+  --overlay-bg: rgba(0, 0, 0, 0.3);
+  --mobile-nav-bg: rgba(255, 255, 255, 0.97);
+}
+
 *,
 *::before,
 *::after {
@@ -38,9 +57,10 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
+  transition: background-color 0.4s ease, color 0.4s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: radial-gradient(circle, rgba(244, 211, 94, 0.025) 1px, transparent 1px);
+  background-image: radial-gradient(circle, var(--color-dot-pattern, rgba(244, 211, 94, 0.025)) 1px, transparent 1px);
   background-size: 24px 24px;
   overflow-x: hidden;
 }
@@ -124,7 +144,7 @@ button {
   border: 1px solid var(--color-bg-lightest);
   border-radius: 12px;
   padding: 1.5rem;
-  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
   position: relative;
 }
 
@@ -184,6 +204,31 @@ button {
   flex: 1;
   height: 1px;
   background: linear-gradient(to right, var(--color-bg-lightest), transparent);
+}
+
+/* ── Section typewriter tagline ── */
+.section-typewriter {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  margin-bottom: 1.5rem;
+  min-height: 1.4em;
+  line-height: 1.6;
+}
+
+.tw-cursor {
+  color: var(--color-accent);
+  font-weight: 300;
+  animation: none;
+}
+
+.tw-cursor.blink {
+  animation: cursorBlink 1s step-end infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* ── Section wrapper ── */

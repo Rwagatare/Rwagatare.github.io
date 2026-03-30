@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import useScrollReveal from '../hooks/useScrollReveal';
 import useTilt from '../hooks/useTilt';
+import Typewriter from './Typewriter';
 import './Projects.css';
 
 const projects = [
@@ -145,6 +146,7 @@ const Projects = () => {
         <section id="projects" className="section-wrap container">
             <div className="reveal" ref={revealRef}>
                 <h2 className="label"><span className="accent">//</span> Projects & Initiatives</h2>
+                <Typewriter text="Things I've built to bridge the gap between what technology can do and what communities actually need." />
                 <div className="proj-grid">
                     {projects.map((p) => (
                         <div

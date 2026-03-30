@@ -1,4 +1,5 @@
 import useScrollReveal from '../hooks/useScrollReveal';
+import Typewriter from './Typewriter';
 import './Education.css';
 
 const awards = [
@@ -24,6 +25,7 @@ const Education = () => {
         <section id="education" className="section-wrap container">
             <div className="reveal" ref={revealRef}>
                 <h2 className="label"><span className="accent">//</span> Education & Leadership</h2>
+                <Typewriter text="Where I learned to think critically, lead intentionally, and question everything." />
                 <div className="edu-layout">
                     {/* Education Card */}
                     <div className="card edu-card">
