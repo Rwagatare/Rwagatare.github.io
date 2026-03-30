@@ -5,12 +5,19 @@ A modern, responsive personal portfolio built with **React** and **Vite**. Featu
 ## Features
 
 - **Interactive Knowledge Graph Background**: A custom HTML5 Canvas animation with floating labeled nodes ("Empathy", "Algorithms", "MIT", "Rwanda", etc.) that repel from the mouse cursor and draw connecting edges between nearby nodes. Clicking a node smoothly scrolls to its related section.
+
 - **Mouse Glow Effect**: A radial gradient spotlight that follows the cursor with a smooth easing animation, adding depth to the dark background.
+
 - **Light / Dark Theme Toggle**: Persistent theme preference stored in `localStorage`, with the background graph and all UI elements adapting to both themes.
+
 - **Narrative-Driven Sections**: About, Experience, Projects, Education, Beyond the Code, and a Bento-style skills/highlights grid — each designed to tell a cohesive story of technical expertise and social impact.
+
 - **Beyond the Code**: Tabbed section covering Books, Community, and Travel — with filterable community cards (Volunteering, Mentorship, Clubs, Education), a Typewriter animation, and card tilt effects on hover.
+
 - **Project Cards**: Expandable project cards with a detailed modal view.
+
 - **Responsive Layout**: Fully responsive design including a hamburger mobile nav that adapts from desktop to mobile.
+
 - **Glassmorphism Header**: Scroll-aware header with smooth scroll navigation to all sections.
 
 ## Tech Stack
