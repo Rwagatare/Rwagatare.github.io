@@ -11,6 +11,10 @@ const OPTIONS = [
     { id: 'butter', swatch: '#fde68a' },
     { id: 'ember', swatch: '#ff7a4d' },
     { id: 'blue', swatch: '#0a84ff' },
+    { id: 'glass', swatch: 'rgba(255,255,255,.18)', glass: true },
+    { id: 'glass-periwinkle', swatch: 'rgba(165,180,252,.35)', glass: true },
+    { id: 'glass-mint', swatch: 'rgba(142,230,184,.32)', glass: true },
+    { id: 'glass-sky', swatch: 'rgba(143,211,254,.32)', glass: true },
 ];
 
 const KEY = 'accent-dev';
@@ -47,9 +51,12 @@ const PaletteDev = () => {
             }}
         >
             <span style={{ fontFamily: 'var(--font-mono)', letterSpacing: '0.04em' }}>Accent · <b style={{ color: 'var(--label)' }}>{accent}</b></span>
-            {OPTIONS.map((o) => (
+            {OPTIONS.map((o, i) => (
+                <span key={o.id} style={{ display: 'contents' }}>
+                {o.glass && !OPTIONS[i - 1]?.glass && (
+                    <span style={{ width: 1, height: 18, background: 'var(--separator)', margin: '0 2px' }} aria-hidden="true" />
+                )}
                 <button
-                    key={o.id}
                     type="button"
                     onClick={() => setAccent(o.id)}
                     aria-label={`Use ${o.id} accent`}
@@ -58,11 +65,17 @@ const PaletteDev = () => {
                         width: 22,
                         height: 22,
                         borderRadius: '50%',
-                        background: o.swatch,
-                        boxShadow: accent === o.id ? '0 0 0 2px var(--bg), 0 0 0 4px var(--label)' : 'inset 0 0 0 1px rgba(0,0,0,.15)',
+                        background: o.glass ? `linear-gradient(180deg, rgba(255,255,255,.55), transparent 60%), ${o.swatch}` : o.swatch,
+                        backdropFilter: o.glass ? 'blur(8px) saturate(180%)' : undefined,
+                        boxShadow: accent === o.id
+                            ? '0 0 0 2px var(--bg), 0 0 0 4px var(--label)'
+                            : o.glass
+                                ? 'inset 0 1px 0 rgba(255,255,255,.7), inset 0 0 0 1px rgba(128,128,140,.35)'
+                                : 'inset 0 0 0 1px rgba(0,0,0,.15)',
                         transition: 'box-shadow 200ms',
                     }}
                 />
+                </span>
             ))}
         </div>
     );
