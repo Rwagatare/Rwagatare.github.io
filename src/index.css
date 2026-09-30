@@ -113,331 +113,36 @@
   --graph-edge-a: 0.13;
 }
 
-/* ── Accent palettes ──
-   One hue drives buttons, links, glow and the Imigongo motif (motif is a
-   deeper tone of the same hue). Periwinkle is the default; the others are
-   selectable via data-accent (dev palette picker). */
+/* ── Accent: clear liquid glass ──
+   Primary actions are frosted glass (same material as the nav bar), and the
+   Imigongo motif is a soft silver so nothing competes with the content. */
 :root,
 [data-theme="dark"] {
-  --accent: #b4c0fd;
-  --accent-strong: #a5b4fc;
-  --accent-soft: rgba(165,180,252, 0.14);
-  --on-accent: #0f1115;
-  --glow: rgba(165,180,252, 0.08);
-  --graph-dot: rgba(180,192,253, 0.55);
-  --clay: #818cf8;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23818cf8' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-theme="light"] {
-  --accent: #4338ca;
-  --accent-strong: #4f46e5;
-  --accent-soft: rgba(79,70,229, 0.1);
-  --on-accent: #ffffff;
-  --glow: rgba(79,70,229, 0.06);
-  --graph-dot: rgba(67,56,202, 0.45);
-  --clay: #6366f1;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%236366f1' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-accent="mint"] {
-  --accent: #9debc4;
-  --accent-strong: #8ee6b8;
-  --accent-soft: rgba(142,230,184, 0.14);
-  --on-accent: #0f1115;
-  --glow: rgba(142,230,184, 0.08);
-  --graph-dot: rgba(157,235,196, 0.55);
-  --clay: #4fbf8a;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%234fbf8a' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-theme="light"][data-accent="mint"] {
-  --accent: #166534;
-  --accent-strong: #15803d;
-  --accent-soft: rgba(21,128,61, 0.1);
-  --on-accent: #ffffff;
-  --glow: rgba(21,128,61, 0.06);
-  --graph-dot: rgba(22,101,52, 0.45);
-  --clay: #16a34a;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%2316a34a' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-accent="sky"] {
-  --accent: #9ad8fe;
-  --accent-strong: #8fd3fe;
-  --accent-soft: rgba(143,211,254, 0.14);
-  --on-accent: #0f1115;
-  --glow: rgba(143,211,254, 0.08);
-  --graph-dot: rgba(154,216,254, 0.55);
-  --clay: #4fb3e8;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%234fb3e8' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-theme="light"][data-accent="sky"] {
-  --accent: #075985;
-  --accent-strong: #0369a1;
-  --accent-soft: rgba(3,105,161, 0.1);
-  --on-accent: #ffffff;
-  --glow: rgba(3,105,161, 0.06);
-  --graph-dot: rgba(7,89,133, 0.45);
-  --clay: #0284c7;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%230284c7' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-accent="lilac"] {
-  --accent: #d8c0fe;
-  --accent-strong: #d0b4fe;
-  --accent-soft: rgba(208,180,254, 0.14);
-  --on-accent: #0f1115;
-  --glow: rgba(208,180,254, 0.08);
-  --graph-dot: rgba(216,192,254, 0.55);
-  --clay: #b18af5;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23b18af5' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-theme="light"][data-accent="lilac"] {
-  --accent: #6b21a8;
-  --accent-strong: #7e22ce;
-  --accent-soft: rgba(126,34,206, 0.1);
-  --on-accent: #ffffff;
-  --glow: rgba(126,34,206, 0.06);
-  --graph-dot: rgba(107,33,168, 0.45);
-  --clay: #9333ea;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%239333ea' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-accent="butter"] {
-  --accent: #fde68a;
-  --accent-strong: #fde68a;
-  --accent-soft: rgba(253,230,138, 0.14);
-  --on-accent: #0f1115;
-  --glow: rgba(253,230,138, 0.08);
-  --graph-dot: rgba(253,230,138, 0.55);
-  --clay: #e3b93e;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23e3b93e' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-theme="light"][data-accent="butter"] {
-  --accent: #854d0e;
-  --accent-strong: #a16207;
-  --accent-soft: rgba(161,98,7, 0.1);
-  --on-accent: #ffffff;
-  --glow: rgba(161,98,7, 0.06);
-  --graph-dot: rgba(133,77,14, 0.45);
-  --clay: #ca8a04;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23ca8a04' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-accent="ember"] {
-  --accent: #ff8559;
-  --accent-strong: #ff7a4d;
-  --accent-soft: rgba(255,122,77, 0.14);
-  --on-accent: #1a0e09;
-  --glow: rgba(255,122,77, 0.08);
-  --graph-dot: rgba(255,133,89, 0.55);
-  --clay: #c8603c;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23c8603c' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-theme="light"][data-accent="ember"] {
-  --accent: #b93c12;
-  --accent-strong: #c2410c;
-  --accent-soft: rgba(194,65,12, 0.1);
-  --on-accent: #ffffff;
-  --glow: rgba(194,65,12, 0.06);
-  --graph-dot: rgba(185,60,18, 0.45);
-  --clay: #9a3d22;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%239a3d22' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-accent="blue"] {
-  --accent: #2997ff;
-  --accent-strong: #0a84ff;
-  --accent-soft: rgba(10,132,255, 0.14);
-  --on-accent: #ffffff;
-  --glow: rgba(10,132,255, 0.08);
-  --graph-dot: rgba(41,151,255, 0.55);
-  --clay: #e0795a;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23e0795a' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-theme="light"][data-accent="blue"] {
-  --accent: #0071e3;
-  --accent-strong: #0066cc;
-  --accent-soft: rgba(0,102,204, 0.1);
-  --on-accent: #ffffff;
-  --glow: rgba(0,102,204, 0.06);
-  --graph-dot: rgba(0,113,227, 0.45);
-  --clay: #b0472a;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23b0472a' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-/* Liquid-glass palettes: primary buttons become frosted, tinted glass
-   (same material as the nav bar). Motif and links follow the tint. */
-[data-accent="glass"] {
-  --glass-tint: rgba(255,255,255, 0.13);
-  --glass-tint-hover: rgba(255,255,255, 0.23);
+  --glass-tint: rgba(255, 255, 255, 0.13);
+  --glass-tint-hover: rgba(255, 255, 255, 0.23);
   --glass-sheen: rgba(255, 255, 255, 0.26);
   --accent: #e5e5ea;
   --accent-strong: #e5e5ea;
-  --accent-soft: rgba(229,229,234, 0.14);
+  --accent-soft: rgba(229, 229, 234, 0.14);
   --on-accent: var(--label);
-  --glow: rgba(255,255,255, 0.07);
-  --graph-dot: rgba(229,229,234, 0.5);
+  --glow: rgba(255, 255, 255, 0.07);
+  --graph-dot: rgba(229, 229, 234, 0.5);
   --clay: #a1a1a6;
   --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23a1a1a6' stroke-width='1.7'/%3E%3C/svg%3E");
 }
 
-[data-theme="light"][data-accent="glass"] {
-  --glass-tint: rgba(255,255,255, 0.62);
-  --glass-tint-hover: rgba(255,255,255, 0.76);
+[data-theme="light"] {
+  --glass-tint: rgba(255, 255, 255, 0.62);
+  --glass-tint-hover: rgba(255, 255, 255, 0.78);
   --glass-sheen: rgba(255, 255, 255, 0.7);
   --accent: #3a3a3c;
   --accent-strong: #3a3a3c;
-  --accent-soft: rgba(58,58,60, 0.1);
+  --accent-soft: rgba(58, 58, 60, 0.1);
   --on-accent: var(--label);
-  --glow: rgba(0,0,0, 0.05);
-  --graph-dot: rgba(58,58,60, 0.4);
+  --glow: rgba(0, 0, 0, 0.05);
+  --graph-dot: rgba(58, 58, 60, 0.4);
   --clay: #8e8e93;
   --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%238e8e93' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-accent="glass-periwinkle"] {
-  --glass-tint: rgba(165,180,252, 0.26);
-  --glass-tint-hover: rgba(165,180,252, 0.36);
-  --glass-sheen: rgba(255, 255, 255, 0.26);
-  --accent: #b4c0fd;
-  --accent-strong: #b4c0fd;
-  --accent-soft: rgba(180,192,253, 0.14);
-  --on-accent: var(--label);
-  --glow: rgba(165,180,252, 0.07);
-  --graph-dot: rgba(180,192,253, 0.5);
-  --clay: #818cf8;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23818cf8' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-theme="light"][data-accent="glass-periwinkle"] {
-  --glass-tint: rgba(99,102,241, 0.16);
-  --glass-tint-hover: rgba(99,102,241, 0.3);
-  --glass-sheen: rgba(255, 255, 255, 0.7);
-  --accent: #4338ca;
-  --accent-strong: #4338ca;
-  --accent-soft: rgba(67,56,202, 0.1);
-  --on-accent: var(--label);
-  --glow: rgba(99,102,241, 0.05);
-  --graph-dot: rgba(67,56,202, 0.4);
-  --clay: #6366f1;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%236366f1' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-accent="glass-mint"] {
-  --glass-tint: rgba(142,230,184, 0.22);
-  --glass-tint-hover: rgba(142,230,184, 0.32);
-  --glass-sheen: rgba(255, 255, 255, 0.26);
-  --accent: #9debc4;
-  --accent-strong: #9debc4;
-  --accent-soft: rgba(157,235,196, 0.14);
-  --on-accent: var(--label);
-  --glow: rgba(142,230,184, 0.07);
-  --graph-dot: rgba(157,235,196, 0.5);
-  --clay: #4fbf8a;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%234fbf8a' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-theme="light"][data-accent="glass-mint"] {
-  --glass-tint: rgba(22,163,74, 0.14);
-  --glass-tint-hover: rgba(22,163,74, 0.28);
-  --glass-sheen: rgba(255, 255, 255, 0.7);
-  --accent: #166534;
-  --accent-strong: #166534;
-  --accent-soft: rgba(22,101,52, 0.1);
-  --on-accent: var(--label);
-  --glow: rgba(22,163,74, 0.05);
-  --graph-dot: rgba(22,101,52, 0.4);
-  --clay: #16a34a;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%2316a34a' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-accent="glass-sky"] {
-  --glass-tint: rgba(143,211,254, 0.24);
-  --glass-tint-hover: rgba(143,211,254, 0.34);
-  --glass-sheen: rgba(255, 255, 255, 0.26);
-  --accent: #9ad8fe;
-  --accent-strong: #9ad8fe;
-  --accent-soft: rgba(154,216,254, 0.14);
-  --on-accent: var(--label);
-  --glow: rgba(143,211,254, 0.07);
-  --graph-dot: rgba(154,216,254, 0.5);
-  --clay: #4fb3e8;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%234fb3e8' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-theme="light"][data-accent="glass-sky"] {
-  --glass-tint: rgba(2,132,199, 0.14);
-  --glass-tint-hover: rgba(2,132,199, 0.28);
-  --glass-sheen: rgba(255, 255, 255, 0.7);
-  --accent: #075985;
-  --accent-strong: #075985;
-  --accent-soft: rgba(7,89,133, 0.1);
-  --on-accent: var(--label);
-  --glow: rgba(2,132,199, 0.05);
-  --graph-dot: rgba(7,89,133, 0.4);
-  --clay: #0284c7;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%230284c7' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-/* Light-blue liquid glass: a clearly blue, see-through tint */
-[data-accent="glass-lightblue"] {
-  --glass-tint: rgba(90, 170, 255, 0.42);
-  --glass-tint-hover: rgba(110, 182, 255, 0.54);
-  --glass-sheen: rgba(255, 255, 255, 0.34);
-  --accent: #8cc7ff;
-  --accent-strong: #8cc7ff;
-  --accent-soft: rgba(140, 199, 255, 0.16);
-  --on-accent: var(--label);
-  --glow: rgba(90, 170, 255, 0.1);
-  --graph-dot: rgba(140, 199, 255, 0.55);
-  --clay: #5aaaff;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%235aaaff' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-theme="light"][data-accent="glass-lightblue"] {
-  --glass-tint: rgba(56, 150, 255, 0.3);
-  --glass-tint-hover: rgba(56, 150, 255, 0.42);
-  --glass-sheen: rgba(255, 255, 255, 0.75);
-  --accent: #0b62c4;
-  --accent-strong: #0b62c4;
-  --accent-soft: rgba(11, 98, 196, 0.1);
-  --on-accent: var(--label);
-  --glow: rgba(56, 150, 255, 0.08);
-  --graph-dot: rgba(11, 98, 196, 0.42);
-  --clay: #3b8fe8;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%233b8fe8' stroke-width='1.7'/%3E%3C/svg%3E");
-}
-
-[data-accent^="glass"] :is(.btn-primary, .gal-cta:not(.is-link)) {
-  position: relative;
-  color: var(--label);
-  background: linear-gradient(180deg, var(--glass-sheen), transparent 58%), var(--glass-tint);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  backdrop-filter: blur(18px) saturate(180%);
-  box-shadow:
-    inset 0 1px 0 var(--glass-rim),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
-    inset 0 0 0 0.5px var(--glass-edge),
-    0 8px 24px rgba(0, 0, 0, 0.18);
-}
-
-[data-accent^="glass"] :is(.btn-primary, .gal-card:hover .gal-cta:not(.is-link)):hover,
-[data-accent^="glass"] .gal-card:hover .gal-cta:not(.is-link) {
-  background: linear-gradient(180deg, var(--glass-sheen), transparent 58%), var(--glass-tint-hover);
-}
-
-[data-theme="light"][data-accent^="glass"] :is(.btn-primary, .gal-cta:not(.is-link)) {
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 0 0 0.5px rgba(0, 0, 0, 0.1),
-    0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 /* Legacy aliases so un-migrated components keep rendering */
@@ -714,13 +419,26 @@ main {
 }
 
 .btn-primary {
-  background: var(--accent-strong);
-  color: var(--on-accent);
+  color: var(--label);
+  background: linear-gradient(180deg, var(--glass-sheen), transparent 58%), var(--glass-tint);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 var(--glass-rim),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 0 0.5px var(--glass-edge),
+    0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
 .btn-primary:hover {
-  background: var(--accent);
-  box-shadow: 0 6px 24px var(--accent-soft);
+  background: linear-gradient(180deg, var(--glass-sheen), transparent 58%), var(--glass-tint-hover);
+}
+
+[data-theme="light"] .btn-primary {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 0 0 0.5px rgba(0, 0, 0, 0.1),
+    0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .btn-secondary {

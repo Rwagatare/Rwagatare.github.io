@@ -153,8 +153,11 @@
   flex: none;
   padding: 0 16px;
   border-radius: 10px;
-  background: var(--accent-strong);
-  color: var(--on-accent);
+  color: var(--label);
+  background: linear-gradient(180deg, var(--glass-sheen), transparent 58%), var(--glass-tint);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: inset 0 1px 0 var(--glass-rim), inset 0 0 0 0.5px var(--glass-edge), 0 6px 18px rgba(0, 0, 0, 0.14);
   font-size: 15px;
   font-weight: 500;
   transition: transform var(--dur) var(--spring), background-color var(--dur-fast);
@@ -173,6 +176,10 @@
 
 .gal-card:hover .gal-cta {
   transform: translateX(3px);
+}
+
+.gal-card:hover .gal-cta:not(.is-link) {
+  background: linear-gradient(180deg, var(--glass-sheen), transparent 58%), var(--glass-tint-hover);
 }
 
 .gal-controls {
