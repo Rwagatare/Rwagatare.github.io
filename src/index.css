@@ -386,6 +386,35 @@
   --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%230284c7' stroke-width='1.7'/%3E%3C/svg%3E");
 }
 
+/* Light-blue liquid glass: a clearly blue, see-through tint */
+[data-accent="glass-lightblue"] {
+  --glass-tint: rgba(90, 170, 255, 0.42);
+  --glass-tint-hover: rgba(110, 182, 255, 0.54);
+  --glass-sheen: rgba(255, 255, 255, 0.34);
+  --accent: #8cc7ff;
+  --accent-strong: #8cc7ff;
+  --accent-soft: rgba(140, 199, 255, 0.16);
+  --on-accent: var(--label);
+  --glow: rgba(90, 170, 255, 0.1);
+  --graph-dot: rgba(140, 199, 255, 0.55);
+  --clay: #5aaaff;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%235aaaff' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"][data-accent="glass-lightblue"] {
+  --glass-tint: rgba(56, 150, 255, 0.3);
+  --glass-tint-hover: rgba(56, 150, 255, 0.42);
+  --glass-sheen: rgba(255, 255, 255, 0.75);
+  --accent: #0b62c4;
+  --accent-strong: #0b62c4;
+  --accent-soft: rgba(11, 98, 196, 0.1);
+  --on-accent: var(--label);
+  --glow: rgba(56, 150, 255, 0.08);
+  --graph-dot: rgba(11, 98, 196, 0.42);
+  --clay: #3b8fe8;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%233b8fe8' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
 [data-accent^="glass"] :is(.btn-primary, .gal-cta:not(.is-link)) {
   position: relative;
   color: var(--label);

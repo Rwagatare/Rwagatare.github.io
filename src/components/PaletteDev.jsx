@@ -15,12 +15,13 @@ const OPTIONS = [
     { id: 'glass-periwinkle', swatch: 'rgba(165,180,252,.35)', glass: true },
     { id: 'glass-mint', swatch: 'rgba(142,230,184,.32)', glass: true },
     { id: 'glass-sky', swatch: 'rgba(143,211,254,.32)', glass: true },
+    { id: 'glass-lightblue', swatch: 'rgba(90,170,255,.55)', glass: true },
 ];
 
-const KEY = 'accent-dev';
+const KEY = 'accent-dev-v2';
 
 const read = () => {
-    try { return localStorage.getItem(KEY) || 'periwinkle'; } catch { return 'periwinkle'; }
+    try { return localStorage.getItem(KEY) || 'glass-lightblue'; } catch { return 'glass-lightblue'; }
 };
 
 const PaletteDev = () => {
