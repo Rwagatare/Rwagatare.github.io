@@ -84,3 +84,25 @@ export const skills = [
     { group: 'Frontend', items: ['React', 'TypeScript', 'PWAs', 'TensorFlow.js'] },
     { group: 'Tooling & systems', items: ['Docker', 'GitHub Actions', 'Linux', 'TCP/IP', 'DNS'] },
 ];
+
+// Community & leadership (from the previous site's leadership list + resume).
+export const community = {
+    featured: {
+        title: 'Ganza Mwari Initiative',
+        role: 'Founder',
+        period: 'Dec 2021 – Present',
+        place: 'Rwamagana, Rwanda',
+        story: 'Ganza Mwari (“Advanced Woman”) began as a response to rising teen dropouts after COVID. With local government and the Aegis Trust we opened a rent-free workspace offering vocational training and financial literacy for teen mothers. Watching human-led support hit its limits is why I build technology that has to work at scale, and in places the network forgets.',
+    },
+    highlight: {
+        value: '$650K',
+        label: 'raised at the Agahozo-Shalom Youth Village gala in New York, where I spoke for the village’s orphaned and vulnerable youth.',
+        role: 'Fundraiser & speaker',
+        period: 'Jan 2025 – Present',
+    },
+    roles: [
+        { role: 'Co-founder & Co-president', org: 'African Students Union, Westmont', period: '2023 – 2024' },
+        { role: 'Co-president', org: 'Global & International Students Association', period: '2023 – 2024' },
+        { role: 'Co-founder', org: 'ASYV Critical Thinking for Peace', period: '2017 – 2018' },
+    ],
+};

@@ -6,7 +6,6 @@ import Experience from './components/Experience';
 import Work from './components/Work';
 import BeyondTheCode from './components/BeyondTheCode';
 import Footer from './components/Footer';
-import './legacy.css';
 
 function App() {
   return (
