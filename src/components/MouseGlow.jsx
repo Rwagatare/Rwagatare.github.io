@@ -1,57 +1,68 @@
 import { useEffect, useRef } from 'react';
 
+// Soft accent-tinted light that trails the cursor.
 const MouseGlow = () => {
     const glowRef = useRef(null);
 
     useEffect(() => {
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const glow = glowRef.current;
-        let x = 0, y = 0;
-        let targetX = 0, targetY = 0;
-        let animId;
+        let x = window.innerWidth / 2;
+        let y = window.innerHeight / 3;
+        let tx = x;
+        let ty = y;
+        let raf = 0;
 
-        const handleMove = (e) => {
-            targetX = e.clientX;
-            targetY = e.clientY;
+        const place = () => {
+            glow.style.transform = `translate3d(${x - 350}px, ${y - 350}px, 0)`;
         };
 
-        const handleTouch = (e) => {
-            if (e.touches.length > 0) {
-                targetX = e.touches[0].clientX;
-                targetY = e.touches[0].clientY;
+        const tick = () => {
+            x += (tx - x) * 0.08;
+            y += (ty - y) * 0.08;
+            place();
+            if (Math.abs(tx - x) > 0.5 || Math.abs(ty - y) > 0.5) raf = requestAnimationFrame(tick);
+            else raf = 0;
+        };
+
+        const onMove = (e) => {
+            tx = e.clientX;
+            ty = e.clientY;
+            glow.style.opacity = '1';
+            if (reduceMotion) {
+                x = tx;
+                y = ty;
+                place();
+            } else if (!raf) {
+                raf = requestAnimationFrame(tick);
             }
         };
 
-        const animate = () => {
-            x += (targetX - x) * 0.08;
-            y += (targetY - y) * 0.08;
-            glow.style.transform = `translate(${x - 300}px, ${y - 300}px)`;
-            animId = requestAnimationFrame(animate);
-        };
-
-        window.addEventListener('mousemove', handleMove);
-        window.addEventListener('touchmove', handleTouch, { passive: true });
-        animate();
-
+        place();
+        window.addEventListener('mousemove', onMove);
         return () => {
-            window.removeEventListener('mousemove', handleMove);
-            window.removeEventListener('touchmove', handleTouch);
-            cancelAnimationFrame(animId);
+            window.removeEventListener('mousemove', onMove);
+            cancelAnimationFrame(raf);
         };
     }, []);
 
     return (
         <div
             ref={glowRef}
+            aria-hidden="true"
             style={{
                 position: 'fixed',
                 top: 0,
                 left: 0,
-                width: '600px',
-                height: '600px',
+                width: 700,
+                height: 700,
                 borderRadius: '50%',
-                background: 'radial-gradient(circle, var(--color-accent-dim) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, var(--glow) 0%, transparent 65%)',
                 pointerEvents: 'none',
                 zIndex: 0,
+                opacity: 0,
+                transition: 'opacity 600ms ease',
                 willChange: 'transform',
             }}
         />

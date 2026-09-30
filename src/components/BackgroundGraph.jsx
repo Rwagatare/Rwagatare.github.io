@@ -1,198 +1,203 @@
 import { useEffect, useRef } from 'react';
 
+// Floating "knowledge graph": labeled nodes drift, push away from the cursor
+// (anti-gravity), link to nearby nodes, and jump to their section on click.
+const TERMS = {
+    'FastAPI': 'work-bridge',
+    'WhatsApp': 'work-bridge',
+    'PostgreSQL': 'work-bridge',
+    'Offline-first': 'work-teachable',
+    'TensorFlow.js': 'work-teachable',
+    'PWA': 'work-teachable',
+    'Local LLMs': 'work',
+    'RL agents': 'experience',
+    'Rivetfields': 'experience',
+    'MIT': 'experience',
+    'React': 'work',
+    'Data': 'work',
+    'Rwanda': 'beyond',
+    'Ghana': 'work-bridge',
+    'Education': 'beyond',
+    'Empathy': 'beyond',
+    'Books': 'beyond',
+    'Access': 'work',
+};
+
+const INTERACTIVE = 'a, button, input, textarea, select, label, [role="button"], .surface, .glass';
+
+const readColors = () => {
+    const s = getComputedStyle(document.documentElement);
+    return {
+        dot: s.getPropertyValue('--graph-dot').trim(),
+        text: s.getPropertyValue('--graph-text').trim(),
+        edge: s.getPropertyValue('--graph-edge').trim(),
+        edgeA: parseFloat(s.getPropertyValue('--graph-edge-a')) || 0.14,
+    };
+};
+
 const BackgroundGraph = () => {
     const canvasRef = useRef(null);
-    const mouseRef = useRef({ x: null, y: null });
-    const nodesRef = useRef([]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
-        let width = window.innerWidth;
-        let height = window.innerHeight;
-        let animationFrameId;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const mouse = { x: null, y: null };
+        let width = 0;
+        let height = 0;
+        let raf = 0;
+        let colors = readColors();
+        let hovering = null;
 
-        const termToSection = {
-            "Empathy": "about",
-            "Algorithms": "experience",
-            "Global Health": "beyond",
-            "HCI": "experience",
-            "AI": "experience",
-            "Community": "about",
-            "Scale": "projects",
-            "Education": "education",
-            "Impact": "about",
-            "Data Science": "experience",
-            "Rwanda": "about",
-            "Access": "beyond",
-            "Equity": "beyond",
-            "Design": "projects",
-            "Machine Learning": "experience",
-            "MIT": "experience",
-            "Catlab": "projects",
-            "Ganza Mwari": "projects",
-        };
-
-        const resizeCanvas = () => {
+        const resize = () => {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
             width = window.innerWidth;
             height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         };
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        resize();
 
-        const updateMouse = (x, y) => {
-            mouseRef.current.x = x;
-            mouseRef.current.y = y;
-        };
+        const labels = Object.keys(TERMS);
+        const count = width < 640 ? 11 : labels.length;
+        const nodes = labels.slice(0, count).map((text) => ({
+            text,
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35,
+        }));
 
-        const handleMouseMove = (e) => updateMouse(e.clientX, e.clientY);
-        const handleTouchMove = (e) => {
-            if (e.touches.length > 0) {
-                updateMouse(e.touches[0].clientX, e.touches[0].clientY);
+        const nodeAt = (x, y) => nodes.find((n) => Math.hypot(x - n.x, y - n.y) < 26);
+
+        const onMove = (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            const overUi = e.target instanceof Element && e.target.closest(INTERACTIVE);
+            const n = overUi ? null : nodeAt(e.clientX, e.clientY);
+            if (n !== hovering) {
+                hovering = n;
+                document.body.style.cursor = n ? 'pointer' : '';
             }
         };
-        const handleTouchEnd = () => {
-            mouseRef.current.x = null;
-            mouseRef.current.y = null;
-        };
-
-        const handleClick = (e) => {
-            const x = e.clientX;
-            const y = e.clientY;
-            for (const node of nodesRef.current) {
-                const dx = x - node.x;
-                const dy = y - node.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 30) {
-                    const targetId = termToSection[node.text];
-                    if (targetId) {
-                        const el = document.getElementById(targetId);
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
-                    }
-                    break;
-                }
+        const onTouch = (e) => {
+            if (e.touches.length) {
+                mouse.x = e.touches[0].clientX;
+                mouse.y = e.touches[0].clientY;
             }
         };
-
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('touchmove', handleTouchMove, { passive: true });
-        window.addEventListener('touchend', handleTouchEnd);
-        window.addEventListener('click', handleClick);
-
-        const terms = [
-            "Empathy", "Algorithms", "Global Health", "HCI", "AI",
-            "Community", "Scale", "Education", "Impact", "Data Science",
-            "Rwanda", "Access", "Equity", "Design", "Machine Learning",
-            "MIT", "Catlab", "Ganza Mwari"
-        ];
-
-        class Node {
-            constructor(text) {
-                this.text = text;
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.4;
-                this.vy = (Math.random() - 0.5) * 0.4;
-                this.radius = 3;
-            }
-
-            update() {
-                if (mouseRef.current.x != null) {
-                    const dx = mouseRef.current.x - this.x;
-                    const dy = mouseRef.current.y - this.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    const maxDistance = 150;
-
-                    if (distance < maxDistance && distance > 0) {
-                        const force = (maxDistance - distance) / maxDistance;
-                        this.x -= (dx / distance) * force * 2;
-                        this.y -= (dy / distance) * force * 2;
-                    }
-                }
-
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
-
-        }
-
-        nodesRef.current = terms.map(t => new Node(t));
-
-        const getThemeColors = () => {
-            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-            return {
-                dot: isLight ? 'rgba(198, 147, 10, 0.4)' : 'rgba(244, 211, 94, 0.35)',
-                text: isLight ? 'rgba(74, 85, 104, 0.25)' : 'rgba(204, 214, 246, 0.2)',
-                edge: isLight ? [136, 146, 176, 0.08] : [136, 146, 176, 0.12],
-            };
+        const onLeave = () => {
+            mouse.x = null;
+            mouse.y = null;
+        };
+        const onClick = (e) => {
+            if (e.target instanceof Element && e.target.closest(INTERACTIVE)) return;
+            const n = nodeAt(e.clientX, e.clientY);
+            if (!n) return;
+            document.getElementById(TERMS[n.text])?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
         };
 
-        const animate = () => {
-            const colors = getThemeColors();
+        const draw = () => {
             ctx.clearRect(0, 0, width, height);
-            nodesRef.current.forEach(node => {
-                node.update();
-                // inline draw with theme colors
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-                ctx.fillStyle = colors.dot;
-                ctx.fill();
-                ctx.font = '11px "JetBrains Mono", monospace';
-                ctx.fillStyle = colors.text;
-                ctx.fillText(node.text, node.x + 8, node.y + 4);
-            });
-            // inline edges with theme colors
-            const maxDist = 200;
-            for (let i = 0; i < nodesRef.current.length; i++) {
-                for (let j = i + 1; j < nodesRef.current.length; j++) {
-                    const a = nodesRef.current[i];
-                    const b = nodesRef.current[j];
-                    const dx = a.x - b.x;
-                    const dy = a.y - b.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < maxDist) {
-                        const opacity = 1 - dist / maxDist;
+            const maxDist = 190;
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const a = nodes[i];
+                    const b = nodes[j];
+                    const d = Math.hypot(a.x - b.x, a.y - b.y);
+                    if (d < maxDist) {
                         ctx.beginPath();
                         ctx.moveTo(a.x, a.y);
                         ctx.lineTo(b.x, b.y);
-                        ctx.strokeStyle = `rgba(${colors.edge[0]}, ${colors.edge[1]}, ${colors.edge[2]}, ${opacity * colors.edge[3]})`;
+                        ctx.strokeStyle = `rgba(${colors.edge}, ${(1 - d / maxDist) * colors.edgeA})`;
+                        ctx.lineWidth = 1;
                         ctx.stroke();
                     }
                 }
             }
-            animationFrameId = requestAnimationFrame(animate);
+            ctx.font = '500 11px ui-monospace, "SF Mono", Menlo, monospace';
+            for (const n of nodes) {
+                const hot = n === hovering;
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, hot ? 4.5 : 3, 0, Math.PI * 2);
+                ctx.fillStyle = colors.dot;
+                ctx.fill();
+                ctx.fillStyle = hot ? colors.dot : colors.text;
+                ctx.fillText(n.text, n.x + 9, n.y + 4);
+            }
         };
 
-        animate();
+        const step = () => {
+            for (const n of nodes) {
+                if (mouse.x != null) {
+                    const dx = mouse.x - n.x;
+                    const dy = mouse.y - n.y;
+                    const d = Math.hypot(dx, dy);
+                    const reach = 150;
+                    if (d < reach && d > 0) {
+                        const f = (reach - d) / reach;
+                        n.x -= (dx / d) * f * 2;
+                        n.y -= (dy / d) * f * 2;
+                    }
+                }
+                n.x += n.vx;
+                n.y += n.vy;
+                if (n.x < 0 || n.x > width) n.vx *= -1;
+                if (n.y < 0 || n.y > height) n.vy *= -1;
+                n.x = Math.max(-10, Math.min(width + 10, n.x));
+                n.y = Math.max(-10, Math.min(height + 10, n.y));
+            }
+            draw();
+            raf = requestAnimationFrame(step);
+        };
+
+        const onVisibility = () => {
+            cancelAnimationFrame(raf);
+            if (!document.hidden && !reduceMotion) raf = requestAnimationFrame(step);
+        };
+
+        const themeObserver = new MutationObserver(() => {
+            colors = readColors();
+            if (reduceMotion) draw();
+        });
+        themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+        const onResize = () => {
+            resize();
+            if (reduceMotion) draw();
+        };
+
+        window.addEventListener('resize', onResize);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('touchmove', onTouch, { passive: true });
+        window.addEventListener('touchend', onLeave);
+        document.addEventListener('mouseleave', onLeave);
+        window.addEventListener('click', onClick);
+        document.addEventListener('visibilitychange', onVisibility);
+
+        if (reduceMotion) draw();
+        else raf = requestAnimationFrame(step);
 
         return () => {
-            window.removeEventListener('resize', resizeCanvas);
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('touchmove', handleTouchMove);
-            window.removeEventListener('touchend', handleTouchEnd);
-            window.removeEventListener('click', handleClick);
-            cancelAnimationFrame(animationFrameId);
+            cancelAnimationFrame(raf);
+            themeObserver.disconnect();
+            window.removeEventListener('resize', onResize);
+            window.removeEventListener('mousemove', onMove);
+            window.removeEventListener('touchmove', onTouch);
+            window.removeEventListener('touchend', onLeave);
+            document.removeEventListener('mouseleave', onLeave);
+            window.removeEventListener('click', onClick);
+            document.removeEventListener('visibilitychange', onVisibility);
+            document.body.style.cursor = '';
         };
     }, []);
 
     return (
         <canvas
             ref={canvasRef}
-            style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                zIndex: -1,
-                pointerEvents: 'none',
-                background: 'transparent'
-            }}
+            aria-hidden="true"
+            style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}
         />
     );
 };

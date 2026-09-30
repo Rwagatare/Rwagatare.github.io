@@ -1,36 +1,214 @@
-.exp-card {
-    padding: 2rem;
+.xp-list {
+  border-top: 1px solid var(--separator);
 }
 
-.exp-role {
-    font-size: 1.05rem;
-    font-weight: 500;
-    margin-bottom: 0.25rem;
+.xp-item {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 32px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--separator);
 }
 
-.exp-at {
-    color: var(--color-accent);
+.xp-when {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 4px;
 }
 
-.exp-period {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--color-text-dim);
-    margin-bottom: 1rem;
+.xp-period {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--label);
 }
 
-.exp-bullets li {
-    position: relative;
-    padding-left: 1.25rem;
-    margin-bottom: 0.6rem;
-    font-size: 0.9rem;
-    color: var(--color-text);
-    line-height: 1.6;
+.xp-place {
+  font-size: 14px;
+  color: var(--label-3);
 }
 
-.exp-bullets li::before {
-    content: "▹";
-    position: absolute;
-    left: 0;
-    color: var(--color-accent);
+.xp-role {
+  font-size: clamp(22px, 0.8vw + 18px, 28px);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+}
+
+.xp-org {
+  margin-top: 6px;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--label);
+}
+
+.xp-org a {
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.xp-org a svg {
+  color: var(--label-3);
+}
+
+.xp-summary {
+  font-weight: 400;
+  color: var(--label-2);
+}
+
+.xp-points {
+  margin-top: 18px;
+  display: grid;
+  gap: 10px;
+  max-width: 68ch;
+}
+
+.xp-points li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--label-2);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.xp-points li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.68em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--label-3);
+}
+
+.xp-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.xp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.xp-see {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.xp-see .link-more {
+  font-size: 15px;
+}
+
+/* Bento */
+.xp-bento {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 12px;
+  margin-top: 56px;
+}
+
+.xp-tile {
+  padding: 30px;
+  border-radius: var(--r-lg);
+}
+
+.xp-tile-kicker {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--label-3);
+  margin-bottom: 14px;
+}
+
+.xp-edu h3 {
+  font-size: 28px;
+  letter-spacing: -0.024em;
+}
+
+.xp-edu-degree {
+  margin-top: 6px;
+  font-size: 17px;
+  color: var(--label);
+}
+
+.xp-edu-meta {
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--label-3);
+}
+
+.xp-edu-course {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.xp-honors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--separator);
+  font-size: 14px;
+  color: var(--label-2);
+}
+
+.xp-honors span::before {
+  content: "✦";
+  margin-right: 6px;
+  color: var(--accent);
+  font-size: 10px;
+  vertical-align: 2px;
+}
+
+.xp-skills dl {
+  margin: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.xp-skills dt {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--label);
+}
+
+.xp-skills dd {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: var(--label-2);
+  line-height: 1.5;
+}
+
+@media (max-width: 820px) {
+  .xp-item {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 32px 0;
+  }
+
+  .xp-when {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .xp-bento {
+    grid-template-columns: 1fr;
+  }
+
+  .xp-tile {
+    padding: 24px;
+  }
 }

@@ -143,7 +143,7 @@ const Projects = () => {
     });
 
     return (
-        <section id="projects" className="section-wrap container">
+        <section id="work" className="section-wrap container">
             <div className="reveal" ref={revealRef}>
                 <h2 className="label"><span className="accent">//</span> Projects & Initiatives</h2>
                 <Typewriter text="Things I've built to bridge the gap between what technology can do and what communities actually need." />

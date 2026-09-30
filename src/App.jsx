@@ -2,13 +2,11 @@ import BackgroundGraph from './components/BackgroundGraph';
 import MouseGlow from './components/MouseGlow';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import BeyondTheCode from './components/BeyondTheCode';
-import Education from './components/Education';
 import Footer from './components/Footer';
-import './App.css';
+import './legacy.css';
 
 function App() {
   return (
@@ -18,11 +16,9 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <About />
-        <Experience />
         <Projects />
+        <Experience />
         <BeyondTheCode />
-        <Education />
       </main>
       <Footer />
     </div>

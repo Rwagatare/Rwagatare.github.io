@@ -1,83 +1,87 @@
-import { useState } from 'react';
+import { experience, education, skills } from '../data/profile';
 import useScrollReveal from '../hooks/useScrollReveal';
 import useTilt from '../hooks/useTilt';
-import Typewriter from './Typewriter';
+import { ArrowUpRight } from './Icons';
 import './Experience.css';
-
-const jobs = [
-    {
-        company: 'Day of AI',
-        shortName: 'Day of AI',
-        role: 'Software Engineering Intern',
-        period: 'Jul – Aug 2025',
-        location: 'Cambridge, MA',
-        bullets: [
-            'Spearheaded the development and launch of three AI chatbots  tutoring systems for a nationwide Day of AI\'s AI literacy program in Rwanda.',
-            'Reengineered Google transfer learning tool (teachable machine v1) into fully functional offline-capable Progressive Web Application (PWA) using Workbox service workers with CacheFirst strategies allowing reliable use in regions with limited internet access. I improved mobileNet image classification prediction stability on low-powered Android devices using temporal smoothing with a 10-frame confidence buffer and a 65% confidence threshold.',
-            'Developed RESTful API middleware bridging Playlab.ai educational LLM platform with Meta WhatsApp Cloud API using Python/FastAPI, enabling curriculum-grounded AI tutoring for students in low-bandwidth regions. Implemented webhook-based architecture with Redis session caching and PostgreSQL persistence to handle asynchronous message routing between educators custom AI agents and student conversations.'
-        ]
-    },
-    {
-        company: 'CATLAB',
-        shortName: 'CATLAB',
-        role: 'Summer Intern (Mobile Developer)',
-        period: 'May – Aug 2024',
-        location: 'Santa Barbara, CA',
-        bullets: [
-            'Developed a scalable user/faculty directory using component driven architecture with virtualized list rendering, debounced search queries, and a clean API abstraction layer.',
-            'Built an attendance dashboard that consumes normalized time-series data via a dedicated API layer and performs client-side computation of attendance matrix.',
-            'Optimized data fetching using Role-Based access control (RBAC) leveraging react-query.'
-        ]
-    },
-    {
-        company: 'Westmont College',
-        shortName: 'Westmont',
-        role: 'Academic Technology Technician',
-        period: 'Aug 2022 – Present',
-        location: 'Santa Barbara, CA',
-        bullets: [
-            'Supports diverse user populations (1200+ students and faculty) for effective utilization of AV technologies for teaching, learning, and event context.',
-            'Troubleshoots and maintains classroom technology infrastructure, diagnosing hardware and software issues to ensure smooth user experience.'
-        ]
-    }
-];
 
 const Experience = () => {
     const revealRef = useScrollReveal();
-    const tilt = useTilt(4);
-    const [active, setActive] = useState(0);
-    const job = jobs[active];
+    const tilt = useTilt(2);
 
     return (
-        <section id="experience" className="section-wrap container">
-            <div className="reveal" ref={revealRef}>
-                <h2 className="label"><span className="accent">//</span> Experience</h2>
-                <Typewriter text="Every role taught me that the best technology is built with people, not just for them." />
-                <div className="card exp-card" onMouseMove={tilt.onMouseMove} onMouseLeave={tilt.onMouseLeave}>
-                    <div className="vtab-layout">
-                        <div className="vtab-sidebar">
-                            {jobs.map((j, i) => (
-                                <button
-                                    key={i}
-                                    className={`vtab-btn ${active === i ? 'active' : ''}`}
-                                    onClick={() => setActive(i)}
-                                >
-                                    {j.shortName}
-                                </button>
+        <section id="experience" className="section">
+            <div className="container reveal" ref={revealRef}>
+                <header className="section-head">
+                    <span className="eyebrow">Experience</span>
+                    <h2 className="section-title">
+                        Production systems, <span className="muted">real users, small teams.</span>
+                    </h2>
+                </header>
+
+                <ol className="xp-list">
+                    {experience.map((job) => (
+                        <li key={job.org} className="xp-item reveal-child">
+                            <div className="xp-when">
+                                <span className="xp-period">{job.period}</span>
+                                <span className="xp-place">{job.place}</span>
+                            </div>
+                            <div className="xp-body">
+                                <h3 className="xp-role">{job.role}</h3>
+                                <p className="xp-org">
+                                    {job.href ? (
+                                        <a href={job.href} target="_blank" rel="noopener noreferrer">
+                                            {job.org} <ArrowUpRight size={11} />
+                                        </a>
+                                    ) : job.org}
+                                    <span className="xp-summary"> — {job.summary}</span>
+                                </p>
+                                <ul className="xp-points">
+                                    {job.points.map((p) => <li key={p}>{p}</li>)}
+                                </ul>
+                                <div className="xp-foot">
+                                    <div className="xp-tags">
+                                        {job.tags.map((t) => <span key={t} className="chip">{t}</span>)}
+                                    </div>
+                                    {job.see && (
+                                        <div className="xp-see">
+                                            {job.see.map((s) => (
+                                                <a key={s.href + s.label} href={s.href} className="link-more">{s.label}</a>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </li>
+                    ))}
+                </ol>
+
+                <div className="xp-bento">
+                    <article className="xp-tile xp-edu surface spotlight reveal-child" onMouseMove={tilt.onMouseMove} onMouseLeave={tilt.onMouseLeave}>
+                        <span className="xp-tile-kicker">Education</span>
+                        <h3>{education.school}</h3>
+                        <p className="xp-edu-degree">{education.degree}</p>
+                        <p className="xp-edu-meta">{education.period} · {education.place}</p>
+                        <div className="xp-edu-course">
+                            {education.coursework.map((c) => <span key={c} className="chip">{c}</span>)}
+                        </div>
+                        <div className="xp-honors">
+                            {education.honors.map((h) => (
+                                <span key={h}>{h}</span>
                             ))}
                         </div>
-                        <div className="vtab-content">
-                            <h3 className="exp-role">
-                                {job.role} <span className="exp-at">@ {job.company}</span>
-                            </h3>
-                            <p className="exp-period">{job.period} · {job.location}</p>
-                            <ul className="exp-bullets">
-                                {job.bullets.map((b, i) => (
-                                    <li key={i}>{b}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
+                    </article>
+
+                    <article className="xp-tile xp-skills surface spotlight reveal-child" onMouseMove={tilt.onMouseMove} onMouseLeave={tilt.onMouseLeave}>
+                        <span className="xp-tile-kicker">Toolbox</span>
+                        <dl>
+                            {skills.map((s) => (
+                                <div key={s.group}>
+                                    <dt>{s.group}</dt>
+                                    <dd>{s.items.join(' · ')}</dd>
+                                </div>
+                            ))}
+                        </dl>
+                    </article>
                 </div>
             </div>
         </section>
