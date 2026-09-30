@@ -63,7 +63,7 @@ export const experience = [
 export const education = {
     school: 'Westmont College',
     degree: 'B.S. Data Analytics · B.A. Computer Science',
-    period: 'Graduating Aug 2026',
+    period: 'Graduated Aug 2026',
     place: 'Santa Barbara, CA',
     coursework: ['Operating Systems', 'Database Systems', 'Data Structures & Algorithms', 'Programming Languages', 'Linear Algebra'],
     honors: ['LeFrak Scholar', 'Bridge2Rwanda Scholar', 'Augustinian Scholar', 'Wheaton Innovation Lab', 'Up-to-US Leadership'],
