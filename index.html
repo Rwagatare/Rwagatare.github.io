@@ -2,11 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portifolio</title>
-    <script type="module" crossorigin src="/assets/index-pUXsz_5q.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-D1-fN3MQ.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Livingstone Rwagatare — Software Engineer</title>
+    <meta name="description" content="Software engineer building AI tools that work on low bandwidth: a WhatsApp AI tutor for 5,000+ teachers, an offline ML web app for classrooms in Rwanda, and Rivetfields." />
+    <meta name="theme-color" content="#f5f4f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c0b0b" media="(prefers-color-scheme: dark)" />
+    <meta property="og:title" content="Livingstone Rwagatare — Software Engineer" />
+    <meta property="og:description" content="Software that works where the network doesn't." />
+    <meta property="og:image" content="/Photos/profile-720.jpg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+    <script>
+      // Resolve theme before first paint so there is no flash.
+      (function () {
+        var t;
+        try { t = localStorage.getItem('theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-BKpChaGx.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-c66I0sXL.css">
   </head>
   <body>
     <div id="root"></div>
