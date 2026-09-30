@@ -8,6 +8,7 @@ import Experience from './components/Experience';
 import Work from './components/Work';
 import BeyondTheCode from './components/BeyondTheCode';
 import Footer from './components/Footer';
+import PaletteDev from './components/PaletteDev';
 
 function App() {
   useEffect(() => installAnchorScrolling(), []);
@@ -24,6 +25,7 @@ function App() {
         <BeyondTheCode />
       </main>
       <Footer />
+      {import.meta.env.DEV && <PaletteDev />}
     </div>
   );
 }

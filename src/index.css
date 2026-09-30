@@ -1,7 +1,6 @@
 /* ─────────────────────────────────────────────────────────────
    Design tokens — Apple HIG-inspired
-   Neutral system grays + a single accent (sky blue, which is
-   also the blue of the Rwandan flag). Color lives in content
+   Warm neutrals + one accent hue. Color lives in content
    (screenshots, demos), not in chrome.
    ───────────────────────────────────────────────────────────── */
 :root {
@@ -59,17 +58,11 @@
   --fill: rgba(120, 120, 128, 0.24);
   --fill-2: rgba(120, 120, 128, 0.16);
 
-  --accent: #2997ff;
-  --accent-strong: #0a84ff;
-  --accent-soft: rgba(41, 151, 255, 0.14);
-  --on-accent: #ffffff;
   --green: #30d158;
   --orange: #ff9f0a;
   --yellow: #ffd60a;
   --pink: #ff375f;
   --indigo: #5e5ce6;
-  --clay: #e0795a;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23e0795a' stroke-width='1.7'/%3E%3C/svg%3E");
 
   --glass-fill: rgba(30, 30, 32, 0.52);
   --glass-rim: rgba(255, 255, 255, 0.2);
@@ -79,9 +72,7 @@
 
   --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-2: 0 8px 30px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
-  --glow: rgba(41, 151, 255, 0.09);
 
-  --graph-dot: rgba(41, 151, 255, 0.55);
   --graph-text: rgba(235, 235, 245, 0.24);
   --graph-edge: 150, 160, 190;
   --graph-edge-a: 0.16;
@@ -102,17 +93,11 @@
   --fill: rgba(120, 120, 128, 0.14);
   --fill-2: rgba(120, 120, 128, 0.08);
 
-  --accent: #0071e3;
-  --accent-strong: #0066cc;
-  --accent-soft: rgba(0, 113, 227, 0.1);
-  --on-accent: #ffffff;
   --green: #248a3d;
   --orange: #c93400;
   --yellow: #b25000;
   --pink: #d30f45;
   --indigo: #3634a3;
-  --clay: #b0472a;
-  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23b0472a' stroke-width='1.7'/%3E%3C/svg%3E");
 
   --glass-fill: rgba(250, 250, 252, 0.62);
   --glass-rim: rgba(255, 255, 255, 0.85);
@@ -122,12 +107,169 @@
 
   --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 8px rgba(0, 0, 0, 0.04);
   --shadow-2: 0 10px 34px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
-  --glow: rgba(0, 113, 227, 0.07);
 
-  --graph-dot: rgba(0, 113, 227, 0.45);
   --graph-text: rgba(29, 29, 31, 0.22);
   --graph-edge: 110, 110, 125;
   --graph-edge-a: 0.13;
+}
+
+/* ── Accent palettes ──
+   One hue drives buttons, links, glow and the Imigongo motif (motif is a
+   deeper tone of the same hue). Periwinkle is the default; the others are
+   selectable via data-accent (dev palette picker). */
+:root,
+[data-theme="dark"] {
+  --accent: #b4c0fd;
+  --accent-strong: #a5b4fc;
+  --accent-soft: rgba(165,180,252, 0.14);
+  --on-accent: #0f1115;
+  --glow: rgba(165,180,252, 0.08);
+  --graph-dot: rgba(180,192,253, 0.55);
+  --clay: #818cf8;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23818cf8' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] {
+  --accent: #4338ca;
+  --accent-strong: #4f46e5;
+  --accent-soft: rgba(79,70,229, 0.1);
+  --on-accent: #ffffff;
+  --glow: rgba(79,70,229, 0.06);
+  --graph-dot: rgba(67,56,202, 0.45);
+  --clay: #6366f1;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%236366f1' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-accent="mint"] {
+  --accent: #9debc4;
+  --accent-strong: #8ee6b8;
+  --accent-soft: rgba(142,230,184, 0.14);
+  --on-accent: #0f1115;
+  --glow: rgba(142,230,184, 0.08);
+  --graph-dot: rgba(157,235,196, 0.55);
+  --clay: #4fbf8a;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%234fbf8a' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"][data-accent="mint"] {
+  --accent: #166534;
+  --accent-strong: #15803d;
+  --accent-soft: rgba(21,128,61, 0.1);
+  --on-accent: #ffffff;
+  --glow: rgba(21,128,61, 0.06);
+  --graph-dot: rgba(22,101,52, 0.45);
+  --clay: #16a34a;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%2316a34a' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-accent="sky"] {
+  --accent: #9ad8fe;
+  --accent-strong: #8fd3fe;
+  --accent-soft: rgba(143,211,254, 0.14);
+  --on-accent: #0f1115;
+  --glow: rgba(143,211,254, 0.08);
+  --graph-dot: rgba(154,216,254, 0.55);
+  --clay: #4fb3e8;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%234fb3e8' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"][data-accent="sky"] {
+  --accent: #075985;
+  --accent-strong: #0369a1;
+  --accent-soft: rgba(3,105,161, 0.1);
+  --on-accent: #ffffff;
+  --glow: rgba(3,105,161, 0.06);
+  --graph-dot: rgba(7,89,133, 0.45);
+  --clay: #0284c7;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%230284c7' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-accent="lilac"] {
+  --accent: #d8c0fe;
+  --accent-strong: #d0b4fe;
+  --accent-soft: rgba(208,180,254, 0.14);
+  --on-accent: #0f1115;
+  --glow: rgba(208,180,254, 0.08);
+  --graph-dot: rgba(216,192,254, 0.55);
+  --clay: #b18af5;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23b18af5' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"][data-accent="lilac"] {
+  --accent: #6b21a8;
+  --accent-strong: #7e22ce;
+  --accent-soft: rgba(126,34,206, 0.1);
+  --on-accent: #ffffff;
+  --glow: rgba(126,34,206, 0.06);
+  --graph-dot: rgba(107,33,168, 0.45);
+  --clay: #9333ea;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%239333ea' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-accent="butter"] {
+  --accent: #fde68a;
+  --accent-strong: #fde68a;
+  --accent-soft: rgba(253,230,138, 0.14);
+  --on-accent: #0f1115;
+  --glow: rgba(253,230,138, 0.08);
+  --graph-dot: rgba(253,230,138, 0.55);
+  --clay: #e3b93e;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23e3b93e' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"][data-accent="butter"] {
+  --accent: #854d0e;
+  --accent-strong: #a16207;
+  --accent-soft: rgba(161,98,7, 0.1);
+  --on-accent: #ffffff;
+  --glow: rgba(161,98,7, 0.06);
+  --graph-dot: rgba(133,77,14, 0.45);
+  --clay: #ca8a04;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23ca8a04' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-accent="ember"] {
+  --accent: #ff8559;
+  --accent-strong: #ff7a4d;
+  --accent-soft: rgba(255,122,77, 0.14);
+  --on-accent: #1a0e09;
+  --glow: rgba(255,122,77, 0.08);
+  --graph-dot: rgba(255,133,89, 0.55);
+  --clay: #c8603c;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23c8603c' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"][data-accent="ember"] {
+  --accent: #b93c12;
+  --accent-strong: #c2410c;
+  --accent-soft: rgba(194,65,12, 0.1);
+  --on-accent: #ffffff;
+  --glow: rgba(194,65,12, 0.06);
+  --graph-dot: rgba(185,60,18, 0.45);
+  --clay: #9a3d22;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%239a3d22' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-accent="blue"] {
+  --accent: #2997ff;
+  --accent-strong: #0a84ff;
+  --accent-soft: rgba(10,132,255, 0.14);
+  --on-accent: #ffffff;
+  --glow: rgba(10,132,255, 0.08);
+  --graph-dot: rgba(41,151,255, 0.55);
+  --clay: #e0795a;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23e0795a' stroke-width='1.7'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"][data-accent="blue"] {
+  --accent: #0071e3;
+  --accent-strong: #0066cc;
+  --accent-soft: rgba(0,102,204, 0.1);
+  --on-accent: #ffffff;
+  --glow: rgba(0,102,204, 0.06);
+  --graph-dot: rgba(0,113,227, 0.45);
+  --clay: #b0472a;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23b0472a' stroke-width='1.7'/%3E%3C/svg%3E");
 }
 
 /* Legacy aliases so un-migrated components keep rendering */
@@ -338,7 +480,7 @@ main {
 
 [data-theme="dark"] .spotlight::after {
   background:
-    radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(41, 151, 255, 0.1), transparent 60%),
+    radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), var(--glow), transparent 60%),
     radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.04), transparent 70%);
 }
 
