@@ -294,6 +294,37 @@ const Work = () => {
     const [active, setActive] = useState(0);
     const [open, setOpen] = useState(projectFromHash);
 
+    // Autoplay: the active dot fills up, then the next project slides in.
+    // Pauses for hover, touch, keyboard focus, an open sheet, off-screen,
+    // hidden tabs, reduced motion, or the visitor's own pause button.
+    const [inView, setInView] = useState(false);
+    const [hovering, setHovering] = useState(false);
+    const [focused, setFocused] = useState(false);
+    const [held, setHeld] = useState(false);
+    const [tabHidden, setTabHidden] = useState(false);
+    const [userPaused, setUserPaused] = useState(() => reduceMotion());
+    const holdTimer = useRef(0);
+    const running = inView && !open && !hovering && !focused && !held && !tabHidden && !userPaused;
+
+    useEffect(() => {
+        const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.5 });
+        io.observe(trackRef.current);
+        const onVis = () => setTabHidden(document.hidden);
+        document.addEventListener('visibilitychange', onVis);
+        const timer = holdTimer.current;
+        return () => {
+            io.disconnect();
+            document.removeEventListener('visibilitychange', onVis);
+            clearTimeout(timer);
+        };
+    }, []);
+
+    const holdAfterTouch = () => {
+        setHeld(true);
+        clearTimeout(holdTimer.current);
+        holdTimer.current = setTimeout(() => setHeld(false), 7000);
+    };
+
     // Focus effect: scale/fade slides by distance from the track's center.
     useEffect(() => {
         const track = trackRef.current;
@@ -414,7 +445,16 @@ const Work = () => {
                 </header>
             </div>
 
-            <ul className="gal-track" ref={trackRef} aria-label="Projects">
+            <ul
+                className="gal-track"
+                ref={trackRef}
+                aria-label="Projects"
+                onPointerEnter={(e) => e.pointerType === 'mouse' && setHovering(true)}
+                onPointerLeave={() => setHovering(false)}
+                onTouchStart={holdAfterTouch}
+                onFocus={() => setFocused(true)}
+                onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setFocused(false)}
+            >
                 {projects.map((p) => (
                     <li key={p.id} className="gal-slide">
                         <Card project={p} onOpen={openProject} hidden={open?.id === p.id} />
@@ -422,10 +462,28 @@ const Work = () => {
                 ))}
             </ul>
 
-            <div className="gal-dots" role="tablist" aria-label="Choose a project">
-                {projects.map((p, i) => (
-                    <button key={p.id} role="tab" aria-selected={i === active} aria-label={p.title} onClick={() => goTo(i)} />
-                ))}
+            <div className={`gal-controls ${running ? 'is-running' : ''}`}>
+                <div className="gal-dots" role="tablist" aria-label="Choose a project">
+                    {projects.map((p, i) => (
+                        <button key={p.id} role="tab" aria-selected={i === active} aria-label={p.title} onClick={() => goTo(i)}>
+                            {i === active && (
+                                <i key={active} onAnimationEnd={() => goTo((active + 1) % projects.length)} />
+                            )}
+                        </button>
+                    ))}
+                </div>
+                <button
+                    className="gal-play"
+                    onClick={() => setUserPaused((v) => !v)}
+                    aria-label={userPaused ? 'Play project slideshow' : 'Pause project slideshow'}
+                    title={userPaused ? 'Play' : 'Pause'}
+                >
+                    {userPaused ? (
+                        <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z" /></svg>
+                    ) : (
+                        <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0h3.5v12H0zM6.5 0H10v12H6.5z" /></svg>
+                    )}
+                </button>
             </div>
 
             {open && <Sheet project={open} onClose={close} onStep={step} />}

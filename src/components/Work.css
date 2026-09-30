@@ -175,23 +175,77 @@
   transform: translateX(3px);
 }
 
-.gal-dots {
+.gal-controls {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.gal-dots {
+  display: flex;
+  align-items: center;
   gap: 8px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--r-pill);
+  background: var(--fill-2);
 }
 
 .gal-dots button {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: var(--r-pill);
   background: var(--fill);
-  transition: width var(--dur) var(--spring), background-color var(--dur);
+  overflow: hidden;
+  transition: width 500ms var(--spring), background-color var(--dur);
+}
+
+.gal-dots button:hover {
+  background: var(--label-3);
 }
 
 .gal-dots button[aria-selected="true"] {
-  width: 26px;
+  width: 40px;
+  background: var(--fill);
+}
+
+/* Progress fill: when it completes, the gallery advances */
+.gal-dots button i {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   background: var(--label-2);
+  transform-origin: left;
+  animation: gal-progress 5.5s linear forwards;
+  animation-play-state: paused;
+}
+
+.gal-controls.is-running .gal-dots button i {
+  animation-play-state: running;
+}
+
+@keyframes gal-progress {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.gal-play {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--fill-2);
+  color: var(--label-2);
+  transition: background-color var(--dur-fast), color var(--dur-fast);
+}
+
+.gal-play:hover {
+  background: var(--fill);
+  color: var(--label);
 }
 
 /* ── Expanded sheet ── */
@@ -538,5 +592,10 @@
   .gal-slide {
     transform: none;
     opacity: 1;
+  }
+
+  /* Autoplay starts paused here; if played, keep the real timing. */
+  .gal-dots button i {
+    animation-duration: 5.5s !important;
   }
 }
