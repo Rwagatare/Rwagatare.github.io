@@ -1,9 +1,322 @@
-.work-list {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: clamp(96px, 12vw, 160px);
+/* ── Section header ── */
+.work-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
 }
 
+.gal-arrows {
+  display: flex;
+  gap: 10px;
+  flex: none;
+}
+
+.gal-arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--fill);
+  color: var(--label);
+  transition: background-color var(--dur-fast), transform var(--dur-fast), opacity var(--dur-fast);
+}
+
+.gal-arrow:hover:not(:disabled) {
+  background: var(--surface-3);
+}
+
+.gal-arrow:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.gal-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* ── Horizontal gallery (full-bleed, snap, center focus) ── */
+.gal-track {
+  --card: min(620px, 78vw);
+  display: flex;
+  gap: clamp(16px, 2.5vw, 28px);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding: 24px calc((100% - var(--card)) / 2) 36px;
+  scrollbar-width: none;
+}
+
+.gal-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gal-slide {
+  --focus: 1;
+  flex: 0 0 var(--card);
+  scroll-snap-align: center;
+  transform: scale(calc(0.9 + 0.1 * var(--focus)));
+  opacity: calc(0.45 + 0.55 * var(--focus));
+  transition: opacity 200ms linear;
+  will-change: transform;
+}
+
+.gal-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+
+.gal-card:hover {
+  text-decoration: none;
+}
+
+.gal-visual {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.gal-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 22px 26px 26px;
+}
+
+.gal-copy .work-kicker {
+  margin-bottom: 4px;
+}
+
+.gal-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 1vw + 18px, 30px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  color: var(--label);
+}
+
+.gal-teaser {
+  margin-top: 6px;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--label-2);
+}
+
+.gal-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  margin-top: 18px;
+  padding: 0 16px;
+  border-radius: var(--r-pill);
+  background: var(--accent-strong);
+  color: var(--on-accent);
+  font-size: 15px;
+  font-weight: 500;
+  transition: transform var(--dur) var(--spring), background-color var(--dur-fast);
+}
+
+.gal-cta span {
+  font-size: 1.3em;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.gal-cta.is-link {
+  background: var(--fill);
+  color: var(--label);
+}
+
+.gal-card:hover .gal-cta {
+  transform: translateX(3px);
+}
+
+.gal-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.gal-dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: var(--fill);
+  transition: width var(--dur) var(--spring), background-color var(--dur);
+}
+
+.gal-dots button[aria-selected="true"] {
+  width: 26px;
+  background: var(--label-2);
+}
+
+/* ── Expanded sheet ── */
+.sheet-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  padding: clamp(0px, 2.5vw, 28px);
+  background: rgba(0, 0, 0, 0.5);
+  animation: scrim-in var(--dur) var(--ease-std);
+}
+
+@keyframes scrim-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.sheet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(1180px, 100%);
+  height: 100%;
+  max-height: 100%;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), inset 0 0 0 1px var(--separator);
+  animation: sheet-rise 520ms var(--spring);
+}
+
+@keyframes sheet-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+}
+
+/* The View Transition morph replaces the CSS entrance when available */
+@supports (view-transition-name: none) {
+  .sheet {
+    animation: none;
+  }
+}
+
+::view-transition-group(project-morph) {
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+::view-transition-old(project-morph),
+::view-transition-new(project-morph) {
+  height: 100%;
+  object-fit: cover;
+  overflow: clip;
+}
+
+.sheet-bar {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  z-index: 5;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 52px;
+  width: min(560px, calc(100% - 28px));
+  padding: 0 8px 0 18px;
+  border-radius: var(--r-pill);
+}
+
+.sheet-crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: auto;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--label);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sheet-dots {
+  display: inline-flex;
+  gap: 5px;
+  flex: none;
+}
+
+.sheet-dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--fill);
+  transition: width var(--dur) var(--spring), background-color var(--dur);
+}
+
+.sheet-dots i.on {
+  width: 16px;
+  background: var(--label-2);
+}
+
+.sheet-actions {
+  display: inline-flex;
+  gap: 4px;
+  flex: none;
+}
+
+.sheet-btn {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--label-2);
+  transition: background-color var(--dur-fast), color var(--dur-fast), transform var(--dur-fast);
+}
+
+.sheet-btn:hover {
+  background: var(--fill-2);
+  color: var(--label);
+}
+
+.sheet-btn:active {
+  transform: scale(0.92);
+}
+
+.sheet-close {
+  background: var(--fill);
+  color: var(--label);
+}
+
+.sheet-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.sheet-inner {
+  padding: 104px clamp(18px, 4vw, 56px) clamp(32px, 5vw, 56px);
+  animation: panel-in 450ms var(--ease-out);
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* ── Project layout inside the sheet ── */
 .work-head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -17,6 +330,9 @@
   font-size: 13px;
   font-weight: 600;
   color: var(--label-3);
+}
+
+.work-intro .work-kicker {
   margin-bottom: 10px;
 }
 
@@ -115,74 +431,43 @@
   gap: 6px;
 }
 
-/* Now building */
-.work-now {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 20px;
-  align-items: center;
-  margin-top: clamp(96px, 12vw, 160px);
-  padding: 26px 28px;
-  border-radius: var(--r-lg);
-  color: inherit;
-}
-
-.work-now:hover {
-  text-decoration: none;
-}
-
-.work-now-mark {
-  display: grid;
-  place-items: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
-  background: var(--label);
-  color: var(--bg);
-}
-
-.work-now-copy {
+.sheet-next {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 100%;
+  margin-top: 48px;
+  padding: 24px 28px;
+  border-radius: var(--r-lg);
+  text-align: left;
+  transition: transform var(--dur) var(--spring);
 }
 
-.work-now-copy .work-kicker {
-  margin: 0;
-  color: var(--green);
-}
-
-.work-now-copy strong {
-  font-size: 19px;
+.sheet-next strong {
+  font-size: 22px;
   font-weight: 600;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   color: var(--label);
 }
 
-.work-now-copy span:last-child {
+.sheet-next span:last-child {
   font-size: 15px;
   color: var(--label-2);
 }
 
-.work-now-go {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--accent);
-  white-space: nowrap;
+.sheet-next:hover {
+  transform: translateY(-2px);
 }
 
 @media (max-width: 900px) {
   .work-head {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     align-items: start;
     gap: 20px;
   }
 
   .work-foot {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .work-stack {
@@ -191,8 +476,16 @@
 }
 
 @media (max-width: 640px) {
+  .gal-arrows {
+    display: none;
+  }
+
+  .gal-copy {
+    padding: 18px 20px 22px;
+  }
+
   .work-notes {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .work-stage {
@@ -200,11 +493,18 @@
     padding: 12px;
   }
 
-  .work-now {
-    grid-template-columns: auto 1fr;
+  .sheet {
+    border-radius: 0;
   }
 
-  .work-now-go {
-    grid-column: 2;
+  .sheet-inner {
+    padding-top: 88px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gal-slide {
+    transform: none;
+    opacity: 1;
   }
 }

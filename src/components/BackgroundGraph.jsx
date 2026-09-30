@@ -3,20 +3,20 @@ import { useEffect, useRef } from 'react';
 // Floating "knowledge graph": labeled nodes drift, push away from the cursor
 // (anti-gravity), link to nearby nodes, and jump to their section on click.
 const TERMS = {
-    'FastAPI': 'work-bridge',
-    'WhatsApp': 'work-bridge',
-    'PostgreSQL': 'work-bridge',
-    'Offline-first': 'work-teachable',
-    'TensorFlow.js': 'work-teachable',
-    'PWA': 'work-teachable',
-    'Local LLMs': 'work',
+    'FastAPI': 'project-bridge',
+    'WhatsApp': 'project-bridge',
+    'PostgreSQL': 'project-bridge',
+    'Offline-first': 'project-teachable',
+    'TensorFlow.js': 'project-teachable',
+    'PWA': 'project-teachable',
+    'Local LLMs': 'project-mirrorme',
     'RL agents': 'experience',
     'Rivetfields': 'experience',
     'MIT': 'experience',
     'React': 'work',
     'Data': 'work',
     'Rwanda': 'beyond',
-    'Ghana': 'work-bridge',
+    'Ghana': 'project-bridge',
     'Education': 'beyond',
     'Empathy': 'beyond',
     'Books': 'beyond',
@@ -95,7 +95,10 @@ const BackgroundGraph = () => {
             if (e.target instanceof Element && e.target.closest(INTERACTIVE)) return;
             const n = nodeAt(e.clientX, e.clientY);
             if (!n) return;
-            document.getElementById(TERMS[n.text])?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+            const target = TERMS[n.text];
+            // project-* opens that project in the gallery (Work listens for the hash).
+            if (target.startsWith('project-')) window.location.hash = target;
+            else document.getElementById(target)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
         };
 
         const draw = () => {

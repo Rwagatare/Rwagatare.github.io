@@ -17,10 +17,10 @@ export const profile = {
 
 // Each stat links to the work that backs it up.
 export const stats = [
-    { value: '5,000+', label: 'teachers in Ghana and Rwanda reached through the WhatsApp AI bridge', href: '#work-bridge' },
-    { value: '150+', label: 'teachers in Rwanda running ML offline in the browser', href: '#work-teachable' },
-    { value: '1,580+', label: 'campus users on the attendance dashboard I built', href: '#work-catlab' },
-    { value: '79+', label: 'automated tests guarding production on every push', href: '#work-bridge' },
+    { value: '5,000+', label: 'teachers in Ghana and Rwanda reached through the WhatsApp AI bridge', href: '#project-bridge' },
+    { value: '150+', label: 'teachers in Rwanda running ML offline in the browser', href: '#project-teachable' },
+    { value: '1,580+', label: 'campus users on the attendance dashboard I built', href: '#experience' },
+    { value: '79+', label: 'automated tests guarding production on every push', href: '#project-bridge' },
 ];
 
 export const experience = [
@@ -50,8 +50,8 @@ export const experience = [
         ],
         tags: ['Python', 'FastAPI', 'PostgreSQL', 'TensorFlow.js', 'PWA'],
         see: [
-            { label: 'Try the WhatsApp bridge', href: '#work-bridge' },
-            { label: 'Try Teachable Machine v3', href: '#work-teachable' },
+            { label: 'Try the WhatsApp bridge', href: '#project-bridge' },
+            { label: 'Try Teachable Machine v3', href: '#project-teachable' },
         ],
     },
     {
@@ -65,7 +65,6 @@ export const experience = [
             'Shipped a production React/TypeScript directory with virtualized rendering, debounced search, and a Node.js API layer, adopted by faculty and students for daily lookups.',
         ],
         tags: ['React', 'TypeScript', 'Node.js', 'RBAC'],
-        see: [{ label: 'Try the directory technique', href: '#work-catlab' }],
     },
 ];
 
