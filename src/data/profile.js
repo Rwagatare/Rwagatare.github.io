@@ -19,7 +19,7 @@ export const profile = {
 export const stats = [
     { value: '5,000+', label: 'teachers in Ghana and Rwanda reached through the WhatsApp AI bridge', href: '#project-bridge' },
     { value: '150+', label: 'teachers in Rwanda running ML offline in the browser', href: '#project-teachable' },
-    { value: '1,580+', label: 'campus users on the attendance dashboard I built', href: '#experience' },
+    { value: '1,580+', label: 'campus users served by the attendance tab I built at CATLAB', href: '#experience' },
     { value: '79+', label: 'automated tests guarding production on every push', href: '#project-bridge' },
 ];
 
@@ -59,10 +59,10 @@ export const experience = [
         role: 'Software Engineering Intern',
         period: 'May – Aug 2024',
         place: 'Santa Barbara, CA',
-        summary: 'Full-stack tools used daily across Westmont College.',
+        summary: 'Contributed to Westmont\u2019s campus app, building its Directory and Attendance tabs.',
         points: [
-            'Built a full-stack analytics dashboard with time-series ingestion, role-based access control, and tiered authentication, giving 1,580+ campus users real-time visibility into attendance standing.',
-            'Shipped a production React/TypeScript directory with virtualized rendering, debounced search, and a Node.js API layer, adopted by faculty and students for daily lookups.',
+            'Built the Attendance tab: time-series data ingestion, role-based access control, and tiered authentication, giving 1,580+ campus users real-time visibility into their attendance standing.',
+            'Built the Directory tab in React/TypeScript with virtualized rendering, debounced search, and a Node.js API layer, used by faculty and students for daily lookups.',
         ],
         tags: ['React', 'TypeScript', 'Node.js', 'RBAC'],
     },
