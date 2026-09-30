@@ -1,5 +1,6 @@
 .work-list {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(96px, 12vw, 160px);
 }
 
@@ -69,6 +70,7 @@
 }
 
 .work-stage {
+  min-width: 0;
   padding: clamp(16px, 3vw, 32px);
   border-radius: var(--r-xl);
 }

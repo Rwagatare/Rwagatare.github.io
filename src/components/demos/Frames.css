@@ -252,7 +252,7 @@
 
 @media (max-width: 760px) {
   .pgal {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     justify-items: center;
   }
 
@@ -262,6 +262,7 @@
 
   .pgal-side {
     width: 100%;
+    min-width: 0;
   }
 
   .pgal-list {
