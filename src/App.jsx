@@ -3,7 +3,7 @@ import MouseGlow from './components/MouseGlow';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Experience from './components/Experience';
-import Projects from './components/Projects';
+import Work from './components/Work';
 import BeyondTheCode from './components/BeyondTheCode';
 import Footer from './components/Footer';
 import './legacy.css';
@@ -16,7 +16,7 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <Projects />
+        <Work />
         <Experience />
         <BeyondTheCode />
       </main>
