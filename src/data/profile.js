@@ -71,9 +71,10 @@ export const education = {
 
 export const skills = [
     { group: 'Languages', items: ['Python', 'TypeScript', 'JavaScript', 'SQL', 'C++', 'Java'] },
-    { group: 'Backend & data', items: ['FastAPI', 'Node.js', 'PostgreSQL', 'SQLAlchemy', 'Alembic', 'Redis', 'pytest'] },
+    { group: 'Backend & data', items: ['FastAPI', 'Node.js', 'REST APIs', 'PostgreSQL', 'SQLAlchemy', 'Alembic', 'Redis', 'pytest'] },
     { group: 'Frontend', items: ['React', 'TypeScript', 'PWAs', 'TensorFlow.js'] },
-    { group: 'Tooling & systems', items: ['Docker', 'GitHub Actions', 'Linux', 'TCP/IP', 'DNS'] },
+    { group: 'Systems', items: ['Linux (services, permissions, logs)', 'TCP/IP, DNS & ports', 'OS fundamentals', 'Data structures & algorithms'] },
+    { group: 'Tooling', items: ['Docker', 'Git', 'GitHub Actions', 'Shell scripting'] },
 ];
 
 // Community & leadership (from the previous site's leadership list + resume).
