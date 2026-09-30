@@ -1,11 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal, flushSync } from 'react-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
 import useTilt from '../hooks/useTilt';
 import { GitHubIcon, ArrowUpRight } from './Icons';
-import WhatsAppDemo from './demos/WhatsAppDemo';
-import BrowserDemo from './demos/BrowserDemo';
-import PhoneGallery from './demos/PhoneGallery';
+// Demos only render inside an opened project, so load them on demand.
+const WhatsAppDemo = lazy(() => import('./demos/WhatsAppDemo'));
+const BrowserDemo = lazy(() => import('./demos/BrowserDemo'));
+const PhoneGallery = lazy(() => import('./demos/PhoneGallery'));
 import { BridgePreview, BrowserPreview, PhonesPreview, RivetPreview } from './demos/Previews';
 import './Work.css';
 
@@ -214,7 +215,9 @@ const Sheet = ({ project, onClose, onStep }) => {
                         </header>
 
                         <div className="work-stage surface">
-                            <Demo />
+                            <Suspense fallback={<div className="work-stage-loading" aria-busy="true">Loading demo…</div>}>
+                                <Demo />
+                            </Suspense>
                         </div>
 
                         <div className="work-foot">
@@ -466,9 +469,11 @@ const Work = () => {
                 <div className="gal-dots" role="tablist" aria-label="Choose a project">
                     {projects.map((p, i) => (
                         <button key={p.id} role="tab" aria-selected={i === active} aria-label={p.title} onClick={() => goTo(i)}>
-                            {i === active && (
-                                <i key={active} onAnimationEnd={() => goTo((active + 1) % projects.length)} />
-                            )}
+                            <span className="gal-dot">
+                                {i === active && (
+                                    <i key={active} onAnimationEnd={() => goTo((active + 1) % projects.length)} />
+                                )}
+                            </span>
                         </button>
                     ))}
                 </div>
