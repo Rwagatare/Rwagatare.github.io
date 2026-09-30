@@ -62,9 +62,33 @@
 }
 
 .nav-links {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 2px;
+}
+
+/* Sliding glass indicator under the active link */
+.nav-pill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 36px;
+  margin-top: -18px;
+  border-radius: var(--r-pill);
+  background: var(--fill);
+  box-shadow: inset 0 1px 0 var(--glass-rim), inset 0 0 0 0.5px var(--glass-edge);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 560ms var(--spring),
+    width 560ms var(--spring),
+    opacity var(--dur) var(--ease-std);
+}
+
+.nav-links li:not(.nav-pill) {
+  position: relative;
+  z-index: 1;
 }
 
 .nav-links a {
@@ -87,7 +111,10 @@
 
 .nav-links a.is-active {
   color: var(--label);
-  background: var(--fill);
+}
+
+.nav-links a.is-active:hover {
+  background: transparent;
 }
 
 .nav-actions {

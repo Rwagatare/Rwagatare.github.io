@@ -504,6 +504,61 @@ main {
   transform: none;
 }
 
+/* ── Arrival (after an animated nav scroll lands) ── */
+.is-arriving .eyebrow,
+.is-arriving :is(.section-title, .contact-title),
+.is-arriving :is(.section-lead, .contact-lead) {
+  animation: arrive-lift 900ms var(--ease-out) both;
+}
+
+.is-arriving :is(.section-title, .contact-title) {
+  animation-delay: 70ms;
+}
+
+.is-arriving :is(.section-lead, .contact-lead) {
+  animation-delay: 150ms;
+}
+
+.is-arriving .eyebrow {
+  position: relative;
+}
+
+.is-arriving .eyebrow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform-origin: left;
+  animation: arrive-sweep 1100ms var(--ease-out) both;
+}
+
+@keyframes arrive-lift {
+  from {
+    opacity: 0.25;
+    transform: translateY(18px);
+    filter: blur(6px);
+  }
+}
+
+@keyframes arrive-sweep {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  60% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
 /* ── Utilities ── */
 .sr-only {
   position: absolute;

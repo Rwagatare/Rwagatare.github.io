@@ -31,12 +31,12 @@ const projects = [
     },
     {
         id: 'teachable',
-        kicker: 'Deployed · 150+ teachers in Rwanda',
+        kicker: 'Deployed · MIT RAISE / Day of AI',
         title: 'Teachable Machine v3',
         teaser: 'Train a model on your webcam, entirely in your browser. Works offline.',
         cta: 'Train a model',
         pitch: 'Google’s Teachable Machine, rebuilt to keep working when the internet doesn’t. Open the Live tab to train a model on your webcam. It all runs in your browser, and no frame leaves your device.',
-        impact: [['Offline', 'installable PWA'], ['0', 'servers for inference']],
+        impact: [['150+', 'teachers in Rwanda'], ['Offline', 'installable PWA']],
         stack: ['TensorFlow.js', 'MobileNet', 'Workbox', 'PWA', 'JavaScript'],
         notes: [
             'A Workbox service worker precaches the app and model (CacheFirst), so classrooms can train with no connection.',
@@ -251,9 +251,21 @@ const Card = ({ project, onOpen, hidden }) => {
                 <span className="work-kicker">{project.kicker}</span>
                 <strong className="gal-title">{project.title}</strong>
                 <span className="gal-teaser">{project.teaser}</span>
-                <span className={`gal-cta ${project.href ? 'is-link' : ''}`}>
-                    {project.cta}
-                    {project.href ? <ArrowUpRight size={12} /> : <span aria-hidden="true">›</span>}
+                <span className="gal-foot">
+                    <span className={`gal-cta ${project.href ? 'is-link' : ''}`}>
+                        {project.cta}
+                        {project.href ? <ArrowUpRight size={12} /> : <span aria-hidden="true">›</span>}
+                    </span>
+                    {project.impact && (
+                        <span className="gal-stats">
+                            {project.impact.map(([v, k]) => (
+                                <span key={k} className="gal-stat">
+                                    <b>{v}</b>
+                                    <small>{k}</small>
+                                </span>
+                            ))}
+                        </span>
+                    )}
                 </span>
             </span>
         </>

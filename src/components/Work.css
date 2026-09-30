@@ -112,13 +112,45 @@
   color: var(--label-2);
 }
 
+.gal-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 20px;
+  margin-top: 20px;
+}
+
+.gal-stats {
+  display: flex;
+  gap: 22px;
+}
+
+.gal-stat {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.gal-stat b {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--label);
+}
+
+.gal-stat small {
+  font-size: 12px;
+  color: var(--label-3);
+}
+
 .gal-cta {
-  align-self: flex-start;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   height: 36px;
-  margin-top: 18px;
+  flex: none;
   padding: 0 16px;
   border-radius: var(--r-pill);
   background: var(--accent-strong);

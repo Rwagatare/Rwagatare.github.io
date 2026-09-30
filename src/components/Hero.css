@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  padding: calc(var(--nav-h) + clamp(64px, 11vw, 132px)) 0 clamp(56px, 8vw, 96px);
+  padding: calc(var(--nav-h) + clamp(64px, 11vw, 132px)) 0 clamp(24px, 4vw, 48px);
 }
 
 .hero-grid {
@@ -157,60 +157,6 @@
   color: var(--label-3);
 }
 
-/* Stats */
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: clamp(64px, 8vw, 104px);
-}
-
-.hero-stat {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 22px 22px 18px;
-  border-radius: var(--r-md);
-  color: inherit;
-}
-
-.hero-stat:hover {
-  text-decoration: none;
-}
-
-.hero-stat-value {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 2vw + 18px, 44px);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1;
-  color: var(--label);
-}
-
-.hero-stat-label {
-  margin-top: 10px;
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--label-2);
-  flex: 1;
-}
-
-.hero-stat-go {
-  margin-top: 14px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent);
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity var(--dur-fast), transform var(--dur) var(--ease-out);
-}
-
-.hero-stat:hover .hero-stat-go,
-.hero-stat:focus-visible .hero-stat-go {
-  opacity: 1;
-  transform: none;
-}
-
 @media (max-width: 900px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -227,22 +173,5 @@
 
   .hero-portrait figcaption {
     display: none;
-  }
-
-  .hero-stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (hover: none) {
-  .hero-stat-go {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (max-width: 420px) {
-  .hero-stat {
-    padding: 18px 16px 14px;
   }
 }

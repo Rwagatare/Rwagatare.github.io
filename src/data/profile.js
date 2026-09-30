@@ -15,14 +15,6 @@ export const profile = {
     now: { label: 'Co-founder, Rivetfields', href: 'https://rivetfields.com' },
 };
 
-// Each stat links to the work that backs it up.
-export const stats = [
-    { value: '5,000+', label: 'teachers in Ghana and Rwanda reached through the WhatsApp AI bridge', href: '#project-bridge' },
-    { value: '150+', label: 'teachers in Rwanda running ML offline in the browser', href: '#project-teachable' },
-    { value: '1,580+', label: 'campus users served by the attendance tab I built at CATLAB', href: '#experience' },
-    { value: '79+', label: 'automated tests guarding production on every push', href: '#project-bridge' },
-];
-
 export const experience = [
     {
         org: 'Rivetfields',

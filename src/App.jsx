@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { installAnchorScrolling } from './lib/scrollToSection';
 import BackgroundGraph from './components/BackgroundGraph';
 import MouseGlow from './components/MouseGlow';
 import Header from './components/Header';
@@ -8,6 +10,8 @@ import BeyondTheCode from './components/BeyondTheCode';
 import Footer from './components/Footer';
 
 function App() {
+  useEffect(() => installAnchorScrolling(), []);
+
   return (
     <div className="app">
       <BackgroundGraph />

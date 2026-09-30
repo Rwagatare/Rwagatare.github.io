@@ -1,11 +1,8 @@
-import { profile, stats } from '../data/profile';
-import useTilt from '../hooks/useTilt';
+import { profile } from '../data/profile';
 import { GitHubIcon, LinkedInIcon, ArrowUpRight } from './Icons';
 import './Hero.css';
 
 const Hero = () => {
-    const tilt = useTilt(3);
-
     return (
         <section id="top" className="hero">
             <div className="container">
@@ -49,18 +46,6 @@ const Hero = () => {
                         </figcaption>
                     </figure>
                 </div>
-
-                <ul className="hero-stats" aria-label="Impact at a glance">
-                    {stats.map((s) => (
-                        <li key={s.value + s.label}>
-                            <a href={s.href} className="hero-stat surface spotlight" onMouseMove={tilt.onMouseMove} onMouseLeave={tilt.onMouseLeave}>
-                                <span className="hero-stat-value">{s.value}</span>
-                                <span className="hero-stat-label">{s.label}</span>
-                                <span className="hero-stat-go" aria-hidden="true">See it ›</span>
-                            </a>
-                        </li>
-                    ))}
-                </ul>
             </div>
         </section>
     );

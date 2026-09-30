@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useTheme from '../hooks/useTheme';
 import { profile } from '../data/profile';
 import './Header.css';
@@ -36,11 +36,18 @@ const Header = () => {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
+    const listRef = useRef(null);
+    const pillRef = useRef(null);
+    const lockRef = useRef(null);
+
     // Scroll-spy: highlight the section occupying the middle of the viewport.
+    // While an animated nav scroll is running, stay locked on its target.
     useEffect(() => {
-        const sections = links.map((l) => document.getElementById(l.id)).filter(Boolean);
+        const ids = ['top', ...links.map((l) => l.id)];
+        const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
         const io = new IntersectionObserver(
             (entries) => {
+                if (lockRef.current) return;
                 entries.forEach((e) => {
                     if (e.isIntersecting) setActive(e.target.id);
                 });
@@ -48,8 +55,41 @@ const Header = () => {
             { rootMargin: '-45% 0px -50% 0px' }
         );
         sections.forEach((s) => io.observe(s));
-        return () => io.disconnect();
+
+        const onNavScroll = (e) => {
+            const { id, phase } = e.detail;
+            if (phase === 'start') {
+                lockRef.current = id;
+                setActive(id);
+            } else if (lockRef.current === id) {
+                lockRef.current = null;
+            }
+        };
+        window.addEventListener('section-scroll', onNavScroll);
+        return () => {
+            io.disconnect();
+            window.removeEventListener('section-scroll', onNavScroll);
+        };
     }, []);
+
+    // Glide the glass pill under the active link.
+    useEffect(() => {
+        const place = () => {
+            const pill = pillRef.current;
+            const link = listRef.current?.querySelector(`a[href="#${active}"]`);
+            if (!pill) return;
+            if (!link) {
+                pill.style.opacity = '0';
+                return;
+            }
+            pill.style.opacity = '1';
+            pill.style.width = `${link.offsetWidth}px`;
+            pill.style.transform = `translateX(${link.parentElement.offsetLeft}px)`;
+        };
+        place();
+        window.addEventListener('resize', place);
+        return () => window.removeEventListener('resize', place);
+    }, [active]);
 
     useEffect(() => {
         if (!open) return;
@@ -69,7 +109,8 @@ const Header = () => {
                     LR
                 </a>
 
-                <ul className="nav-links">
+                <ul className="nav-links" ref={listRef}>
+                    <li className="nav-pill" ref={pillRef} aria-hidden="true" />
                     {links.map((l) => (
                         <li key={l.id}>
                             <a href={`#${l.id}`} className={active === l.id ? 'is-active' : ''} aria-current={active === l.id ? 'true' : undefined}>
