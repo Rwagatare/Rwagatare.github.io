@@ -17,7 +17,7 @@ const Hero = () => {
 
                         <h1 className="hero-name">{profile.name}</h1>
                         <p className="hero-statement">
-                            Software engineer building AI that works <span>where the network doesn&rsquo;t.</span>
+                            Software engineer building AI that works <span className="mark">where the network doesn&rsquo;t.</span>
                         </p>
                         <p className="hero-lede">
                             I ship production Python services and offline-first web apps. My code has reached
@@ -36,6 +36,7 @@ const Hero = () => {
                     </div>
 
                     <figure className="hero-portrait">
+                        <span className="hero-imigongo" aria-hidden="true" />
                         <img src={profile.photo} alt="Portrait of Livingstone Rwagatare" width="360" height="360" />
                         <figcaption className="glass">
                             <span>Kigali</span>

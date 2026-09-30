@@ -18,8 +18,8 @@
   letter-spacing: -0.038em;
 }
 
-.contact-title span {
-  color: var(--label-3);
+.contact-title .mark {
+  color: var(--label-2);
 }
 
 .contact-lead {
@@ -43,8 +43,8 @@
   justify-content: space-between;
   gap: 8px 24px;
   margin-top: clamp(96px, 12vw, 140px);
-  padding-top: 20px;
-  border-top: 1px solid var(--separator);
+  padding-top: 30px;
+  position: relative;
   font-size: 13px;
   color: var(--label-3);
   text-align: left;
@@ -54,4 +54,18 @@
   .contact-cta .btn {
     width: 100%;
   }
+}
+
+/* Imigongo band closing the page */
+.contact-foot::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: var(--clay);
+  opacity: 0.7;
+  -webkit-mask: var(--zigzag-mask) repeat-x 0 50% / 14px 10px;
+  mask: var(--zigzag-mask) repeat-x 0 50% / 14px 10px;
 }

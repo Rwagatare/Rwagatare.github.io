@@ -56,9 +56,9 @@
 
 .hero-name {
   font-size: clamp(44px, 5.4vw + 16px, 88px);
-  font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: -0.042em;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
 
 .hero-statement {
@@ -72,8 +72,8 @@
   max-width: 25ch;
 }
 
-.hero-statement span {
-  color: var(--label-3);
+.hero-statement .mark {
+  color: var(--label-2);
 }
 
 .hero-lede {
@@ -120,7 +120,25 @@
   width: clamp(220px, 26vw, 340px);
 }
 
+/* Imigongo-inspired frame: nested diamonds in clay, offset behind the photo */
+.hero-imigongo {
+  position: absolute;
+  inset: 0;
+  transform: translate(22px, 22px);
+  border-radius: 38px;
+  background: var(--clay);
+  opacity: 0.55;
+  -webkit-mask: var(--diamond-mask) 0 0 / 44px 44px round;
+  mask: var(--diamond-mask) 0 0 / 44px 44px round;
+  transition: transform 700ms var(--ease-out);
+}
+
+.hero-portrait:hover .hero-imigongo {
+  transform: translate(28px, 28px);
+}
+
 .hero-portrait img {
+  position: relative;
   width: 100%;
   height: auto;
   aspect-ratio: 1;
@@ -169,6 +187,12 @@
 
   .hero-portrait img {
     border-radius: 30px;
+  }
+
+  .hero-imigongo {
+    transform: translate(12px, 12px);
+    -webkit-mask-size: 28px 28px;
+    mask-size: 28px 28px;
   }
 
   .hero-portrait figcaption {

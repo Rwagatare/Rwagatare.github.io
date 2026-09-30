@@ -427,7 +427,7 @@ const Work = () => {
                     <div>
                         <span className="eyebrow">Selected work</span>
                         <h2 className="section-title">
-                            Don&rsquo;t take my word for it. <span className="muted">Try it.</span>
+                            Don&rsquo;t take my word for it. <span className="mark">Try it.</span>
                         </h2>
                         <p className="section-lead">
                             Open a project to use it: message the WhatsApp bot, train a model on your

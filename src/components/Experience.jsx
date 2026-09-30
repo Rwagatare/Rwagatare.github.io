@@ -14,7 +14,7 @@ const Experience = () => {
                 <header className="section-head">
                     <span className="eyebrow">Experience</span>
                     <h2 className="section-title">
-                        Production systems, <span className="muted">real users, small teams.</span>
+                        Production systems, <span className="mark">real users, small teams.</span>
                     </h2>
                 </header>
 

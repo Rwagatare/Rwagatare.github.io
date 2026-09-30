@@ -54,11 +54,12 @@
 }
 
 .nav-mark-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft);
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--clay);
+  border-radius: 1px;
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 2.5px var(--bg), 0 0 0 3.5px color-mix(in srgb, var(--clay) 45%, transparent);
 }
 
 .nav-links {

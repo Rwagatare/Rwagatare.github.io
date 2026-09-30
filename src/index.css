@@ -7,8 +7,12 @@
 :root {
   /* Type */
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, "JetBrains Mono", Consolas, monospace;
+  --font-display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Imigongo motif shapes (used as masks, colored with --clay) */
+  --zigzag-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23000' stroke-width='1.7' stroke-linejoin='miter'/%3E%3C/svg%3E");
+  --diamond-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44' fill='none' stroke='%23000' stroke-width='1.6'%3E%3Cpath d='M22 2 42 22 22 42 2 22Z'/%3E%3Cpath d='M22 10 34 22 22 34 10 22Z'/%3E%3Cpath d='M22 17.5 26.5 22 22 26.5 17.5 22Z' fill='%23000'/%3E%3C/svg%3E");
 
   /* Radii (continuous-corner feel) */
   --r-xs: 8px;
@@ -43,10 +47,10 @@
 :root,
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg: #000000;
-  --bg-2: #0b0b0d;
-  --surface: #161617;
-  --surface-2: #1d1d1f;
+  --bg: #0c0b0b;
+  --bg-2: #131211;
+  --surface: #181716;
+  --surface-2: #1f1e1c;
   --surface-3: #2c2c2e;
   --label: #f5f5f7;
   --label-2: rgba(235, 235, 245, 0.64);
@@ -64,6 +68,8 @@
   --yellow: #ffd60a;
   --pink: #ff375f;
   --indigo: #5e5ce6;
+  --clay: #e0795a;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23e0795a' stroke-width='1.7'/%3E%3C/svg%3E");
 
   --glass-fill: rgba(30, 30, 32, 0.52);
   --glass-rim: rgba(255, 255, 255, 0.2);
@@ -84,8 +90,8 @@
 /* ── Light ── */
 [data-theme="light"] {
   color-scheme: light;
-  --bg: #f5f5f7;
-  --bg-2: #ececf0;
+  --bg: #f5f4f1;
+  --bg-2: #ecebe7;
   --surface: #ffffff;
   --surface-2: #fbfbfd;
   --surface-3: #f0f0f3;
@@ -105,6 +111,8 @@
   --yellow: #b25000;
   --pink: #d30f45;
   --indigo: #3634a3;
+  --clay: #b0472a;
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23b0472a' stroke-width='1.7'/%3E%3C/svg%3E");
 
   --glass-fill: rgba(250, 250, 252, 0.62);
   --glass-rim: rgba(255, 255, 255, 0.85);
@@ -240,24 +248,46 @@ main {
 
 /* ── Section header (apple.com style) ── */
 .eyebrow {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--accent);
-  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--label-2);
+  margin-bottom: 14px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 8px;
+  background: var(--clay);
+  -webkit-mask: var(--zigzag-mask) repeat-x 0 50% / 12px 8px;
+  mask: var(--zigzag-mask) repeat-x 0 50% / 12px 8px;
+}
+
+/* Imigongo zigzag underline for a headline's key phrase */
+.mark {
+  color: inherit;
+  background: var(--zigzag) repeat-x 0 100% / 0.34em 0.22em;
+  padding-bottom: 0.16em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .section-title {
   font-size: clamp(34px, 3.2vw + 18px, 56px);
   font-weight: 700;
-  line-height: 1.07;
-  letter-spacing: -0.028em;
-  max-width: 20ch;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  max-width: 22ch;
 }
 
-.section-title .muted {
-  color: var(--label-3);
+:is(.section-title, .contact-title, .hero-statement, .work-title, .gal-title) {
+  text-wrap: balance;
 }
 
 .section-lead {
@@ -356,8 +386,8 @@ main {
   justify-content: center;
   gap: 8px;
   min-height: 44px;
-  padding: 0 22px;
-  border-radius: var(--r-pill);
+  padding: 0 20px;
+  border-radius: 12px;
   font-size: 17px;
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -393,8 +423,9 @@ main {
 }
 
 .btn-sm {
-  min-height: 32px;
+  min-height: 34px;
   padding: 0 14px;
+  border-radius: 10px;
   font-size: 14px;
 }
 

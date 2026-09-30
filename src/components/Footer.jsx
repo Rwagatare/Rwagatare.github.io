@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="container reveal" ref={revealRef}>
                 <span className="eyebrow">Contact</span>
                 <h2 className="contact-title">
-                    Let&rsquo;s build something <span>people actually use.</span>
+                    Let&rsquo;s build something <span className="mark">people actually use.</span>
                 </h2>
                 <p className="contact-lead">
                     I&rsquo;m open to software engineering roles and collaborations, especially in AI
