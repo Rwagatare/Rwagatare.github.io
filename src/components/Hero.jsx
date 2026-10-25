@@ -17,12 +17,10 @@ const Hero = () => {
 
                         <h1 className="hero-name">{profile.name}</h1>
                         <p className="hero-statement">
-                            Software engineer building AI that works <span className="mark">where the network doesn&rsquo;t.</span>
+                            I build AI <span className="mark">people actually use.</span>
                         </p>
                         <p className="hero-lede">
-                            I ship production Python services and offline-first web apps. My code has reached
-                            5,000+ teachers over WhatsApp and runs machine learning in Rwandan classrooms
-                            with no connection at all.
+                            Teachers on WhatsApp. Classrooms in Rwanda. <span className="hero-lede-now">Now, agents at Rivetfields.</span>
                         </p>
 
                         <div className="hero-cta">

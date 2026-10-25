@@ -1,18 +1,19 @@
 import { experience, education, skills } from '../data/profile';
 import useScrollReveal from '../hooks/useScrollReveal';
+import Eyebrow from './Eyebrow';
 import useTilt from '../hooks/useTilt';
 import { ArrowUpRight } from './Icons';
 import './Experience.css';
 
 const Experience = () => {
     const revealRef = useScrollReveal();
-    const tilt = useTilt(2);
+    const tilt = useTilt(1);
 
     return (
         <section id="experience" className="section">
             <div className="container reveal" ref={revealRef}>
                 <header className="section-head">
-                    <span className="eyebrow">Experience</span>
+                    <Eyebrow>Experience</Eyebrow>
                     <h2 className="section-title">
                         Production systems, <span className="mark">real users, small teams.</span>
                     </h2>

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal, flushSync } from 'react-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
+import Eyebrow from './Eyebrow';
 import useTilt from '../hooks/useTilt';
 import { GitHubIcon, ArrowUpRight } from './Icons';
 // Demos only render inside an opened project, so load them on demand.
@@ -169,12 +170,12 @@ const Sheet = ({ project, onClose, onStep }) => {
                 onClick={(e) => e.stopPropagation()}
                 style={{ viewTransitionName: MORPH }}
             >
-                <div className="sheet-bar glass">
+                <div className="sheet-bar">
                     <span className="sheet-crumb">
                         <span className="sheet-dots" aria-hidden="true">
                             {openable.map((p) => <i key={p.id} className={p === project ? 'on' : ''} />)}
                         </span>
-                        {project.title}
+                        <span className="sheet-crumb-title">{project.title}</span>
                     </span>
                     <span className="sheet-actions">
                         <button className="sheet-btn" onClick={() => onStep(-1)} aria-label={`Previous: ${prev.title}`}>
@@ -245,7 +246,7 @@ const Sheet = ({ project, onClose, onStep }) => {
 /* ── Gallery card ─────────────────────────────────── */
 
 const Card = ({ project, onOpen, hidden }) => {
-    const tilt = useTilt(3);
+    const tilt = useTilt(1.5);
     const { Preview } = project;
     const body = (
         <>
@@ -428,14 +429,10 @@ const Work = () => {
             <div className="container">
                 <header className="section-head work-top reveal" ref={headRef}>
                     <div>
-                        <span className="eyebrow">Selected work</span>
+                        <Eyebrow>Selected work</Eyebrow>
                         <h2 className="section-title">
-                            Don&rsquo;t take my word for it. <span className="mark">Try it.</span>
+                            <span className="mark">Try it.</span>
                         </h2>
-                        <p className="section-lead">
-                            Open a project to use it: message the WhatsApp bot, train a model on your
-                            webcam, or tour an app that runs its AI entirely on-device.
-                        </p>
                     </div>
                     <div className="gal-arrows">
                         <button className="gal-arrow" onClick={() => goTo(active - 1)} disabled={active === 0} aria-label="Previous project">
