@@ -30,36 +30,58 @@
     background-color var(--dur-fast) var(--ease-std), color var(--dur-fast) var(--ease-std);
 }
 
-/* ── Type: light display weights, tight tracking ── */
+/* ── Type: Geist standing in for Iso's Söhne (Söhne is a paid Klim
+   font). Weights and tracking follow Iso's scale: display 200,
+   headlines 300, paragraphs 300, small text 400. ── */
+:root {
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Geist", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+body {
+  font-weight: 300;
+  letter-spacing: -0.005em;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
 }
 
 .hero-name {
-  font-weight: 250;
-  letter-spacing: -0.05em;
+  font-weight: 200;
+  letter-spacing: -0.035em;
 }
 
 .hero-statement {
-  font-weight: 350;
-  letter-spacing: -0.03em;
+  font-weight: 300;
+  letter-spacing: -0.02em;
 }
 
 :is(.section-title, .contact-title, .work-title) {
+  font-weight: 200;
+  letter-spacing: -0.03em;
+}
+
+:is(.gal-title, .xp-role, .xp-edu h3, .cm-feature h3) {
   font-weight: 300;
-  letter-spacing: -0.04em;
-}
-
-:is(.gal-title, .xp-edu h3, .cm-feature h3) {
-  font-weight: 350;
-}
-
-.xp-role {
-  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
 :is(.gal-stat b, .work-impact dd, .cm-stat strong) {
-  font-weight: 250;
+  font-weight: 200;
+  letter-spacing: -0.03em;
+}
+
+/* Small UI text stays at book weight so it holds up at 12–15px */
+:is(.chip, .xp-place, .gal-stat small, .work-impact dt, .contact-foot, .hero-now, .cm-place, .xp-edu-meta) {
+  font-weight: 400;
+}
+
+@media (max-width: 767px) {
+  :is(.hero-name, .section-title, .contact-title, .work-title) {
+    font-weight: 300;
+  }
 }
 
 /* ── Labels: Imigongo diamond + mono, typed in ── */
