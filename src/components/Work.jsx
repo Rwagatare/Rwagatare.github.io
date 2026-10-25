@@ -170,12 +170,12 @@ const Sheet = ({ project, onClose, onStep }) => {
                 onClick={(e) => e.stopPropagation()}
                 style={{ viewTransitionName: MORPH }}
             >
-                <div className="sheet-bar glass">
+                <div className="sheet-bar">
                     <span className="sheet-crumb">
                         <span className="sheet-dots" aria-hidden="true">
                             {openable.map((p) => <i key={p.id} className={p === project ? 'on' : ''} />)}
                         </span>
-                        {project.title}
+                        <span className="sheet-crumb-title">{project.title}</span>
                     </span>
                     <span className="sheet-actions">
                         <button className="sheet-btn" onClick={() => onStep(-1)} aria-label={`Previous: ${prev.title}`}>
