@@ -167,14 +167,14 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 18px;
 }
 
-:is(.gal-arrow, .gal-play, .hero-social a, .nav-icon) {
+:is(.gal-arrow, .gal-play, .hero-social a) {
   border-radius: var(--r-tight);
   background: transparent;
   box-shadow: inset 0 0 0 1px var(--line);
   transition: var(--morph), transform var(--dur-fast);
 }
 
-:is(.gal-arrow, .gal-play, .hero-social a, .nav-icon):hover:not(:disabled) {
+:is(.gal-arrow, .gal-play, .hero-social a):hover:not(:disabled) {
   border-radius: 50%;
   background: var(--fill-2);
 }
@@ -203,40 +203,252 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: inset 0 0 0 1px var(--line-strong);
 }
 
-/* ── Nav: keep the glass bar, outline the marks inside it ── */
-.nav-mark {
-  height: 34px;
-  padding: 0 11px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r-tight);
-  font-weight: 400;
-  transition: var(--morph);
+/* ── Nav: Iso's bar — no container, every mark is its own box ──
+   Logo and tabs are rows of joined hairline boxes (shared 1px borders).
+   Tight corners round out on hover and on the current section. A soft
+   progressive blur behind the bar keeps it legible over content. */
+:root {
+  --nav-h: 72px;
+  --nav-box: 36px;
+  --nav-ease: cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
-.nav-mark:hover {
-  border-radius: 18px;
+.nav-wrap {
+  padding: 0 var(--gutter);
+}
+
+.nav-wrap::before,
+.nav-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 -32px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-std);
+}
+
+.nav-wrap::before {
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 78%, transparent), transparent);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  -webkit-mask: linear-gradient(#000 55%, transparent);
+  mask: linear-gradient(#000 55%, transparent);
+}
+
+.nav-wrap::after {
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  -webkit-mask: linear-gradient(#000 30%, transparent 75%);
+  mask: linear-gradient(#000 30%, transparent 75%);
+}
+
+.nav-wrap.is-scrolled::before,
+.nav-wrap.is-scrolled::after {
+  opacity: 1;
+}
+
+.nav {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: var(--nav-h);
+  padding: 0;
+  gap: 16px;
+  border-radius: 0;
+  background: none;
+}
+
+/* Logo: [◇][Livingstone][Rwagatare] */
+.nav-mark {
+  display: inline-flex;
+  gap: 0;
+  height: var(--nav-box);
+  padding: 0;
+  border: 0;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.nav-mark-box {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-tight);
+  transition: border-radius 150ms var(--nav-ease);
+}
+
+.nav-mark-box + .nav-mark-box {
+  margin-left: -1px;
+}
+
+/* Corners ripple left to right */
+.nav-mark-box:nth-child(2) { transition-delay: 40ms; }
+.nav-mark-box:nth-child(3) { transition-delay: 80ms; }
+
+.nav-mark:hover .nav-mark-box {
+  border-radius: var(--r-box);
+}
+
+.nav-mark-icon {
+  justify-content: center;
+  width: var(--nav-box);
+  padding: 0;
+}
+
+.nav-mark-dot {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--label);
+  border-radius: 1.5px;
+  box-shadow: none;
+  transition: transform 500ms var(--spring);
+}
+
+.nav-mark:hover .nav-mark-dot {
+  transform: rotate(135deg);
+}
+
+/* Tabs */
+.nav-links {
+  gap: 0;
+  margin-left: auto;
+}
+
+.nav-links li + li {
+  margin-left: -1px;
 }
 
 .nav-links a {
+  justify-content: center;
+  min-width: 130px;
+  height: var(--nav-box);
+  padding: 0 18px;
+  border: 1px solid var(--line-strong);
   border-radius: var(--r-tight);
-  box-shadow: inset 0 0 0 1px transparent;
-  transition: var(--morph), box-shadow var(--dur-fast);
-}
-
-.nav-links a:hover {
   background: transparent;
-  border-radius: 18px;
-  box-shadow: inset 0 0 0 1px var(--line);
+  box-shadow: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--label);
+  transition: border-radius 150ms var(--nav-ease), color 150ms var(--nav-ease);
 }
 
-.nav-pill {
+.nav-links a:hover,
+.nav-links a.is-active,
+.nav-links a.is-active:hover {
+  border-radius: var(--r-box);
   background: transparent;
-  box-shadow: inset 0 0 0 1px var(--line-strong);
-  border-radius: 18px;
+  box-shadow: none;
 }
 
-.nav-burger {
+.nav-links a.is-active {
+  position: relative;
+  z-index: 1;
+}
+
+/* Actions: theme square + résumé, joined like the tabs */
+.nav-actions {
+  gap: 0;
+  margin-left: 0;
+}
+
+.nav-actions > * + * {
+  margin-left: -1px;
+}
+
+.nav-icon,
+.nav-icon:hover:not(:disabled) {
+  width: var(--nav-box);
+  height: var(--nav-box);
+  border: 1px solid var(--line-strong);
   border-radius: var(--r-tight);
+  background: transparent;
+  box-shadow: none;
+  color: var(--label);
+  transition: border-radius 150ms var(--nav-ease), transform var(--dur-fast);
+}
+
+.nav-icon:hover:not(:disabled) {
+  border-radius: var(--r-box);
+}
+
+.nav-sheet .btn {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-resume,
+.nav-resume:hover {
+  height: var(--nav-box);
+  padding: 0 18px;
+  border-radius: var(--r-tight);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-resume:hover {
+  border-radius: var(--r-box);
+}
+
+.nav-burger span {
+  left: 11px;
+  right: 11px;
+}
+
+/* Mobile sheet: glass stays (it floats over content), links become boxes */
+.nav-sheet {
+  top: calc(var(--nav-h) - 8px);
+  border-radius: var(--r-box);
+  gap: 12px;
+}
+
+.nav-sheet ul {
+  gap: 0;
+}
+
+.nav-sheet a:not(.btn) {
+  margin-top: -1px;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-tight);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-radius 150ms var(--nav-ease);
+}
+
+.nav-sheet a:not(.btn):hover {
+  background: transparent;
+  border-radius: var(--r-box);
+}
+
+@media (max-width: 1000px) {
+  .nav-links a {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .nav-mark {
+    font-size: 15px;
+  }
+
+  .nav-mark-box {
+    padding: 0 9px;
+  }
 }
 
 /* ── Surfaces: hairline outline, no drop shadow ── */

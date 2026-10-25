@@ -36,8 +36,6 @@ const Header = () => {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
-    const listRef = useRef(null);
-    const pillRef = useRef(null);
     const lockRef = useRef(null);
 
     // Scroll-spy: highlight the section occupying the middle of the viewport.
@@ -72,25 +70,6 @@ const Header = () => {
         };
     }, []);
 
-    // Glide the glass pill under the active link.
-    useEffect(() => {
-        const place = () => {
-            const pill = pillRef.current;
-            const link = listRef.current?.querySelector(`a[href="#${active}"]`);
-            if (!pill) return;
-            if (!link) {
-                pill.style.opacity = '0';
-                return;
-            }
-            pill.style.opacity = '1';
-            pill.style.width = `${link.offsetWidth}px`;
-            pill.style.transform = `translateX(${link.parentElement.offsetLeft}px)`;
-        };
-        place();
-        window.addEventListener('resize', place);
-        return () => window.removeEventListener('resize', place);
-    }, [active]);
-
     useEffect(() => {
         if (!open) return;
         const onKey = (e) => e.key === 'Escape' && setOpen(false);
@@ -103,14 +82,16 @@ const Header = () => {
 
     return (
         <header className={`nav-wrap ${scrolled ? 'is-scrolled' : ''}`}>
-            <nav className="nav glass" aria-label="Primary">
-                <a href="#top" className="nav-mark" aria-label="Back to top" onClick={close}>
-                    <span className="nav-mark-dot" aria-hidden="true" />
-                    LR
+            <nav className="nav" aria-label="Primary">
+                <a href="#top" className="nav-mark" aria-label="Livingstone Rwagatare, back to top" onClick={close}>
+                    <span className="nav-mark-box nav-mark-icon" aria-hidden="true">
+                        <span className="nav-mark-dot" />
+                    </span>
+                    <span className="nav-mark-box" aria-hidden="true">Livingstone</span>
+                    <span className="nav-mark-box" aria-hidden="true">Rwagatare</span>
                 </a>
 
-                <ul className="nav-links" ref={listRef}>
-                    <li className="nav-pill" ref={pillRef} aria-hidden="true" />
+                <ul className="nav-links">
                     {links.map((l) => (
                         <li key={l.id}>
                             <a href={`#${l.id}`} className={active === l.id ? 'is-active' : ''} aria-current={active === l.id ? 'true' : undefined}>
