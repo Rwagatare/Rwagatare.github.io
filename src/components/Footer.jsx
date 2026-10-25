@@ -24,8 +24,8 @@ const Footer = () => {
                             Let&rsquo;s build something <span className="mark">people actually use.</span>
                         </h2>
                         <p className="contact-lead">
-                            I&rsquo;m open to software engineering roles and collaborations, especially in AI
-                            infrastructure, developer tools, and technology for low-connectivity places.
+                            I&rsquo;m open to collaborations, especially in AI infrastructure, developer tools,
+                            and technology for low-connectivity places.
                         </p>
                         <div className="contact-cta">
                             <a href={`mailto:${profile.email}`} className="btn btn-primary">
@@ -42,10 +42,6 @@ const Footer = () => {
 
                     <div className="ft-cell ft-motif">
                         <span className="ft-imigongo" aria-hidden="true" />
-                        <span className="ft-status">
-                            <span className="hero-now-dot" aria-hidden="true" />
-                            Open to roles
-                        </span>
                         <span className="ft-route">Kigali → Santa Barbara → Boston</span>
                     </div>
 
