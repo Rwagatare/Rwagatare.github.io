@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import useTheme from '../hooks/useTheme';
-import { profile } from '../data/profile';
 import './Header.css';
 
 const links = [
@@ -83,12 +82,9 @@ const Header = () => {
     return (
         <header className={`nav-wrap ${scrolled ? 'is-scrolled' : ''}`}>
             <nav className="nav" aria-label="Primary">
-                <a href="#top" className="nav-mark" aria-label="Livingstone Rwagatare, back to top" onClick={close}>
-                    <span className="nav-mark-box nav-mark-icon" aria-hidden="true">
-                        <span className="nav-mark-dot" />
-                    </span>
-                    <span className="nav-mark-box" aria-hidden="true">Livingstone</span>
-                    <span className="nav-mark-box" aria-hidden="true">Rwagatare</span>
+                <a href="#top" className="nav-mark" aria-label="Back to top" onClick={close}>
+                    <span className="nav-mark-dot" aria-hidden="true" />
+                    LR
                 </a>
 
                 <ul className="nav-links">
@@ -105,9 +101,6 @@ const Header = () => {
                     <button className="nav-icon" onClick={toggle} aria-label={themeLabel} title={themeLabel}>
                         {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
                     </button>
-                    <a href={profile.resume} className="btn btn-primary btn-sm nav-resume" target="_blank" rel="noopener noreferrer">
-                        Résumé
-                    </a>
                     <button
                         className={`nav-icon nav-burger ${open ? 'is-open' : ''}`}
                         onClick={() => setOpen((o) => !o)}
@@ -130,9 +123,6 @@ const Header = () => {
                         </li>
                     ))}
                 </ul>
-                <a href={profile.resume} className="btn btn-primary" target="_blank" rel="noopener noreferrer" onClick={close}>
-                    Résumé
-                </a>
             </div>
         </header>
     );

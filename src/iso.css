@@ -138,45 +138,108 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
-/* ── Buttons: tight corners that round out on hover ── */
+/* ── Buttons: the same boxes as the nav tabs ──
+   Hairline, mono uppercase, tight corners that round out on hover.
+   Buttons that sit together share their borders. */
 .btn,
-.btn-sm {
+.btn-primary,
+.btn-secondary,
+[data-theme="light"] .btn-primary {
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1px solid var(--line-strong);
   border-radius: var(--r-tight);
-  transition: transform var(--dur-fast) var(--ease-std), box-shadow var(--dur) var(--ease-std), var(--morph);
-}
-
-.btn:hover {
-  border-radius: 18px;
-}
-
-.btn-secondary {
   background: transparent;
-  box-shadow: inset 0 0 0 1px var(--line-strong);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  color: var(--label);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-radius 150ms var(--nav-ease), transform var(--dur-fast) var(--ease-std);
 }
 
+.btn:hover,
+.btn-primary:hover,
 .btn-secondary:hover {
-  background: var(--fill-2);
+  border-radius: var(--r-box);
+  background: transparent;
 }
 
-.gal-cta {
-  border-radius: var(--r-tight);
-  transition: transform var(--dur) var(--spring), var(--morph);
+.btn-sm {
+  min-height: 36px;
+  padding: 0 16px;
 }
 
-.gal-card:hover .gal-cta {
-  border-radius: 18px;
+/* An email address reads better in its own case */
+.contact-cta .btn-primary {
+  text-transform: none;
+  letter-spacing: 0.02em;
 }
 
-:is(.gal-arrow, .gal-play, .hero-social a) {
+:is(.hero-cta, .contact-cta, .work-links, .gal-arrows, .hero-social) {
+  gap: 0;
+}
+
+:is(.hero-cta, .contact-cta, .work-links, .gal-arrows, .hero-social) > * + * {
+  margin-left: -1px;
+}
+
+.hero-cta {
+  row-gap: 12px;
+}
+
+.hero-social {
+  margin-left: -1px;
+}
+
+@media (max-width: 520px) {
+  .contact-cta > * + * {
+    margin-left: 0;
+    margin-top: -1px;
+  }
+}
+
+/* Icon buttons: square boxes */
+:is(.gal-arrow, .gal-play, .hero-social a, .sheet-btn, .sheet-close) {
+  border: 1px solid var(--line-strong);
   border-radius: var(--r-tight);
   background: transparent;
-  box-shadow: inset 0 0 0 1px var(--line);
-  transition: var(--morph), transform var(--dur-fast);
+  box-shadow: none;
+  color: var(--label);
+  transition: border-radius 150ms var(--nav-ease), transform var(--dur-fast), opacity var(--dur-fast);
 }
 
-:is(.gal-arrow, .gal-play, .hero-social a):hover:not(:disabled) {
-  border-radius: 50%;
-  background: var(--fill-2);
+:is(.gal-arrow, .gal-play, .hero-social a, .sheet-btn, .sheet-close):hover:not(:disabled) {
+  border-radius: var(--r-box);
+  background: transparent;
+  color: var(--label);
+}
+
+/* Card call-to-action rounds out when the card is hovered */
+.gal-cta,
+.gal-cta.is-link {
+  height: 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-tight);
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform var(--dur) var(--spring), border-radius 150ms var(--nav-ease);
+}
+
+.gal-card:hover .gal-cta,
+.gal-card:hover .gal-cta:not(.is-link) {
+  border-radius: var(--r-box);
+  background: transparent;
 }
 
 .gal-dots {
@@ -185,22 +248,42 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: inset 0 0 0 1px var(--line);
 }
 
+/* Segmented controls: joined tabs, the selected one stays round */
 .segmented {
-  border-radius: var(--r-tight);
+  padding: 0;
+  gap: 0;
+  border-radius: 0;
   background: transparent;
-  box-shadow: inset 0 0 0 1px var(--line);
+  box-shadow: none;
 }
 
 .segmented button {
-  border-radius: 4px;
+  height: 36px;
+  padding: 0 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-tight);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-radius 150ms var(--nav-ease), color 150ms var(--nav-ease);
+}
+
+.segmented button + button {
+  margin-left: -1px;
+}
+
+.segmented button:hover {
+  border-radius: var(--r-box);
 }
 
 .segmented button[aria-pressed="true"],
 .segmented button[aria-selected="true"],
 [data-theme="dark"] .segmented button[aria-pressed="true"],
 [data-theme="dark"] .segmented button[aria-selected="true"] {
+  border-radius: var(--r-box);
   background: transparent;
-  box-shadow: inset 0 0 0 1px var(--line-strong);
+  box-shadow: none;
 }
 
 /* ── Nav: Iso's bar — no container, every mark is its own box ──
@@ -258,58 +341,18 @@ h1, h2, h3, h4, h5, h6 {
   background: none;
 }
 
-/* Logo: [◇][Livingstone][Rwagatare] */
+/* Logo: one box, corners round out on hover */
 .nav-mark {
-  display: inline-flex;
-  gap: 0;
   height: var(--nav-box);
-  padding: 0;
-  border: 0;
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-}
-
-.nav-mark-box {
-  display: inline-flex;
-  align-items: center;
-  height: 100%;
   padding: 0 12px;
   border: 1px solid var(--line-strong);
   border-radius: var(--r-tight);
+  font-weight: 400;
   transition: border-radius 150ms var(--nav-ease);
 }
 
-.nav-mark-box + .nav-mark-box {
-  margin-left: -1px;
-}
-
-/* Corners ripple left to right */
-.nav-mark-box:nth-child(2) { transition-delay: 40ms; }
-.nav-mark-box:nth-child(3) { transition-delay: 80ms; }
-
-.nav-mark:hover .nav-mark-box {
+.nav-mark:hover {
   border-radius: var(--r-box);
-}
-
-.nav-mark-icon {
-  justify-content: center;
-  width: var(--nav-box);
-  padding: 0;
-}
-
-.nav-mark-dot {
-  width: 10px;
-  height: 10px;
-  border: 1.5px solid var(--label);
-  border-radius: 1.5px;
-  box-shadow: none;
-  transition: transform 500ms var(--spring);
-}
-
-.nav-mark:hover .nav-mark-dot {
-  transform: rotate(135deg);
 }
 
 /* Tabs */
@@ -379,28 +422,6 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--r-box);
 }
 
-.nav-sheet .btn {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.nav-resume,
-.nav-resume:hover {
-  height: var(--nav-box);
-  padding: 0 18px;
-  border-radius: var(--r-tight);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.nav-resume:hover {
-  border-radius: var(--r-box);
-}
-
 .nav-burger span {
   left: 11px;
   right: 11px;
@@ -438,16 +459,6 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 1000px) {
   .nav-links a {
     min-width: 0;
-  }
-}
-
-@media (max-width: 520px) {
-  .nav-mark {
-    font-size: 15px;
-  }
-
-  .nav-mark-box {
-    padding: 0 9px;
   }
 }
 
