@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { community } from '../data/profile';
 import { readings, years } from '../data/readings';
 import useScrollReveal from '../hooks/useScrollReveal';
+import Eyebrow from './Eyebrow';
 import useTilt from '../hooks/useTilt';
 import './BeyondTheCode.css';
 
@@ -169,7 +170,7 @@ const BeyondTheCode = () => {
             <div className="container reveal" ref={revealRef}>
                 <header className="section-head beyond-head">
                     <div>
-                        <span className="eyebrow">Beyond the code</span>
+                        <Eyebrow>Beyond the code</Eyebrow>
                         <h2 className="section-title">
                             Why I build. <span className="mark">And what I&rsquo;m reading.</span>
                         </h2>

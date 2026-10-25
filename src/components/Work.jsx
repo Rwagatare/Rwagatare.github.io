@@ -1,6 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal, flushSync } from 'react-dom';
 import useScrollReveal from '../hooks/useScrollReveal';
+import Eyebrow from './Eyebrow';
 import useTilt from '../hooks/useTilt';
 import { GitHubIcon, ArrowUpRight } from './Icons';
 // Demos only render inside an opened project, so load them on demand.
@@ -428,7 +429,7 @@ const Work = () => {
             <div className="container">
                 <header className="section-head work-top reveal" ref={headRef}>
                     <div>
-                        <span className="eyebrow">Selected work</span>
+                        <Eyebrow>Selected work</Eyebrow>
                         <h2 className="section-title">
                             Don&rsquo;t take my word for it. <span className="mark">Try it.</span>
                         </h2>

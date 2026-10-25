@@ -1,5 +1,6 @@
 import { profile } from '../data/profile';
 import useScrollReveal from '../hooks/useScrollReveal';
+import Eyebrow from './Eyebrow';
 import { GitHubIcon, LinkedInIcon, MailIcon } from './Icons';
 import './Footer.css';
 
@@ -9,7 +10,7 @@ const Footer = () => {
     return (
         <footer id="contact" className="contact">
             <div className="container reveal" ref={revealRef}>
-                <span className="eyebrow">Contact</span>
+                <Eyebrow>Contact</Eyebrow>
                 <h2 className="contact-title">
                     Let&rsquo;s build something <span className="mark">people actually use.</span>
                 </h2>
