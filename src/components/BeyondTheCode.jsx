@@ -125,7 +125,7 @@ const Reading = () => {
 };
 
 const Community = () => {
-    const tilt = useTilt(2);
+    const tilt = useTilt(1);
     const { featured, highlight, roles } = community;
 
     return (

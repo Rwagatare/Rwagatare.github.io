@@ -7,7 +7,7 @@ import './Experience.css';
 
 const Experience = () => {
     const revealRef = useScrollReveal();
-    const tilt = useTilt(2);
+    const tilt = useTilt(1);
 
     return (
         <section id="experience" className="section">

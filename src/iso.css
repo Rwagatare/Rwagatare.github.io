@@ -758,15 +758,437 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* ── Contact footer: mono fine print ── */
-.contact-foot {
+/* ── Footer: Iso-style tile grid ──
+   [ pitch + contact buttons ][ Imigongo tile ]
+   [ site links, joined boxes ][ fine print    ] */
+.contact {
+  text-align: left;
+  padding-bottom: clamp(24px, 4vw, 40px);
+}
+
+.ft-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+}
+
+.ft-cell {
+  position: relative;
+  padding: clamp(24px, 3.5vw, 48px);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-box);
+  overflow: hidden;
+}
+
+.ft-motif,
+.ft-fine {
+  margin-left: -1px;
+}
+
+.ft-links,
+.ft-fine {
+  margin-top: -1px;
+}
+
+.contact-title {
+  margin: 0;
+  max-width: 16ch;
+}
+
+.contact-lead {
+  margin: 22px 0 0;
+}
+
+.contact-cta {
+  justify-content: flex-start;
+}
+
+.ft-motif {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 8px;
+  min-height: 240px;
+}
+
+.ft-imigongo {
+  position: absolute;
+  inset: 0;
+  background: var(--clay);
+  opacity: 0.2;
+  -webkit-mask: var(--diamond-mask) 0 0 / 36px 36px repeat;
+  mask: var(--diamond-mask) 0 0 / 36px 36px repeat;
+  transition: -webkit-mask-position 900ms var(--ease-out), mask-position 900ms var(--ease-out), opacity var(--dur) var(--ease-std);
+}
+
+.ft-motif:hover .ft-imigongo {
+  opacity: 0.3;
+  -webkit-mask-position: 18px 18px;
+  mask-position: 18px 18px;
+}
+
+.ft-status,
+.ft-route {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-tight);
+  background: var(--bg);
   font-family: var(--font-mono);
   font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.ft-route {
+  color: var(--label-2);
+}
+
+/* +1px top/left absorbs the -1px margins that merge the link borders */
+.ft-links {
+  --p: clamp(16px, 2vw, 24px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  align-content: center;
+  padding: calc(var(--p) + 1px) var(--p) var(--p) calc(var(--p) + 1px);
+}
+
+.ft-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 44px;
+  margin: -1px 0 0 -1px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-tight);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--label);
+  transition: border-radius 150ms var(--nav-ease);
+}
+
+.ft-links a:hover {
+  border-radius: var(--r-box);
+  text-decoration: none;
+}
+
+.ft-fine {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
   letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--label-3);
+}
+
+/* Imigongo zigzag still closes the page, now as the fine-print rule */
+.ft-fine::before {
+  content: "";
+  display: block;
+  height: 10px;
+  margin-bottom: auto;
+  padding-bottom: 24px;
+  background: var(--clay);
+  opacity: 0.7;
+  -webkit-mask: var(--zigzag-mask) repeat-x 0 0 / 14px 10px;
+  mask: var(--zigzag-mask) repeat-x 0 0 / 14px 10px;
+}
+
+.ft-fine a {
+  color: var(--label);
+}
+
+@media (max-width: 820px) {
+  .ft-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ft-motif,
+  .ft-fine {
+    margin-left: 0;
+  }
+
+  .ft-motif {
+    margin-top: -1px;
+    min-height: 180px;
+  }
+
+  .ft-fine::before {
+    margin-bottom: 16px;
+  }
+
+  /* Odd link out spans the row instead of sitting alone */
+  .ft-links a:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ── Reading: books as merged cells ── */
+.bk-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
+.bk-shelf {
+  gap: 0;
+  padding: 1px 0 0 1px;
+}
+
+.bk-shelf > li {
+  display: flex;
+  margin: -1px 0 0 -1px;
+}
+
+.bk-book {
+  padding: 16px 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-box);
+  transition: border-color var(--dur-fast) var(--ease-std);
+}
+
+.bk-book:not(:disabled):hover {
+  position: relative;
+  z-index: 1;
+  border-color: var(--line-strong);
+}
+
+.bk-cover,
+.bk-sheet-cover {
+  border-radius: 3px 6px 6px 3px;
+  box-shadow: inset 3px 0 0 rgba(0, 0, 0, 0.18), 0 0 0 1px var(--line);
+}
+
+.bk-book:not(:disabled):hover .bk-cover {
+  transform: translateY(-3px);
+  box-shadow: inset 3px 0 0 rgba(0, 0, 0, 0.18), 0 0 0 1px var(--line-strong);
+}
+
+.bk-typecover strong {
+  font-weight: 300;
+}
+
+.bk-meta strong {
+  font-weight: 400;
+}
+
+/* Status: mono tag, colour lives only in the diamond */
+.bk-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--label-2);
+}
+
+.bk-status::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--label-3);
+  transform: rotate(45deg);
+}
+
+.bk-status.s-reading,
+.bk-status.s-queued {
+  color: var(--label-2);
+}
+
+.bk-status.s-reading::before {
+  background: var(--green);
+}
+
+.bk-status.s-queued::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--label-2);
+}
+
+/* "Read my notes" becomes the card's box button */
+.bk-open {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  margin-top: 12px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-tight);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--label);
+  transition: border-radius 150ms var(--nav-ease);
+}
+
+.bk-open::after {
+  content: "›";
+  margin-left: 6px;
+  font-size: 1.3em;
+  line-height: 1;
+}
+
+.bk-book:hover .bk-open {
+  border-radius: var(--r-box);
+}
+
+/* Book reader window */
+.bk-sheet {
+  border-radius: var(--r-box);
+}
+
+.bk-close {
+  width: var(--nav-box);
+  height: var(--nav-box);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-tight);
+  background: transparent;
+  color: var(--label);
+  transition: border-radius 150ms var(--nav-ease);
+}
+
+.bk-close:hover {
+  border-radius: var(--r-box);
+}
+
+.bk-sheet h3 {
+  font-weight: 300;
+  letter-spacing: -0.03em;
+}
+
+.bk-takeaways {
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-box);
+  background: transparent;
+}
+
+.bk-takeaways h4 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--label-2);
+}
+
+.bk-takeaways h4::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border: 1px solid currentColor;
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+
+/* Text links ("Try it ›", "Google Books ›"): mono tag links like Iso's "View all" */
+.link-more {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.xp-see .link-more {
+  font-size: 12px;
+}
+
+/* ── Bullets: small Imigongo diamonds instead of dots ── */
+:is(.xp-points, .work-notes, .bk-takeaways ul) li::before {
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background: var(--label-3);
+  transform: rotate(45deg);
+}
+
+.xp-honors span::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 8px;
+  border-radius: 1px;
+  background: var(--label-2);
+  transform: rotate(45deg);
+  vertical-align: 2px;
+}
+
+/* ── Leftover rounded pieces ── */
+.sheet {
+  border-radius: var(--r-box);
+}
+
+.gal-dot,
+.sheet-dots i {
+  border-radius: 1.5px;
+}
+
+/* ── Calmer motion (Iso moves very little) ──
+   Shorter, smaller reveals; the gallery previews settle from a slight
+   zoom as the section scrolls in, like Iso's hero and CTA images. */
+.reveal {
+  transform: translateY(12px);
+  transition-duration: 500ms;
+}
+
+.reveal-child {
+  transform: translateY(8px);
+  transition-duration: 450ms;
+}
+
+@supports (animation-timeline: view()) {
+  .work {
+    view-timeline: --work-in block;
+  }
+
+  .gal-visual > .pv {
+    animation: iso-settle linear both;
+    animation-timeline: --work-in;
+    animation-range: entry 0% cover 45%;
+  }
+
+  @keyframes iso-settle {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .gal-visual > .pv {
+    animation: none;
+  }
+
   .eyebrow::before {
     transform: rotate(45deg);
   }

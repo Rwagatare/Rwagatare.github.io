@@ -246,7 +246,7 @@ const Sheet = ({ project, onClose, onStep }) => {
 /* ── Gallery card ─────────────────────────────────── */
 
 const Card = ({ project, onOpen, hidden }) => {
-    const tilt = useTilt(3);
+    const tilt = useTilt(1.5);
     const { Preview } = project;
     const body = (
         <>
