@@ -16,9 +16,9 @@ const projects = [
         id: 'bridge',
         kicker: 'In production · Ghana & Rwanda',
         title: 'Playlab WhatsApp Bridge',
-        teaser: 'AI tutors on the one app every teacher already has.',
+        teaser: 'Text an AI tutor.',
         cta: 'Message the bot',
-        pitch: 'AI tutors on the one app every teacher already has. The phone below runs the real command set, and the trace shows what the server does with each message.',
+        pitch: 'Text it like a teacher would. The phone runs the real commands; the trace shows the server.',
         impact: [['5,000+', 'teachers reached'], ['79+', 'tests in CI']],
         stack: ['Python', 'FastAPI', 'PostgreSQL', 'Alembic', 'Meta Cloud API', 'Docker'],
         notes: [
@@ -35,9 +35,9 @@ const projects = [
         id: 'teachable',
         kicker: 'Deployed · MIT RAISE / Day of AI',
         title: 'Teachable Machine v3',
-        teaser: 'Train a model on your webcam, entirely in your browser. Works offline.',
+        teaser: 'Train a model on your webcam.',
         cta: 'Train a model',
-        pitch: 'Google’s Teachable Machine, rebuilt to keep working when the internet doesn’t. Open the Live tab to train a model on your webcam. It all runs in your browser, and no frame leaves your device.',
+        pitch: 'Open Live. Train it on your webcam. Nothing leaves your device.',
         impact: [['150+', 'teachers in Rwanda'], ['Offline', 'installable PWA']],
         stack: ['TensorFlow.js', 'MobileNet', 'Workbox', 'PWA', 'JavaScript'],
         notes: [
@@ -66,9 +66,9 @@ const projects = [
         id: 'mirrorme',
         kicker: 'Open source · Local-first',
         title: 'MirrorMe',
-        teaser: 'A planner whose AI never leaves your laptop. $0 forever.',
+        teaser: 'An AI planner that never leaves your laptop.',
         cta: 'Tour the app',
-        pitch: 'A planner whose AI never leaves your laptop. It costs $0, needs no API keys, and your life stays in a SQLite file you own.',
+        pitch: '$0, no API keys. Your life stays in one SQLite file you own.',
         impact: [['$0', 'forever'], ['100%', 'on-device AI']],
         stack: ['Python', 'FastAPI', 'SQLite', 'ChromaDB', 'Ollama', 'React'],
         notes: [
@@ -95,7 +95,7 @@ const projects = [
         id: 'rivetfields',
         kicker: 'Now building · Co-founder',
         title: 'Rivetfields',
-        teaser: 'RL environments, frontier-distilled benchmarks, and private inference in your own cloud.',
+        teaser: 'Training grounds for AI agents.',
         cta: 'rivetfields.com',
         href: 'https://rivetfields.com',
         Preview: RivetPreview,
@@ -431,12 +431,8 @@ const Work = () => {
                     <div>
                         <Eyebrow>Selected work</Eyebrow>
                         <h2 className="section-title">
-                            Don&rsquo;t take my word for it. <span className="mark">Try it.</span>
+                            <span className="mark">Try it.</span>
                         </h2>
-                        <p className="section-lead">
-                            Open a project to use it: message the WhatsApp bot, train a model on your
-                            webcam, or tour an app that runs its AI entirely on-device.
-                        </p>
                     </div>
                     <div className="gal-arrows">
                         <button className="gal-arrow" onClick={() => goTo(active - 1)} disabled={active === 0} aria-label="Previous project">

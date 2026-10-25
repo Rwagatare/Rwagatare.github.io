@@ -17,18 +17,20 @@ const Hero = () => {
 
                         <h1 className="hero-name">{profile.name}</h1>
                         <p className="hero-statement">
-                            Software engineer building AI that works <span className="mark">where the network doesn&rsquo;t.</span>
+                            I build AI <span className="mark">people actually use.</span>
                         </p>
                         <p className="hero-lede">
-                            I ship production Python services and offline-first web apps. My code has reached
-                            5,000+ teachers over WhatsApp and runs machine learning in Rwandan classrooms
-                            with no connection at all.
+                            Teachers on WhatsApp. Classrooms in Rwanda. Now, agents at Rivetfields.
                         </p>
 
                         <div className="hero-cta">
-                            <a href="#work" className="btn btn-primary">See the work</a>
-                            <a href={profile.resume} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">Résumé</a>
+                            <span className="hero-try">
+                                <a href="#project-bridge" className="btn btn-primary">Message the bot</a>
+                                <a href="#project-teachable" className="btn btn-primary">Train a model</a>
+                                <a href="#project-mirrorme" className="btn btn-primary">Tour MirrorMe</a>
+                            </span>
                             <span className="hero-social">
+                                <a href={profile.resume} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">Résumé</a>
                                 <a href={profile.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><GitHubIcon /></a>
                                 <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><LinkedInIcon /></a>
                             </span>
