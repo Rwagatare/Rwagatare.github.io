@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Page not found · Livingstone Rwagatare</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400&amp;family=Geist+Mono:wght@400;500&amp;display=swap" />
+    <style>
+      /* Standalone page: GitHub Pages serves it for any unknown path.
+         Mirrors the site's hairline look without loading the app. */
+      :root {
+        --bg: #f5f4f1;
+        --text: #1d1d1f;
+        --muted: rgba(29, 29, 31, 0.62);
+        --line: rgba(29, 29, 31, 0.15);
+        --line-strong: rgba(29, 29, 31, 0.5);
+        color-scheme: light dark;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0c0b0b;
+          --text: #f5f5f7;
+          --muted: rgba(235, 235, 245, 0.64);
+          --line: rgba(245, 245, 247, 0.13);
+          --line-strong: rgba(245, 245, 247, 0.34);
+        }
+      }
+      * { box-sizing: border-box; margin: 0; }
+      html, body { height: 100%; }
+      body {
+        display: grid;
+        place-items: center;
+        padding: 24px 16px;
+        background: var(--bg);
+        color: var(--text);
+        font: 300 18px/1.5 "Geist", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      }
+      main {
+        width: 100%;
+        max-width: 560px;
+        padding: clamp(28px, 6vw, 52px);
+        border: 1px solid var(--line-strong);
+        border-radius: 16px;
+      }
+      .label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font: 400 13px/1 "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .label::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border: 1px solid currentColor;
+        transform: rotate(45deg);
+      }
+      h1 {
+        margin-top: 20px;
+        font-weight: 300;
+        font-size: clamp(36px, 7vw, 52px);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+      }
+      p { margin-top: 14px; color: var(--muted); }
+      a.home {
+        display: inline-flex;
+        align-items: center;
+        height: 44px;
+        margin-top: 28px;
+        padding: 0 20px;
+        border: 1px solid var(--line-strong);
+        border-radius: 6px;
+        color: var(--text);
+        text-decoration: none;
+        font: 500 13px/1 "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition: border-radius 150ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      a.home:hover, a.home:focus-visible { border-radius: 16px; }
+      a.home:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <span class="label">404</span>
+      <h1>This page doesn&rsquo;t exist.</h1>
+      <p>The link may be old or mistyped. Everything on the site is one page away.</p>
+      <a class="home" href="/">Back to the site</a>
+    </main>
+  </body>
+</html>

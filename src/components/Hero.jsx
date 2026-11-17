@@ -34,7 +34,15 @@ const Hero = () => {
 
                     <figure className="hero-portrait">
                         <span className="hero-imigongo" aria-hidden="true" />
-                        <img src={profile.photo} alt="Portrait of Livingstone Rwagatare" width="360" height="360" />
+                        <img
+                            src={profile.photo}
+                            srcSet={profile.photoSrcSet}
+                            sizes={profile.photoSizes}
+                            alt="Portrait of Livingstone Rwagatare"
+                            width="360"
+                            height="360"
+                            fetchPriority="high"
+                        />
                         <figcaption className="glass">
                             <span>Kigali</span>
                             <span aria-hidden="true">→</span>

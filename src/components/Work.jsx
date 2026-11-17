@@ -49,15 +49,15 @@ const projects = [
             { label: 'Open live app', href: 'https://rwagatare.github.io/teachable-machine-v3/', icon: 'out' },
             { label: 'Source', href: 'https://github.com/Rwagatare/teachable-machine-v3', icon: 'gh' },
         ],
-        Preview: () => <BrowserPreview src="/projects/teachable-machine/training.jpg" />,
+        Preview: () => <BrowserPreview src="/projects/teachable-machine/training-800.webp" />,
         Demo: () => (
             <BrowserDemo
                 url="https://rwagatare.github.io/teachable-machine-v3/"
                 allow="camera; microphone; fullscreen"
                 shots={[
-                    { label: 'Training', src: '/projects/teachable-machine/training.jpg', alt: 'Teachable Machine v3 training a Green class from the webcam, with 100% confidence and the matching emoji output' },
-                    { label: 'Dark', src: '/projects/teachable-machine/training-dark.jpg', alt: 'Teachable Machine v3 in dark mode' },
-                    { label: 'Welcome', src: '/projects/teachable-machine/landing.jpg', alt: 'Teachable Machine v3 landing screen with a narrated tutorial button' },
+                    { label: 'Training', src: '/projects/teachable-machine/training.webp', alt: 'Teachable Machine v3 training a Green class from the webcam, with 100% confidence and the matching emoji output' },
+                    { label: 'Dark', src: '/projects/teachable-machine/training-dark.webp', alt: 'Teachable Machine v3 in dark mode' },
+                    { label: 'Welcome', src: '/projects/teachable-machine/landing.webp', alt: 'Teachable Machine v3 landing screen with a narrated tutorial button' },
                 ]}
             />
         ),
@@ -77,16 +77,16 @@ const projects = [
             'Works offline and installs as a PWA on your phone over your home network.',
         ],
         links: [{ label: 'Source', href: 'https://github.com/Rwagatare/MirrorMe', icon: 'gh' }],
-        Preview: () => <PhonesPreview back="/projects/mirrorme/mirror.jpg" front="/projects/mirrorme/path.jpg" />,
+        Preview: () => <PhonesPreview back="/projects/mirrorme/mirror.webp" front="/projects/mirrorme/path.webp" />,
         Demo: () => (
             <PhoneGallery
                 note="Demo data. The real app runs entirely on your own machine."
                 shots={[
-                    { label: 'Path', src: '/projects/mirrorme/path.jpg', alt: 'MirrorMe Path view: a vertical trail of today’s tasks with star ratings', caption: 'Your day as a trail: finish one task to unlock the next.' },
-                    { label: 'Planner', src: '/projects/mirrorme/planner.jpg', alt: 'MirrorMe weekly planner board', caption: 'A 7-day board that syncs into the Path automatically.' },
-                    { label: 'Goals', src: '/projects/mirrorme/goals.jpg', alt: 'MirrorMe goals tree with progress per goal', caption: 'Each goal is a branch that grows as milestones land.' },
-                    { label: 'Mirror', src: '/projects/mirrorme/mirror.jpg', alt: 'MirrorMe Mirror view with a heatmap of daily ratings', caption: 'A heatmap of your daily ratings, so you can see your patterns.' },
-                    { label: 'AI', src: '/projects/mirrorme/ai.jpg', alt: 'MirrorMe on-device AI assistant answering a planning question', caption: 'A local LLM that reads your tasks and goals and adds tasks for you.' },
+                    { label: 'Path', src: '/projects/mirrorme/path.webp', alt: 'MirrorMe Path view: a vertical trail of today’s tasks with star ratings', caption: 'Your day as a trail: finish one task to unlock the next.' },
+                    { label: 'Planner', src: '/projects/mirrorme/planner.webp', alt: 'MirrorMe weekly planner board', caption: 'A 7-day board that syncs into the Path automatically.' },
+                    { label: 'Goals', src: '/projects/mirrorme/goals.webp', alt: 'MirrorMe goals tree with progress per goal', caption: 'Each goal is a branch that grows as milestones land.' },
+                    { label: 'Mirror', src: '/projects/mirrorme/mirror.webp', alt: 'MirrorMe Mirror view with a heatmap of daily ratings', caption: 'A heatmap of your daily ratings, so you can see your patterns.' },
+                    { label: 'AI', src: '/projects/mirrorme/ai.webp', alt: 'MirrorMe on-device AI assistant answering a planning question', caption: 'A local LLM that reads your tasks and goals and adds tasks for you.' },
                 ]}
             />
         ),

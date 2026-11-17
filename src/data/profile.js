@@ -7,7 +7,10 @@ export const profile = {
     location: 'Boston, MA',
     email: 'lrwagatare@gmail.com',
     resume: '/Resume/Livingstone_Rwagatare_Resume.pdf',
-    photo: '/Photos/profile-720.jpg',
+    // Hero portrait: shown at 160px (mobile) to 290px (desktop).
+    photo: '/Photos/profile-600.webp',
+    photoSrcSet: '/Photos/profile-320.webp 320w, /Photos/profile-600.webp 600w',
+    photoSizes: '(max-width: 900px) 160px, 290px',
     links: {
         github: 'https://github.com/Rwagatare',
         linkedin: 'https://www.linkedin.com/in/rwagatare-livingstone',
