@@ -7,28 +7,31 @@
     <meta name="robots" content="noindex" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script>
+      try { if (localStorage.getItem('theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400&amp;family=Geist+Mono:wght@400;500&amp;display=swap" />
     <style>
       /* Standalone page: GitHub Pages serves it for any unknown path.
          Mirrors the site's hairline look without loading the app. */
+      /* Dark by default, like the site; light only if the visitor chose it there. */
       :root {
+        --bg: #0c0b0b;
+        --text: #f5f5f7;
+        --muted: rgba(235, 235, 245, 0.64);
+        --line: rgba(245, 245, 247, 0.13);
+        --line-strong: rgba(245, 245, 247, 0.34);
+        color-scheme: dark;
+      }
+      :root[data-theme="light"] {
         --bg: #f5f4f1;
         --text: #1d1d1f;
         --muted: rgba(29, 29, 31, 0.62);
         --line: rgba(29, 29, 31, 0.15);
         --line-strong: rgba(29, 29, 31, 0.5);
-        color-scheme: light dark;
-      }
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg: #0c0b0b;
-          --text: #f5f5f7;
-          --muted: rgba(235, 235, 245, 0.64);
-          --line: rgba(245, 245, 247, 0.13);
-          --line-strong: rgba(245, 245, 247, 0.34);
-        }
+        color-scheme: light;
       }
       * { box-sizing: border-box; margin: 0; }
       html, body { height: 100%; }
