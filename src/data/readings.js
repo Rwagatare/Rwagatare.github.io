@@ -1,6 +1,6 @@
 // Reading list with reflections. `cover` uses Open Library (no API key).
 
-export const bookCategories = ['CS / Tech Ethics', 'Philosophy', 'Self-Development', 'Research Papers'];
+export const bookCategories = ['CS / Tech Ethics', 'Philosophy', 'Self-Development', 'Research Papers', 'Literature'];
 
 /*
  * Each book's `reflection` is now an object:
@@ -16,6 +16,16 @@ export const bookCategories = ['CS / Tech Ethics', 'Philosophy', 'Self-Developme
  */
 export const readings = [
     // ── 2026 ──
+    // Recently finished, shown first (no notes yet). Covers from Open Library; null uses a type cover.
+    { year: 2026, cat: 'CS / Tech Ethics', title: 'Empire of AI', author: 'Karen Hao', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/15092439-L.jpg', link: null, reflection: null },
+    { year: 2026, cat: 'CS / Tech Ethics', title: 'The AI Mirror', author: 'Shannon Vallor', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/15265621-L.jpg', link: null, reflection: null },
+    { year: 2026, cat: 'Research Papers', title: 'Do Artifacts Have Politics?', author: 'Langdon Winner', status: 'completed', cover: null, link: null, reflection: null },
+    { year: 2026, cat: 'Research Papers', title: 'Minds, Brains, and Programs', author: 'John Searle', status: 'completed', cover: null, link: null, reflection: null },
+    { year: 2026, cat: 'Self-Development', title: 'Unlikely Entrepreneurs', author: 'Patricia Favreau & N. Louis Shipley', status: 'completed', cover: null, link: null, reflection: null },
+    { year: 2026, cat: 'Philosophy', title: 'Models of Contextual Theology', author: 'Stephen B. Bevans', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/818582-L.jpg', link: null, reflection: null },
+    { year: 2026, cat: 'Literature', title: 'The River Between', author: 'Ngũgĩ wa Thiong\u2019o', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/14337540-L.jpg', link: null, reflection: null },
+    { year: 2026, cat: 'Literature', title: 'Cry, the Beloved Country', author: 'Alan Paton', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/8235289-L.jpg', link: null, reflection: null },
+    { year: 2026, cat: 'Literature', title: 'Letters to a Young Poet', author: 'Rainer Maria Rilke', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/6874224-L.jpg', link: null, reflection: null },
     {
         year: 2026, cat: 'CS / Tech Ethics', title: 'Race After Technology', author: 'Ruha Benjamin', status: 'reading',
         cover: 'https://covers.openlibrary.org/b/isbn/9781509526406-L.jpg',

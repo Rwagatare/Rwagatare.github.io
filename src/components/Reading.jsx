@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { readings } from '../data/readings';
 
@@ -75,16 +75,12 @@ const Reader = ({ book, onClose }) => {
     );
 };
 
-// How fast the shelf drifts, in pixels per second.
-const DRIFT_PXS = 95;
-
 const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const Book = ({ book, onOpen, copy }) => {
+const Book = ({ book, onOpen }) => {
     const canOpen = Boolean(book.reflection);
     return (
-        // The second copy only exists to make the loop seamless; keep it out of tab order and screen readers.
-        <li inert={copy} aria-hidden={copy || undefined}>
+        <li className="bk-slide">
             <button
                 type="button"
                 className="bk-book"
@@ -92,7 +88,7 @@ const Book = ({ book, onOpen, copy }) => {
                 disabled={!canOpen}
                 aria-label={`${book.title} by ${book.author}${canOpen ? ', read my notes' : ''}`}
             >
-                <span className="bk-bay"><span className="bk-cover"><Cover book={book} /></span></span>
+                <span className="bk-cover"><Cover book={book} /></span>
                 <span className="bk-meta">
                     <span className={`bk-status s-${book.status}`}>{STATUS[book.status]} · {book.year}</span>
                     <strong>{book.title}</strong>
@@ -104,27 +100,33 @@ const Book = ({ book, onOpen, copy }) => {
     );
 };
 
-// The Reading tab, built like the footer: a label cell joined to a shelf
-// cell. Every book stands on one shelf line, newest first, and the shelf
-// drifts sideways in a loop. It pauses on hover, focus, touch, off-screen,
-// a hidden tab, an open note or reduced motion, and it can be dragged.
-const Reading = () => {
+const pad = (n) => String(n).padStart(2, '0');
+
+// Books move three at a time, on the same timer as the Work gallery.
+const STEP = 3;
+
+// The Reading tab, moving like the Work gallery but with small cards:
+// the books join into merged hairline cells, snap to the centre, fade
+// with distance, and advance three at a time on the gallery's timer. It pauses on hover, focus,
+// touch, an open note, off-screen, a hidden tab or pane, reduced motion,
+// or the pause button.
+const Reading = ({ active = true }) => {
     const [open, setOpen] = useState(null);
     const close = () => setOpen(null);
 
     const trackRef = useRef(null);
-    const pos = useRef(0);
     const holdTimer = useRef(0);
-    const [still] = useState(() => reduceMotion());
+    const [current, setCurrent] = useState(0);
+    const [userPaused, setUserPaused] = useState(() => reduceMotion());
     const [hovering, setHovering] = useState(false);
     const [focused, setFocused] = useState(false);
     const [held, setHeld] = useState(false);
     const [inView, setInView] = useState(false);
     const [tabHidden, setTabHidden] = useState(false);
-    const running = inView && !open && !hovering && !focused && !held && !tabHidden && !still;
+    const running = active && inView && !open && !hovering && !focused && !held && !tabHidden && !userPaused;
 
     useEffect(() => {
-        const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.3 });
+        const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.5 });
         io.observe(trackRef.current);
         const onVis = () => setTabHidden(document.hidden);
         document.addEventListener('visibilitychange', onVis);
@@ -136,65 +138,105 @@ const Reading = () => {
         };
     }, []);
 
-    // Half the track is one full copy of the shelf; wrap within it.
-    const wrap = (x) => {
-        const half = trackRef.current.scrollWidth / 2;
-        return ((x % half) + half) % half;
-    };
-
+    // Fade each card by its distance from the centre; track which one is there.
     useEffect(() => {
-        if (!running) return undefined;
-        const el = trackRef.current;
+        const track = trackRef.current;
         let raf = 0;
-        let last = performance.now();
-        const tick = (t) => {
-            const dt = Math.min(64, t - last) / 1000;
-            last = t;
-            pos.current = wrap(pos.current + DRIFT_PXS * dt);
-            el.scrollLeft = pos.current;
-            raf = requestAnimationFrame(tick);
+        const update = () => {
+            raf = 0;
+            const mid = track.scrollLeft + track.clientWidth / 2;
+            let best = 0;
+            let bestDist = Infinity;
+            [...track.children].forEach((slide, n) => {
+                const center = slide.offsetLeft + slide.offsetWidth / 2;
+                const dist = Math.abs(center - mid);
+                const f = Math.max(0, 1 - dist / (slide.offsetWidth * 3.5));
+                slide.style.setProperty('--focus', f.toFixed(3));
+                if (dist < bestDist) {
+                    bestDist = dist;
+                    best = n;
+                }
+            });
+            setCurrent(best);
         };
-        raf = requestAnimationFrame(tick);
-        return () => cancelAnimationFrame(raf);
-    }, [running]);
+        const onScroll = () => {
+            if (!raf) raf = requestAnimationFrame(update);
+        };
+        update();
+        track.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        return () => {
+            cancelAnimationFrame(raf);
+            track.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', onScroll);
+        };
+    }, []);
 
-    // Follow manual drags/swipes, and keep them inside the loop.
-    const onScroll = () => {
-        const el = trackRef.current;
-        if (Math.abs(el.scrollLeft - pos.current) > 2) {
-            const next = wrap(el.scrollLeft);
-            pos.current = next;
-            if (next !== el.scrollLeft) el.scrollLeft = next;
-        }
+    const goTo = useCallback((n) => {
+        const track = trackRef.current;
+        const count = track.children.length;
+        const slide = track.children[((n % count) + count) % count];
+        track.scrollTo({
+            left: slide.offsetLeft - (track.clientWidth - slide.offsetWidth) / 2,
+            behavior: reduceMotion() ? 'auto' : 'smooth',
+        });
+    }, []);
+
+    // Step three books; past either end, wrap to the other.
+    const step = (dir) => {
+        const last = readings.length - 1;
+        const next = current + dir * STEP;
+        goTo(next > last ? (current === last ? 0 : last) : next < 0 ? (current === 0 ? last : 0) : next);
     };
 
     const holdAfterTouch = () => {
         setHeld(true);
         clearTimeout(holdTimer.current);
-        holdTimer.current = setTimeout(() => setHeld(false), 5000);
+        holdTimer.current = setTimeout(() => setHeld(false), 7000);
     };
 
     return (
         <div className="bk">
-            <div className="bk-bar">
-                <span className="cm-kicker">Reading list</span>
-            </div>
+            <ul
+                className="bk-gal"
+                ref={trackRef}
+                aria-label="Reading list"
+                onPointerEnter={(e) => e.pointerType === 'mouse' && setHovering(true)}
+                onPointerLeave={() => setHovering(false)}
+                onTouchStart={holdAfterTouch}
+                onFocus={() => setFocused(true)}
+                onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setFocused(false)}
+            >
+                {readings.map((b) => <Book key={b.title} book={b} onOpen={setOpen} />)}
+            </ul>
 
-            <div className="bk-shelfcase">
-                <ul
-                    className="bk-track"
-                    ref={trackRef}
-                    aria-label="Reading list"
-                    onScroll={onScroll}
-                    onPointerEnter={(e) => e.pointerType === 'mouse' && setHovering(true)}
-                    onPointerLeave={() => setHovering(false)}
-                    onTouchStart={holdAfterTouch}
-                    onFocus={() => setFocused(true)}
-                    onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setFocused(false)}
+            <div className={`gal-controls bk-gal-controls ${running ? 'is-running' : ''}`}>
+                <button className="gal-arrow" onClick={() => step(-1)} aria-label="Previous books">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+                </button>
+                <div className="gal-dots" aria-hidden="true">
+                    <span className="bk-progress">
+                        <span className="gal-dot">
+                            <i key={current} onAnimationEnd={() => step(1)} />
+                        </span>
+                    </span>
+                    <span className="bk-counter">{pad(current + 1)} / {pad(readings.length)}</span>
+                </div>
+                <button className="gal-arrow" onClick={() => step(1)} aria-label="Next books">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+                </button>
+                <button
+                    className="gal-play"
+                    onClick={() => setUserPaused((v) => !v)}
+                    aria-label={userPaused ? 'Play reading list' : 'Pause reading list'}
+                    title={userPaused ? 'Play' : 'Pause'}
                 >
-                    {readings.map((b) => <Book key={b.title} book={b} onOpen={setOpen} />)}
-                    {readings.map((b) => <Book key={`copy-${b.title}`} book={b} onOpen={setOpen} copy />)}
-                </ul>
+                    {userPaused ? (
+                        <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z" /></svg>
+                    ) : (
+                        <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0h3.5v12H0zM6.5 0H10v12H6.5z" /></svg>
+                    )}
+                </button>
             </div>
 
             {open && <Reader book={open} onClose={close} />}

@@ -83,7 +83,7 @@ const BeyondTheCode = () => {
                     {readingLoaded && (
                         <div className={`beyond-pane beyond-pane-over ${tab === 'reading' ? 'is-active' : ''}`} inert={tab !== 'reading'}>
                             <Suspense fallback={null}>
-                                <Reading />
+                                <Reading active={tab === 'reading'} />
                             </Suspense>
                         </div>
                     )}
