@@ -88,6 +88,27 @@ export const community = {
         period: 'Dec 2021 – Present',
         place: 'Rwamagana, Rwanda',
         story: 'Ganza Mwari (“Advanced Woman”) began as a response to rising teen dropouts after COVID. With local government and the Aegis Trust we opened a rent-free workspace offering vocational training and financial literacy for teen mothers. Watching human-led support hit its limits is why I build technology that has to work at scale.',
+        // First photo leads (largest in the grid, first in the slider).
+        photos: [
+            {
+                src: '/Photos/ganza/workshop-1200.webp',
+                thumb: '/Photos/ganza/workshop-360.webp',
+                srcSet: '/Photos/ganza/workshop-640.webp 640w, /Photos/ganza/workshop-1200.webp 1200w',
+                alt: 'Four women sewing at treadle machines in the Ganza Mwari workspace',
+            },
+            {
+                src: '/Photos/ganza/group-1200.webp',
+                thumb: '/Photos/ganza/group-360.webp',
+                srcSet: '/Photos/ganza/group-640.webp 640w, /Photos/ganza/group-1200.webp 1200w',
+                alt: 'Ganza Mwari trainees, trainers and partners with the new sewing machines',
+            },
+            {
+                src: '/Photos/ganza/team-1000.webp',
+                thumb: '/Photos/ganza/team-360.webp',
+                srcSet: '/Photos/ganza/team-640.webp 640w, /Photos/ganza/team-1000.webp 1000w',
+                alt: 'The Ganza Mwari team outside the workspace',
+            },
+        ],
     },
     highlight: {
         value: '$650K',

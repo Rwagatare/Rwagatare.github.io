@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { readings, years } from '../data/readings';
+import { readings } from '../data/readings';
 
 // The Reading tab, split out so the book notes (~40 KB) only load
 // when someone opens the tab. Styles stay in BeyondTheCode.css.
@@ -75,47 +75,127 @@ const Reader = ({ book, onClose }) => {
     );
 };
 
+// How fast the shelf drifts, in pixels per second.
+const DRIFT_PXS = 95;
+
+const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const Book = ({ book, onOpen, copy }) => {
+    const canOpen = Boolean(book.reflection);
+    return (
+        // The second copy only exists to make the loop seamless; keep it out of tab order and screen readers.
+        <li inert={copy} aria-hidden={copy || undefined}>
+            <button
+                type="button"
+                className="bk-book"
+                onClick={() => canOpen && onOpen(book)}
+                disabled={!canOpen}
+                aria-label={`${book.title} by ${book.author}${canOpen ? ', read my notes' : ''}`}
+            >
+                <span className="bk-bay"><span className="bk-cover"><Cover book={book} /></span></span>
+                <span className="bk-meta">
+                    <span className={`bk-status s-${book.status}`}>{STATUS[book.status]} · {book.year}</span>
+                    <strong>{book.title}</strong>
+                    <span>{book.author}</span>
+                    {canOpen && <span className="bk-open">Read my notes</span>}
+                </span>
+            </button>
+        </li>
+    );
+};
+
+// The Reading tab, built like the footer: a label cell joined to a shelf
+// cell. Every book stands on one shelf line, newest first, and the shelf
+// drifts sideways in a loop. It pauses on hover, focus, touch, off-screen,
+// a hidden tab, an open note or reduced motion, and it can be dragged.
 const Reading = () => {
-    const [year, setYear] = useState(years[0]);
     const [open, setOpen] = useState(null);
-    const shelf = readings.filter((b) => b.year === year);
     const close = () => setOpen(null);
+
+    const trackRef = useRef(null);
+    const pos = useRef(0);
+    const holdTimer = useRef(0);
+    const [still] = useState(() => reduceMotion());
+    const [hovering, setHovering] = useState(false);
+    const [focused, setFocused] = useState(false);
+    const [held, setHeld] = useState(false);
+    const [inView, setInView] = useState(false);
+    const [tabHidden, setTabHidden] = useState(false);
+    const running = inView && !open && !hovering && !focused && !held && !tabHidden && !still;
+
+    useEffect(() => {
+        const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.3 });
+        io.observe(trackRef.current);
+        const onVis = () => setTabHidden(document.hidden);
+        document.addEventListener('visibilitychange', onVis);
+        const timer = holdTimer.current;
+        return () => {
+            io.disconnect();
+            document.removeEventListener('visibilitychange', onVis);
+            clearTimeout(timer);
+        };
+    }, []);
+
+    // Half the track is one full copy of the shelf; wrap within it.
+    const wrap = (x) => {
+        const half = trackRef.current.scrollWidth / 2;
+        return ((x % half) + half) % half;
+    };
+
+    useEffect(() => {
+        if (!running) return undefined;
+        const el = trackRef.current;
+        let raf = 0;
+        let last = performance.now();
+        const tick = (t) => {
+            const dt = Math.min(64, t - last) / 1000;
+            last = t;
+            pos.current = wrap(pos.current + DRIFT_PXS * dt);
+            el.scrollLeft = pos.current;
+            raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+        return () => cancelAnimationFrame(raf);
+    }, [running]);
+
+    // Follow manual drags/swipes, and keep them inside the loop.
+    const onScroll = () => {
+        const el = trackRef.current;
+        if (Math.abs(el.scrollLeft - pos.current) > 2) {
+            const next = wrap(el.scrollLeft);
+            pos.current = next;
+            if (next !== el.scrollLeft) el.scrollLeft = next;
+        }
+    };
+
+    const holdAfterTouch = () => {
+        setHeld(true);
+        clearTimeout(holdTimer.current);
+        holdTimer.current = setTimeout(() => setHeld(false), 5000);
+    };
 
     return (
         <div className="bk">
             <div className="bk-bar">
-                <div className="segmented" role="tablist" aria-label="Year">
-                    {years.map((y) => (
-                        <button key={y} role="tab" aria-selected={y === year} onClick={() => setYear(y)}>{y}</button>
-                    ))}
-                </div>
-                <span className="bk-count">{readings.filter((b) => b.status === 'completed').length} books finished since {years[years.length - 1]}</span>
+                <span className="cm-kicker">Reading list</span>
             </div>
 
-            <ul className="bk-shelf">
-                {shelf.map((b) => {
-                    const canOpen = Boolean(b.reflection);
-                    return (
-                        <li key={b.title}>
-                            <button
-                                type="button"
-                                className="bk-book"
-                                onClick={() => canOpen && setOpen(b)}
-                                disabled={!canOpen}
-                                aria-label={`${b.title} by ${b.author}${canOpen ? ', read my notes' : ''}`}
-                            >
-                                <span className="bk-cover"><Cover book={b} /></span>
-                                <span className="bk-meta">
-                                    <span className={`bk-status s-${b.status}`}>{STATUS[b.status]}</span>
-                                    <strong>{b.title}</strong>
-                                    <span>{b.author}</span>
-                                    {canOpen && <span className="bk-open">Read my notes</span>}
-                                </span>
-                            </button>
-                        </li>
-                    );
-                })}
-            </ul>
+            <div className="bk-shelfcase">
+                <ul
+                    className="bk-track"
+                    ref={trackRef}
+                    aria-label="Reading list"
+                    onScroll={onScroll}
+                    onPointerEnter={(e) => e.pointerType === 'mouse' && setHovering(true)}
+                    onPointerLeave={() => setHovering(false)}
+                    onTouchStart={holdAfterTouch}
+                    onFocus={() => setFocused(true)}
+                    onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setFocused(false)}
+                >
+                    {readings.map((b) => <Book key={b.title} book={b} onOpen={setOpen} />)}
+                    {readings.map((b) => <Book key={`copy-${b.title}`} book={b} onOpen={setOpen} copy />)}
+                </ul>
+            </div>
 
             {open && <Reader book={open} onClose={close} />}
         </div>
