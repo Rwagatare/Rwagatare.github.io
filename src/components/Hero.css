@@ -40,8 +40,21 @@
   height: 7px;
   border-radius: 50%;
   background: var(--green);
-  box-shadow: 0 0 0 0 var(--green);
+  position: relative;
+}
+
+/* Ring animates transform + opacity only, so it stays on the compositor. */
+.hero-now-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--green);
   animation: pulse 2.4s var(--ease-std) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-now-dot::after { animation: none; opacity: 0; }
 }
 
 .hero-now-label {
@@ -50,8 +63,8 @@
 }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--green) 55%, transparent); }
-  70%, 100% { box-shadow: 0 0 0 8px transparent; }
+  0% { transform: scale(1); opacity: 0.55; }
+  70%, 100% { transform: scale(3.3); opacity: 0; }
 }
 
 .hero-name {
