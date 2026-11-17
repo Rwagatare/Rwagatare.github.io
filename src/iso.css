@@ -1252,103 +1252,110 @@ h1, h2, h3, h4, h5, h6 {
   inset: 0;
 }
 
-/* ── Reading: footer-style bookcase ──
-   A label cell joined to one shelf cell, like the footer's rounded cells
-   sharing a line. Books stand on one shelf line with labels underneath;
-   the shelf drifts sideways in a loop. On desktop it fills the Community
-   footprint (laid over it). */
+/* ── Reading: a small version of the Work gallery ──
+   The original book cards (merged hairline cells), in one row that
+   snaps to the centre, fades with distance and advances on a timer.
+   On desktop it fills the Community footprint (laid over it). */
 .bk {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 18px;
   height: 100%;
 }
 
-.bk .bk-bar {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0;
-  padding: 16px 20px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r-box);
-}
-
-.bk-shelfcase {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  margin-top: -1px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r-box);
-  overflow: hidden;
-}
-
-.bk-track {
-  flex: 1;
+.bk-gal {
+  --bk-card: 172px;
   display: flex;
   margin: 0;
-  padding: 0;
+  padding: 16px calc(50% - var(--bk-card) / 2) 8px;
   list-style: none;
   overflow-x: auto;
   overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
   scrollbar-width: none;
 }
 
-.bk-track::-webkit-scrollbar {
+.bk-gal::-webkit-scrollbar {
   display: none;
 }
 
-.bk-track > li {
-  flex: 0 0 184px;
+.bk-slide {
+  --focus: 1;
+  flex: 0 0 var(--bk-card);
   display: flex;
-  flex-direction: column;
+  scroll-snap-align: center;
+  opacity: calc(0.35 + 0.65 * var(--focus));
+  transition: opacity 200ms linear;
 }
 
-.bk-book,
-.bk-book:not(:disabled):hover {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
+/* Cards share one line with their neighbours, like the project cards */
+.bk-slide + .bk-slide {
+  margin-left: -1px;
 }
 
-/* The bay a book stands in; its bottom edge is the shelf line */
-.bk-bay {
-  flex: 1;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+.bk-slide:hover {
+  position: relative;
+  z-index: 1;
+}
+
+.bk-gal .bk-book {
   width: 100%;
-  padding: 24px 22px 0;
-  border-bottom: 1px solid var(--line-strong);
+  gap: 12px;
+  padding: 14px 14px 16px;
 }
 
-.bk-bay .bk-cover {
+.bk-gal .bk-cover {
   width: 100%;
-  max-width: 132px;
+  max-width: 120px;
+  margin: 0 auto;
 }
 
-.bk-book:not(:disabled):hover .bk-cover {
-  transform: translateY(-8px);
+.bk-gal .bk-meta strong {
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* Shelf label under the line */
-.bk-meta {
-  padding: 16px 22px 22px;
+.bk-gal .bk-meta > span:not(.bk-status):not(.bk-open) {
+  font-size: 12px;
 }
 
-.bk-open {
-  height: auto;
+.bk-gal .bk-open {
+  height: 26px;
   margin-top: 10px;
-  padding: 0;
-  border: 0;
-  color: var(--label-2);
+  padding: 0 10px;
+  font-size: 10px;
 }
 
-.bk-book:hover .bk-open {
-  color: var(--label);
+/* Controls: arrows either side of one progress bar and a counter */
+.bk-gal-controls {
+  gap: 10px;
+}
+
+.bk-gal-controls .gal-dots {
+  gap: 12px;
+  padding: 0 12px;
+}
+
+.bk-progress {
+  display: grid;
+  place-items: center;
+  height: 24px;
+}
+
+.bk-progress .gal-dot {
+  width: 64px;
+}
+
+.bk-counter {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--label-2);
+  font-variant-numeric: tabular-nums;
 }
 
 /* Phones/tablets: the Community grid stacks and gets tall, so Reading
