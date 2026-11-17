@@ -451,8 +451,9 @@ export const readings = [
     },
 ];
 
-// Shelf order: by theme, so related books sit together whatever the year.
-// Starts with AI ethics. A book missing from this list goes at the end.
+// Shelf order: newest year first, then within each year by these themes,
+// so related books sit together. Starts with AI ethics. A book missing
+// from this list goes last in its year.
 export const shelfThemes = [
     {
         theme: 'AI ethics and power',

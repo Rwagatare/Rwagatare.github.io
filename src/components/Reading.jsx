@@ -102,9 +102,12 @@ const Book = ({ book, onOpen }) => {
 
 const pad = (n) => String(n).padStart(2, '0');
 
-// Books in theme order (see shelfThemes); anything unlisted goes last.
-const rank = new Map(shelfThemes.flatMap((t) => t.titles).map((title, n) => [title, n]));
-const shelf = [...readings].sort((a, b) => (rank.get(a.title) ?? Infinity) - (rank.get(b.title) ?? Infinity));
+// Newest year first; within a year, books follow the theme order in
+// shelfThemes so related ones sit together. Unlisted books go last in their year.
+const rank = new Map(shelfThemes.flatMap((t) => t.titles).map((title, i) => [title, i]));
+const shelf = [...readings].sort(
+    (a, b) => b.year - a.year || (rank.get(a.title) ?? Infinity) - (rank.get(b.title) ?? Infinity),
+);
 
 // Books move three at a time, on the same timer as the Work gallery.
 const STEP = 3;
