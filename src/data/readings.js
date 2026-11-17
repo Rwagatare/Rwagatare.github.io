@@ -16,12 +16,12 @@ export const bookCategories = ['CS / Tech Ethics', 'Philosophy', 'Self-Developme
  */
 export const readings = [
     // ── 2026 ──
-    // Recently finished, shown first (no notes yet). Covers from Open Library; null uses a type cover.
+    // Finished in 2026 (no notes yet). Covers from Open Library; null uses a type cover.
     { year: 2026, cat: 'CS / Tech Ethics', title: 'Empire of AI', author: 'Karen Hao', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/15092439-L.jpg', link: null, reflection: null },
     { year: 2026, cat: 'CS / Tech Ethics', title: 'The AI Mirror', author: 'Shannon Vallor', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/15265621-L.jpg', link: null, reflection: null },
     { year: 2026, cat: 'Research Papers', title: 'Do Artifacts Have Politics?', author: 'Langdon Winner', status: 'completed', cover: null, link: null, reflection: null },
-    { year: 2026, cat: 'Research Papers', title: 'Minds, Brains, and Programs', author: 'John Searle', status: 'completed', cover: null, link: null, reflection: null },
-    { year: 2026, cat: 'Self-Development', title: 'Unlikely Entrepreneurs', author: 'Patricia Favreau & N. Louis Shipley', status: 'completed', cover: null, link: null, reflection: null },
+    { year: 2026, cat: 'Philosophy', title: 'Minds, Brains and Science', author: 'John Searle', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/4194686-L.jpg', link: 'https://books.google.com/books/about/Minds_Brains_and_Science.html?id=yNJN-_jznw4C', reflection: null },
+    { year: 2026, cat: 'Self-Development', title: 'Unlikely Entrepreneurs', author: 'N. Louis Shipley & Patricia Favreau', status: 'completed', cover: '/covers/unlikely-entrepreneurs.webp', link: 'https://titancasket.com/products/unlikely-entrepreneurs', reflection: null },
     { year: 2026, cat: 'Philosophy', title: 'Models of Contextual Theology', author: 'Stephen B. Bevans', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/818582-L.jpg', link: null, reflection: null },
     { year: 2026, cat: 'Literature', title: 'The River Between', author: 'Ngũgĩ wa Thiong\u2019o', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/14337540-L.jpg', link: null, reflection: null },
     { year: 2026, cat: 'Literature', title: 'Cry, the Beloved Country', author: 'Alan Paton', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/8235289-L.jpg', link: null, reflection: null },
@@ -448,6 +448,57 @@ export const readings = [
                 'Prefer expressive code over explanatory comments'
             ]
         }
+    },
+];
+
+// Shelf order: by theme, so related books sit together whatever the year.
+// Starts with AI ethics. A book missing from this list goes at the end.
+export const shelfThemes = [
+    {
+        theme: 'AI ethics and power',
+        titles: [
+            'Empire of AI',
+            'The AI Mirror',
+            'Race After Technology',
+            'Algorithms of Oppression',
+            'Weapons of Math Destruction',
+            'Automating Inequality',
+            'Artificial Unintelligence',
+            'The Age of Surveillance Capitalism',
+            'Decolonial AI: Decolonial Theory as Sociotechnical Foresight',
+            'Do Artifacts Have Politics?',
+        ],
+    },
+    {
+        theme: 'Minds and machines',
+        titles: [
+            'Minds, Brains and Science',
+            'Attention Is All You Need',
+            'Human-AI Interaction in the Age of Large Language Models',
+            'Teachable Machine: Approachable Web-Based Tool for Exploring ML',
+            'Thinking, Fast and Slow',
+        ],
+    },
+    {
+        theme: 'Design',
+        titles: ['The Design of Everyday Things', 'Designing for the Digital Age'],
+    },
+    {
+        theme: 'Education, culture and faith',
+        titles: [
+            'Pedagogy of the Oppressed',
+            'The River Between',
+            'Cry, the Beloved Country',
+            'Models of Contextual Theology',
+        ],
+    },
+    {
+        theme: 'Meaning',
+        titles: ["Man's Search for Meaning", 'Letters to a Young Poet', 'The Ethics of Ambiguity', 'The Republic'],
+    },
+    {
+        theme: 'Building and craft',
+        titles: ['Unlikely Entrepreneurs', 'Range', 'Atomic Habits', 'Deep Work', 'The Pragmatic Programmer', 'Clean Code'],
     },
 ];
 

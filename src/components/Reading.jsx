@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { readings } from '../data/readings';
+import { readings, shelfThemes } from '../data/readings';
 
 // The Reading tab, split out so the book notes (~40 KB) only load
 // when someone opens the tab. Styles stay in BeyondTheCode.css.
@@ -102,6 +102,10 @@ const Book = ({ book, onOpen }) => {
 
 const pad = (n) => String(n).padStart(2, '0');
 
+// Books in theme order (see shelfThemes); anything unlisted goes last.
+const rank = new Map(shelfThemes.flatMap((t) => t.titles).map((title, n) => [title, n]));
+const shelf = [...readings].sort((a, b) => (rank.get(a.title) ?? Infinity) - (rank.get(b.title) ?? Infinity));
+
 // Books move three at a time, on the same timer as the Work gallery.
 const STEP = 3;
 
@@ -184,7 +188,7 @@ const Reading = ({ active = true }) => {
 
     // Step three books; past either end, wrap to the other.
     const step = (dir) => {
-        const last = readings.length - 1;
+        const last = shelf.length - 1;
         const next = current + dir * STEP;
         goTo(next > last ? (current === last ? 0 : last) : next < 0 ? (current === 0 ? last : 0) : next);
     };
@@ -207,7 +211,7 @@ const Reading = ({ active = true }) => {
                 onFocus={() => setFocused(true)}
                 onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setFocused(false)}
             >
-                {readings.map((b) => <Book key={b.title} book={b} onOpen={setOpen} />)}
+                {shelf.map((b) => <Book key={b.title} book={b} onOpen={setOpen} />)}
             </ul>
 
             <div className={`gal-controls bk-gal-controls ${running ? 'is-running' : ''}`}>
@@ -220,7 +224,7 @@ const Reading = ({ active = true }) => {
                             <i key={current} onAnimationEnd={() => step(1)} />
                         </span>
                     </span>
-                    <span className="bk-counter">{pad(current + 1)} / {pad(readings.length)}</span>
+                    <span className="bk-counter">{pad(current + 1)} / {pad(shelf.length)}</span>
                 </div>
                 <button className="gal-arrow" onClick={() => step(1)} aria-label="Next books">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
