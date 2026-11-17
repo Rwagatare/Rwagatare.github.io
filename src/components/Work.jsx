@@ -85,8 +85,8 @@ const projects = [
                     { label: 'Path', src: '/projects/mirrorme/path.jpg', alt: 'MirrorMe Path view: a vertical trail of today’s tasks with star ratings', caption: 'Your day as a trail: finish one task to unlock the next.' },
                     { label: 'Planner', src: '/projects/mirrorme/planner.jpg', alt: 'MirrorMe weekly planner board', caption: 'A 7-day board that syncs into the Path automatically.' },
                     { label: 'Goals', src: '/projects/mirrorme/goals.jpg', alt: 'MirrorMe goals tree with progress per goal', caption: 'Each goal is a branch that grows as milestones land.' },
-                    { label: 'Mirror', src: '/projects/mirrorme/mirror.jpg', alt: 'MirrorMe Mirror view with a heatmap of daily ratings', caption: 'Patterns from your real history, not vanity metrics.' },
-                    { label: 'AI', src: '/projects/mirrorme/ai.jpg', alt: 'MirrorMe on-device AI assistant answering a planning question', caption: 'A local LLM that knows your context and takes actions.' },
+                    { label: 'Mirror', src: '/projects/mirrorme/mirror.jpg', alt: 'MirrorMe Mirror view with a heatmap of daily ratings', caption: 'A heatmap of your daily ratings, so you can see your patterns.' },
+                    { label: 'AI', src: '/projects/mirrorme/ai.jpg', alt: 'MirrorMe on-device AI assistant answering a planning question', caption: 'A local LLM that reads your tasks and goals and adds tasks for you.' },
                 ]}
             />
         ),
@@ -406,7 +406,7 @@ const Work = () => {
         setOpen(next);
     }, [open]);
 
-    // Deep links: #project-<id> (hero stats, experience links, graph nodes).
+    // Deep links: #project-<id> (hero stats, experience links).
     useEffect(() => {
         const initial = projectFromHash();
         if (initial) {

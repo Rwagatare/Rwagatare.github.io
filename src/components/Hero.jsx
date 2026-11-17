@@ -24,7 +24,6 @@ const Hero = () => {
                         </p>
 
                         <div className="hero-cta">
-                            <a href="#work" className="btn btn-primary">See the work</a>
                             <a href={profile.resume} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">Résumé</a>
                             <span className="hero-social">
                                 <a href={profile.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><GitHubIcon /></a>

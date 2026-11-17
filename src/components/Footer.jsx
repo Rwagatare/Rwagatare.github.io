@@ -21,7 +21,7 @@ const Footer = () => {
                     <div className="ft-cell ft-pitch">
                         <Eyebrow>Contact</Eyebrow>
                         <h2 className="contact-title">
-                            Let&rsquo;s build something <span className="mark">people actually use.</span>
+                            Let&rsquo;s build <span className="mark">something together.</span>
                         </h2>
                         <p className="contact-lead">
                             I&rsquo;m open to collaborations, especially in AI infrastructure, developer tools,

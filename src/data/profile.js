@@ -36,7 +36,7 @@ export const experience = [
         place: 'Cambridge, MA',
         summary: 'Production AI services for national AI-literacy programs.',
         points: [
-            'Designed, deployed, and maintained a production AI data pipeline (Python/FastAPI) on the Meta Cloud API with entity-level parsing, retry handling, and idempotent deduplication, serving thousands of registered users.',
+            'Designed, deployed, and maintained a production AI data pipeline (Python/FastAPI) on the Meta Cloud API with entity-level parsing, retry handling, and idempotent deduplication, reaching 5,000+ teachers.',
             'Built multi-user session state with PostgreSQL persistence and Alembic migrations, guarded by a 79+ test suite running in GitHub Actions CI.',
             'Rebuilt Teachable Machine as an offline-capable PWA with TensorFlow.js in-browser inference, deployed to 150+ teachers in Rwanda.',
         ],
@@ -47,13 +47,13 @@ export const experience = [
         ],
     },
     {
-        org: 'CATLAB — Center for Applied Technology',
+        org: 'CATLAB (Center for Applied Technology)',
         role: 'Software Engineering Intern',
         period: 'May – Aug 2024',
         place: 'Santa Barbara, CA',
-        summary: 'Contributed to Westmont\u2019s campus app, building its Directory and Attendance tabs.',
+        summary: 'Directory and Attendance tabs for Westmont\u2019s campus app.',
         points: [
-            'Built the Attendance tab: time-series data ingestion, role-based access control, and tiered authentication, giving 1,580+ campus users real-time visibility into their attendance standing.',
+            'Built the Attendance tab: time-series data ingestion, role-based access control, and tiered authentication, so 1,580+ campus users can see their attendance standing in real time.',
             'Built the Directory tab in React/TypeScript with virtualized rendering, debounced search, and a Node.js API layer, used by faculty and students for daily lookups.',
         ],
         tags: ['React', 'TypeScript', 'Node.js', 'RBAC'],
@@ -84,7 +84,7 @@ export const community = {
         role: 'Founder',
         period: 'Dec 2021 – Present',
         place: 'Rwamagana, Rwanda',
-        story: 'Ganza Mwari (“Advanced Woman”) began as a response to rising teen dropouts after COVID. With local government and the Aegis Trust we opened a rent-free workspace offering vocational training and financial literacy for teen mothers. Watching human-led support hit its limits is why I build technology that has to work at scale, and in places the network forgets.',
+        story: 'Ganza Mwari (“Advanced Woman”) began as a response to rising teen dropouts after COVID. With local government and the Aegis Trust we opened a rent-free workspace offering vocational training and financial literacy for teen mothers. Watching human-led support hit its limits is why I build technology that has to work at scale.',
     },
     highlight: {
         value: '$650K',

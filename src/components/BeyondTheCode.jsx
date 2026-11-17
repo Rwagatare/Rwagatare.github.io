@@ -172,7 +172,7 @@ const BeyondTheCode = () => {
                     <div>
                         <Eyebrow>Beyond the code</Eyebrow>
                         <h2 className="section-title">
-                            Why I build. <span className="mark">And what I&rsquo;m reading.</span>
+                            Why I build, <span className="mark">and what I&rsquo;m reading.</span>
                         </h2>
                     </div>
                     <div className="segmented" role="tablist" aria-label="Beyond the code">

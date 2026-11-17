@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { installAnchorScrolling } from './lib/scrollToSection';
-import BackgroundGraph from './components/BackgroundGraph';
 import MouseGlow from './components/MouseGlow';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -14,7 +13,6 @@ function App() {
 
   return (
     <div className="app">
-      <BackgroundGraph />
       <MouseGlow />
       <Header />
       <main>
