@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Livingstone Rwagatare · Software Engineer</title>
     <meta name="description" content="Software engineer building AI tools that work on low bandwidth: a WhatsApp AI tutor for 5,000+ teachers, an offline ML web app for classrooms in Rwanda, and Rivetfields." />
-    <meta name="theme-color" content="#f5f4f1" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0c0b0b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0c0b0b" />
     <meta property="og:title" content="Livingstone Rwagatare · Software Engineer" />
     <meta property="og:description" content="Software engineer building AI people use: a WhatsApp AI tutor for 5,000+ teachers, offline ML for classrooms in Rwanda, and Rivetfields." />
     <meta name="twitter:description" content="Software engineer building AI people use: a WhatsApp AI tutor for 5,000+ teachers, offline ML for classrooms in Rwanda, and Rivetfields." />
@@ -46,13 +45,16 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Geist+Mono:wght@400..600&amp;display=swap" /></noscript>
     <script>
       // Resolve theme before first paint so there is no flash.
+      // Dark by default; a visitor's own choice (the toggle) is remembered.
       (function () {
         var t;
         try { t = localStorage.getItem('theme'); } catch (e) {}
-        if (t !== 'light' && t !== 'dark') {
-          t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-        }
+        if (t !== 'light') t = 'dark';
         document.documentElement.setAttribute('data-theme', t);
+        if (t === 'light') {
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute('content', '#f5f4f1');
+        }
       })();
     </script>
   </head>
