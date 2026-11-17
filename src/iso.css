@@ -8,7 +8,7 @@
               morph from tight to round on hover.
    Kept here: Imigongo (the dot is a diamond, cells carry the motif,
               zigzag underlines stay), clear-glass primary buttons,
-              the floating graph, tilt and spotlight.
+              tilt and spotlight.
    ───────────────────────────────────────────────────────────── */
 
 :root,
@@ -561,9 +561,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* ── Surfaces: hairline outline, no drop shadow ── */
+/* ── Surfaces: hairline outline on the page colour, no fill or shadow ── */
 .surface,
 [data-theme="dark"] .surface {
+  background: transparent;
   border: 1px solid var(--line);
   border-radius: var(--r-box);
   box-shadow: none;

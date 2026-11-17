@@ -44,7 +44,7 @@ const ANSWERS = {
 const answerFor = (slug, text) => {
     const rules = ANSWERS[slug] || [];
     const hit = rules.find(([re]) => re.test(text));
-    return hit ? hit[1] : 'Great question! In the live service this is answered by a Playlab tutor grounded in the Day of AI curriculum. Try “What is machine learning?”';
+    return hit ? hit[1] : 'In the live service, a Playlab tutor grounded in the Day of AI curriculum answers this. For now, try “What is machine learning?”';
 };
 
 const parseCommand = (message) => {
@@ -134,7 +134,7 @@ const WhatsAppDemo = () => {
                 const n = Object.keys(convRef.current).length;
                 convRef.current = {};
                 log('db', `UPDATE conversations SET status='expired' WHERE user_id=:uid AND status='active'  → ${n} row(s)`);
-                return 'Your conversation history has been cleared. Feel free to start a new conversation!';
+                return 'Conversation history cleared. Send a message to start over.';
             }
             case 'switch': {
                 if (!cmd.arg) return 'Usage: /switch <slug>\nSend /bots to see available bots.';

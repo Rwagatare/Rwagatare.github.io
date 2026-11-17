@@ -73,9 +73,6 @@
   --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-2: 0 8px 30px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
 
-  --graph-text: rgba(235, 235, 245, 0.24);
-  --graph-edge: 150, 160, 190;
-  --graph-edge-a: 0.16;
 }
 
 /* ── Light ── */
@@ -108,9 +105,6 @@
   --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 8px rgba(0, 0, 0, 0.04);
   --shadow-2: 0 10px 34px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
 
-  --graph-text: rgba(29, 29, 31, 0.22);
-  --graph-edge: 110, 110, 125;
-  --graph-edge-a: 0.13;
 }
 
 /* ── Accent: clear liquid glass ──
@@ -126,7 +120,6 @@
   --accent-soft: rgba(229, 229, 234, 0.14);
   --on-accent: var(--label);
   --glow: rgba(255, 255, 255, 0.07);
-  --graph-dot: rgba(229, 229, 234, 0.5);
   --clay: #a1a1a6;
   --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%23a1a1a6' stroke-width='1.7'/%3E%3C/svg%3E");
 }
@@ -140,7 +133,6 @@
   --accent-soft: rgba(58, 58, 60, 0.1);
   --on-accent: var(--label);
   --glow: rgba(0, 0, 0, 0.05);
-  --graph-dot: rgba(58, 58, 60, 0.4);
   --clay: #8e8e93;
   --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M0 6.5 3 1.5 6 6.5 9 1.5 12 6.5' fill='none' stroke='%238e8e93' stroke-width='1.7'/%3E%3C/svg%3E");
 }
