@@ -19,7 +19,7 @@ export const readings = [
     // Finished in 2026 (no notes yet). Covers from Open Library; null uses a type cover.
     { year: 2026, cat: 'CS / Tech Ethics', title: 'Empire of AI', author: 'Karen Hao', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/15092439-L.jpg', link: null, reflection: null },
     { year: 2026, cat: 'CS / Tech Ethics', title: 'The AI Mirror', author: 'Shannon Vallor', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/15265621-L.jpg', link: null, reflection: null },
-    { year: 2026, cat: 'Research Papers', title: 'Do Artifacts Have Politics?', author: 'Langdon Winner', status: 'completed', cover: null, link: null, reflection: null },
+    { year: 2026, cat: 'Research Papers', title: 'Do Artifacts Have Politics?', author: 'Langdon Winner', status: 'completed', cover: null, link: 'https://faculty.cc.gatech.edu/~beki/cs4001/Winner.pdf', reflection: null },
     { year: 2026, cat: 'Philosophy', title: 'Minds, Brains and Science', author: 'John Searle', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/4194686-L.jpg', link: 'https://books.google.com/books/about/Minds_Brains_and_Science.html?id=yNJN-_jznw4C', reflection: null },
     { year: 2026, cat: 'Self-Development', title: 'Unlikely Entrepreneurs', author: 'N. Louis Shipley & Patricia Favreau', status: 'completed', cover: '/covers/unlikely-entrepreneurs.webp', link: 'https://titancasket.com/products/unlikely-entrepreneurs', reflection: null },
     { year: 2026, cat: 'Philosophy', title: 'Models of Contextual Theology', author: 'Stephen B. Bevans', status: 'completed', cover: 'https://covers.openlibrary.org/b/id/818582-L.jpg', link: null, reflection: null },
